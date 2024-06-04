@@ -1,3 +1,39 @@
 #### What's Improved
-- Added a new configuration parameter `Verify SSL`, which when selected verifies the SSL certificate for the server. 
-- Added support for Network Proxy. The API call to the OpenAI endpoint is routed using the network proxy if the proxy has been configured for the FortiSOAR instance.
+- Added following new actions
+  - Create Assistant
+  - Retrieve Assistant
+  - Delete Assistant
+  - Modify Assistant
+  - List Assistant
+  - Create Thread
+  - Retrieve Thread
+  - Delete Thread
+  - Modify Thread
+  - Create Message
+  - Create Run
+  - List Message
+  - Modify Message
+  - Delete Message
+  - Retrieve Message
+  - Create Thread and Run
+  - List runs
+  - Retrieve Run
+  - Modify Run
+  - Submit tool output to run
+  - Cancel a run
+  - List run steps
+  - Retrieve run steps
+  - Create vector store
+  - Retrieve vector store
+  - Modify vector store
+  - Delete vector store
+  - List vector store
+  - Create vector store file
+  - Create vector store file batch
+  - Retrieve vector store file batch
+  - Cancel vector store file batch
+  - Create speech
+  - Create Transcription
+  - Create Translation
+  - Upload File
+  - Retrieve File

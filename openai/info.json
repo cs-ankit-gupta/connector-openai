@@ -1,6 +1,6 @@
 {
   "name": "openai",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "label": "OpenAI",
   "description": "This integration supports interacting with OpenAI's powerful language model, ChatGPT from FortiSOAR workflows",
   "publisher": "Fortinet",
@@ -8,7 +8,7 @@
   "cs_compatible": true,
   "icon_small_name": "small.png",
   "icon_large_name": "large.png",
-  "help_online": "https://docs.fortinet.com/document/fortisoar/2.1.0/openai/815/openai-v2-1-0",
+  "help_online": "",
   "category": "Miscellaneous",
   "configuration": {
     "fields": [
@@ -391,6 +391,2572 @@
       ],
       "output_schema": {
         "tokens": ""
+      }
+    },
+    {
+      "operation": "list_assistants",
+      "title": "List Assistants",
+      "description": "Retrieves a list of assistants.",
+      "category": "miscellaneous",
+      "annotation": "list_assistants",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Sort Order",
+          "type": "select",
+          "name": "order",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Select the order in which to retrieve the assistant list sorted by creation time. You can choose from Ascending or Descending.",
+          "tooltip": "Select the order in which to retrieve the assistant list sorted by creation time.",
+          "value": "Descending",
+          "options": [
+            "Ascending",
+            "Descending"
+          ]
+        },
+        {
+          "title": "Starting ID",
+          "type": "text",
+          "name": "after",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the assistant ID to retrieve assistants after this ID.",
+          "tooltip": "Specify the assistant ID to retrieve assistants after this ID."
+        },
+        {
+          "title": "Ending ID",
+          "type": "text",
+          "name": "before",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the assistant ID to retrieve assistants before this ID.",
+          "tooltip": "Specify the assistant ID to retrieve assistants before this ID."
+        },
+        {
+          "title": "Limit",
+          "type": "integer",
+          "name": "limit",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the maximum number of items to be retrieved. By default it retrieves 20.",
+          "tooltip": "Specify the maximum number of items to be retrieved. By default it retrieves 20.",
+          "value": "20"
+        }
+      ],
+      "output_schema": {
+        "object": "",
+        "data": [
+          {
+            "id": "",
+            "object": "",
+            "created_at": "",
+            "name": "",
+            "description": "",
+            "model": "",
+            "instructions": "",
+            "tools": [],
+            "tool_resources": {},
+            "metadata": {},
+            "top_p": "",
+            "temperature": "",
+            "response_format": ""
+          }
+        ],
+        "first_id": "",
+        "last_id": "",
+        "has_more": ""
+      }
+    },
+    {
+      "operation": "get_assistant",
+      "title": "Get an Assistant",
+      "description": "Retrieves an assistant based on assistant ID.",
+      "category": "miscellaneous",
+      "annotation": "get_assistant",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Assistant ID",
+          "type": "text",
+          "name": "assistant_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of assistant to be retrieved",
+          "tooltip": "Specify the ID of assistant to be retrieved"
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "object": "",
+        "created_at": "",
+        "name": "",
+        "description": "",
+        "model": "",
+        "instructions": "",
+        "tools": [
+          {
+            "type": ""
+          }
+        ],
+        "metadata": {},
+        "top_p": "",
+        "temperature": "",
+        "response_format": ""
+      }
+    },
+    {
+      "operation": "create_assistant",
+      "title": "Create an Assistant",
+      "description": "Creates an assistant based on specified input parameters.",
+      "category": "miscellaneous",
+      "annotation": "create_assistant",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Model",
+          "type": "text",
+          "name": "model",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of model to be used to create an assistant. You can use the \"List Available Models\" action to see all of your available models.",
+          "tooltip": "Specify the ID of model to be used to create an assistant. You can use the \"List Available Models\" action to see all of your available models."
+        },
+        {
+          "title": "Name",
+          "type": "text",
+          "name": "name",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the name of assistant to be created",
+          "tooltip": "Specify the name of assistant to be created"
+        },
+        {
+          "title": "Description",
+          "type": "text",
+          "name": "description",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the description of assistant to be created.",
+          "tooltip": "Specify the description of assistant to be created."
+        },
+        {
+          "title": "Instructions",
+          "type": "textarea",
+          "name": "instructions",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the system instructions that the assistant uses",
+          "tooltip": "Specify the system instructions that the assistant uses"
+        },
+        {
+          "title": "Tools",
+          "type": "json",
+          "name": "tools",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": {},
+          "description": "Specify a list tools enable on assistant. There can be a maximum of 128 tools per assistant. Tools can be of types code_interpreter, file_search, or function. For example, ",
+          "tooltip": "Specify a list tools enable on assistant. There can be a maximum of 128 tools per assistant. Tools can be of types code_interpreter, file_search, or function"
+        },
+        {
+          "title": "Tool Resources",
+          "type": "json",
+          "name": "tool_resources",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": {
+            "code_interpreter": {
+              "file_ids": [
+                "file_id_1",
+                "file_id_2"
+              ]
+            },
+            "file_search": {
+              "vector_store_ids": [
+                "vector_store_id_1",
+                "vector_store_id_2"
+              ]
+            }
+          },
+          "description": "(Optional) Specify the set of resources that are used by the assistant's tools. The resources are specific to the type of tools.  For example, the code_interpreter tool requires a list of file IDs, while the file_search tool requires a list of vector store IDs. For example, {\n            \"code_interpreter\": {\n              \"file_ids\": [\n                \"file_id_1\",\n                \"file_id_2\"\n              ]\n            },\n            \"file_search\": {\n              \"vector_store_ids\": [\n                \"vector_store_id_1\",\n                \"vector_store_id_2\"\n              ]\n            }\n          }",
+          "tooltip": "Specify the set of resources that are used by the assistant's tools. The resources are specific to the type of tools."
+        },
+        {
+          "title": "Temperature",
+          "type": "decimal",
+          "name": "temperature",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the sampling temperature between 0 and 2. Higher values, such as, 0.8 make the output more random, while lower values make the output more focused and deterministic. NOTE: It is recommended to use either this parameter or the 'Top Probability' parameter, not both. By default, this parameter is set to 1.",
+          "tooltip": "Specify the sampling temperature between 0 and 2. Higher values, such as, 0.8 make the output more random, while lower values make the output more focused and deterministic. NOTE: It is recommended to use either this parameter or the 'Top Probability' parameter, not both."
+        },
+        {
+          "title": "Top Probability",
+          "type": "decimal",
+          "name": "top_p",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the top probability, an alternative to sampling with temperature, also called nucleus sampling. The model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. NOTE: It is recommended to use either this parameter or the 'Temperature' parameter, not both. By default, this parameter is set to 1.",
+          "tooltip": "Specify the top probability, an alternative to sampling with temperature, also called nucleus sampling. The model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. NOTE: It is recommended to use either this parameter or the 'Temperature' parameter, not both."
+        },
+        {
+          "title": "Metadata",
+          "type": "json",
+          "name": "metadata",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": {
+            "creator": "Jane Doe",
+            "creation_date": "2024-05-28",
+            "purpose": "Customer support",
+            "organization": "ABC Inc.",
+            "project_id": "123456789",
+            "department": "Customer Service",
+            "version": "1.0",
+            "tags": [
+              "customer support",
+              "AI assistant",
+              "version 1.0"
+            ]
+          },
+          "description": "(Optional) Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. For example, {\n            \"creator\": \"Jane Doe\",\n            \"creation_date\": \"2024-05-28\",\n            \"purpose\": \"Customer support\",\n            \"organization\": \"ABC Inc.\",\n            \"project_id\": \"123456789\",\n            \"department\": \"Customer Service\",\n            \"version\": \"1.0\",\n            \"tags\": [\n              \"customer support\",\n              \"AI assistant\",\n              \"version 1.0\"\n            ]\n          }",
+          "tooltip": "Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long."
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "object": "",
+        "created_at": "",
+        "name": "",
+        "description": "",
+        "model": "",
+        "instructions": "",
+        "tools": [
+          {
+            "type": ""
+          }
+        ],
+        "metadata": {},
+        "top_p": "",
+        "temperature": "",
+        "response_format": ""
+      }
+    },
+    {
+      "operation": "update_assistant",
+      "title": "Update an Assistant",
+      "description": "Updates an assistant based on specified input parameters.",
+      "category": "miscellaneous",
+      "annotation": "update_assistant",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Model",
+          "type": "text",
+          "name": "model",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of model to be used to update an assistant. You can use the \"List Available Models\" action to see all of your available models.",
+          "tooltip": "Specify the ID of model to be used to update an assistant. You can use the \"List Available Models\" action to see all of your available models."
+        },
+        {
+          "title": "Assistant ID",
+          "type": "text",
+          "name": "assistant_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of assistant to be updated.",
+          "tooltip": "Specify the ID of assistant to be updated."
+        },
+        {
+          "title": "Name",
+          "type": "text",
+          "name": "name",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the name of assistant to be created",
+          "tooltip": "Specify the name of assistant to be created"
+        },
+        {
+          "title": "Description",
+          "type": "text",
+          "name": "description",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the description of assistant to be created.",
+          "tooltip": "Specify the description of assistant to be created."
+        },
+        {
+          "title": "Instructions",
+          "type": "textarea",
+          "name": "instructions",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the system instructions that the assistant uses",
+          "tooltip": "Specify the system instructions that the assistant uses"
+        },
+        {
+          "title": "Tools",
+          "type": "json",
+          "name": "tools",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify a list tools enable on assistant. There can be a maximum of 128 tools per assistant. Tools can be of types code_interpreter, file_search, or function, For example, {\n            \"code_interpreter\": {\n              \"file_ids\": [\n                \"file_id_1\",\n                \"file_id_2\"\n              ]\n            },\n            \"file_search\": {\n              \"vector_store_ids\": [\n                \"vector_store_id_1\",\n                \"vector_store_id_2\"\n              ]\n            }\n          }",
+          "tooltip": "Specify the system instructions that the assistant uses"
+        },
+        {
+          "title": "Tool Resources",
+          "type": "json",
+          "name": "tool_resources",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": {
+            "code_interpreter": {
+              "file_ids": [
+                "file_id_1",
+                "file_id_2"
+              ]
+            },
+            "file_search": {
+              "vector_store_ids": [
+                "vector_store_id_1",
+                "vector_store_id_2"
+              ]
+            }
+          },
+          "description": "(Optional) Specify the set of resources that are used by the assistant's tools. The resources are specific to the type of tools.  For example, the code_interpreter tool requires a list of file IDs, while the file_search tool requires a list of vector store IDs. For example, {\n            \"code_interpreter\": {\n              \"file_ids\": [\n                \"file_id_1\",\n                \"file_id_2\"\n              ]\n            },\n            \"file_search\": {\n              \"vector_store_ids\": [\n                \"vector_store_id_1\",\n                \"vector_store_id_2\"\n              ]\n            }\n          }",
+          "tooltip": "Specify the set of resources that are used by the assistant's tools. The resources are specific to the type of tools."
+        },
+        {
+          "title": "Temperature",
+          "type": "text",
+          "name": "temperature",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the sampling temperature between 0 and 2. Higher values, such as, 0.8 make the output more random, while lower values make the output more focused and deterministic. NOTE: It is recommended to use either this parameter or the 'Top Probability' parameter, not both. By default, this parameter is set to 1.",
+          "tooltip": "Specify the sampling temperature between 0 and 2. Higher values, such as, 0.8 make the output more random, while lower values make the output more focused and deterministic. NOTE: It is recommended to use either this parameter or the 'Top Probability' parameter, not both."
+        },
+        {
+          "title": "Top Probability",
+          "type": "text",
+          "name": "top_p",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the top probability, an alternative to sampling with temperature, also called nucleus sampling. The model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. NOTE: It is recommended to use either this parameter or the 'Temperature' parameter, not both. By default, this parameter is set to 1.",
+          "tooltip": "Specify the top probability, an alternative to sampling with temperature, also called nucleus sampling. The model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. NOTE: It is recommended to use either this parameter or the 'Temperature' parameter, not both."
+        },
+        {
+          "title": "Metadata",
+          "type": "json",
+          "name": "metadata",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": {
+            "creator": "Jane Doe",
+            "creation_date": "2024-05-28",
+            "purpose": "Customer support",
+            "organization": "ABC Inc.",
+            "project_id": "123456789",
+            "department": "Customer Service",
+            "version": "1.0",
+            "tags": [
+              "customer support",
+              "AI assistant",
+              "version 1.0"
+            ]
+          },
+          "description": "(Optional) Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. For example, {\n            \"creator\": \"Jane Doe\",\n            \"creation_date\": \"2024-05-28\",\n            \"purpose\": \"Customer support\",\n            \"organization\": \"ABC Inc.\",\n            \"project_id\": \"123456789\",\n            \"department\": \"Customer Service\",\n            \"version\": \"1.0\",\n            \"tags\": [\n              \"customer support\",\n              \"AI assistant\",\n              \"version 1.0\"\n            ]\n          }",
+          "tooltip": "Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long."
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "object": "",
+        "created_at": "",
+        "name": "",
+        "description": "",
+        "model": "",
+        "instructions": "",
+        "tools": [
+          {
+            "type": ""
+          }
+        ],
+        "tool_resources": {
+          "file_search": {
+            "vector_store_ids": []
+          }
+        },
+        "metadata": {},
+        "top_p": "",
+        "temperature": "",
+        "response_format": ""
+      }
+    },
+    {
+      "operation": "delete_assistant",
+      "title": "Delete an Assistant",
+      "description": "Deletes an assistant based on assistant ID.",
+      "category": "miscellaneous",
+      "annotation": "delete_assistant",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Assistant ID",
+          "type": "text",
+          "name": "assistant_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of assistant to be deleted",
+          "tooltip": "Specify the ID of assistant to be deleted"
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "object": "",
+        "deleted": ""
+      }
+    },
+    {
+      "operation": "get_thread",
+      "title": "Get Thread",
+      "description": "Retrieves a thread based on the thread ID.",
+      "category": "miscellaneous",
+      "annotation": "get_thread",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Thread ID",
+          "type": "text",
+          "name": "thread_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of thread to be retrieved",
+          "tooltip": "Specify the ID of thread to be retrieved"
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "object": "",
+        "created_at": "",
+        "metadata": {},
+        "tool_resources": {
+          "code_interpreter": {
+            "file_ids": []
+          }
+        }
+      }
+    },
+    {
+      "operation": "delete_thread",
+      "title": "Delete Thread",
+      "description": "Deletes a thread based on thread ID.",
+      "category": "miscellaneous",
+      "annotation": "delete_thread",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Thread ID",
+          "type": "text",
+          "name": "thread_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of thread to be deleted",
+          "tooltip": "Specify the ID of thread to be deleted"
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "object": "",
+        "deleted": ""
+      }
+    },
+    {
+      "operation": "create_thread",
+      "title": "Create Thread",
+      "description": "Creates a thread based on the specified input parameters.",
+      "category": "miscellaneous",
+      "annotation": "get_thread",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Messages",
+          "type": "json",
+          "name": "messages",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the list of messages to start the thread. For example, [\n            {\n              \"role\": \"\",\n              \"content\": \"\"\n            }\n          ]",
+          "tooltip": "Specify the list of messages to start the thread.",
+          "value": [
+            {
+              "role": "",
+              "content": ""
+            }
+          ]
+        },
+        {
+          "title": "Tool Resources",
+          "type": "json",
+          "name": "tool_resources",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": {
+            "code_interpreter": {
+              "file_ids": [
+                "file_id_1",
+                "file_id_2"
+              ]
+            },
+            "file_search": {
+              "vector_store_ids": [
+                "vector_store_id_1",
+                "vector_store_id_2"
+              ]
+            }
+          },
+          "description": "(Optional) Specify the set of resources are made available to the assistant's tools in this thread. The resources are specific to the type of tool. For example, the code_interpreter tool requires a list of file IDs, while the file_search tool requires a list of vector store IDs. For example, {\n            \"code_interpreter\": {\n              \"file_ids\": [\n                \"file_id_1\",\n                \"file_id_2\"\n              ]\n            },\n            \"file_search\": {\n              \"vector_store_ids\": [\n                \"vector_store_id_1\",\n                \"vector_store_id_2\"\n              ]\n            }\n          }",
+          "tooltip": "Specify the set of resources are made available to the assistant's tools in this thread. The resources are specific to the type of tool. For example, the code_interpreter tool requires a list of file IDs, while the file_search tool requires a list of vector store IDs."
+        },
+        {
+          "title": "Metadata",
+          "type": "json",
+          "name": "metadata",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": {
+            "creator": "Jane Doe",
+            "creation_date": "2024-05-28",
+            "purpose": "Customer support",
+            "organization": "ABC Inc.",
+            "project_id": "123456789",
+            "department": "Customer Service",
+            "version": "1.0",
+            "tags": [
+              "customer support",
+              "AI assistant",
+              "version 1.0"
+            ]
+          },
+          "description": "(Optional) Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. For example, {\n            \"creator\": \"Jane Doe\",\n            \"creation_date\": \"2024-05-28\",\n            \"purpose\": \"Customer support\",\n            \"organization\": \"ABC Inc.\",\n            \"project_id\": \"123456789\",\n            \"department\": \"Customer Service\",\n            \"version\": \"1.0\",\n            \"tags\": [\n              \"customer support\",\n              \"AI assistant\",\n              \"version 1.0\"\n            ]\n          }",
+          "tooltip": "Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long."
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "object": "",
+        "created_at": "",
+        "metadata": {},
+        "tool_resources": {}
+      }
+    },
+    {
+      "operation": "update_thread",
+      "title": "Update Thread",
+      "description": "Updates a thread based on the specified input parameters.",
+      "category": "miscellaneous",
+      "annotation": "update_thread",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Thread ID",
+          "type": "text",
+          "name": "thread_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of thread to be updated",
+          "tooltip": "Specify the ID of thread to be updated"
+        },
+        {
+          "title": "Tool Resources",
+          "type": "json",
+          "name": "tool_resources",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": {
+            "code_interpreter": {
+              "file_ids": [
+                "file_id_1",
+                "file_id_2"
+              ]
+            },
+            "file_search": {
+              "vector_store_ids": [
+                "vector_store_id_1",
+                "vector_store_id_2"
+              ]
+            }
+          },
+          "description": "(Optional) Specify the set of resources are made available to the assistant's tools in this thread. The resources are specific to the type of tool. For example, the code_interpreter tool requires a list of file IDs, while the file_search tool requires a list of vector store IDs. For example, {\n            \"code_interpreter\": {\n              \"file_ids\": [\n                \"file_id_1\",\n                \"file_id_2\"\n              ]\n            },\n            \"file_search\": {\n              \"vector_store_ids\": [\n                \"vector_store_id_1\",\n                \"vector_store_id_2\"\n              ]\n            }\n          }",
+          "tooltip": "Specify the set of resources are made available to the assistant's tools in this thread. The resources are specific to the type of tool. For example, the code_interpreter tool requires a list of file IDs, while the file_search tool requires a list of vector store IDs."
+        },
+        {
+          "title": "Metadata",
+          "type": "json",
+          "name": "metadata",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": {
+            "modified": "true",
+            "user": "abc123"
+          },
+          "description": "(Optional) Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. For example, {\n    \"modified\": \"true\",\n    \"user\": \"abc123\"\n  }",
+          "tooltip": "Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. "
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "object": "",
+        "created_at": "",
+        "metadata": {
+          "modified": "",
+          "user": ""
+        },
+        "tool_resources": {}
+      }
+    },
+    {
+      "operation": "create_thread_message",
+      "title": "Create Message",
+      "description": "Creates a message based on the specified input parameters.",
+      "category": "miscellaneous",
+      "annotation": "create_thread_message",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Thread ID",
+          "type": "text",
+          "name": "thread_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of the thread to create a message for.",
+          "tooltip": "Specify the ID of the thread to create a message for."
+        },
+        {
+          "title": "Role",
+          "type": "select",
+          "name": "role",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the role of entity that is creating the message. You can choose from User, Assistant",
+          "tooltip": "Specify the role of entity that is creating the message.",
+          "options": [
+            "User",
+            "Assistant"
+          ]
+        },
+        {
+          "title": "Content",
+          "type": "json",
+          "name": "content",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "value": [
+            {
+              "type": "text",
+              "text": {
+                "value": "How does AI work? Explain it in simple terms.",
+                "annotations": []
+              }
+            }
+          ],
+          "description": "Specify the message content in list format. Message content can be of type text, image_url or image_file. For example, [\n    {\n      \"type\": \"text\",\n      \"text\": {\n        \"value\": \"How does AI work? Explain it in simple terms.\",\n        \"annotations\": []\n      }\n    }\n  ],\n  Note: Image types are only supported on Vision-compatible models.",
+          "tooltip": "Specify the message content in list format. Message content can be of type text, image_url or image_file."
+        },
+        {
+          "title": "Attachments",
+          "type": "json",
+          "name": "attachments",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "value": [],
+          "description": "Specify the list of files attached to the message, and the tools they should be added to.",
+          "tooltip": "Specify the list of files attached to the message, and the tools they should be added to."
+        },
+        {
+          "title": "Metadata",
+          "type": "json",
+          "name": "metadata",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": {
+            "creator": "Jane Doe",
+            "creation_date": "2024-05-28",
+            "purpose": "Customer support",
+            "organization": "ABC Inc.",
+            "project_id": "123456789",
+            "department": "Customer Service",
+            "version": "1.0",
+            "tags": [
+              "customer support",
+              "AI assistant",
+              "version 1.0"
+            ]
+          },
+          "description": "(Optional) Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. For example, {\n            \"creator\": \"Jane Doe\",\n            \"creation_date\": \"2024-05-28\",\n            \"purpose\": \"Customer support\",\n            \"organization\": \"ABC Inc.\",\n            \"project_id\": \"123456789\",\n            \"department\": \"Customer Service\",\n            \"version\": \"1.0\",\n            \"tags\": [\n              \"customer support\",\n              \"AI assistant\",\n              \"version 1.0\"\n            ]\n          }",
+          "tooltip": "Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long."
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "object": "",
+        "created_at": "",
+        "assistant_id": "",
+        "thread_id": "",
+        "run_id": "",
+        "role": "",
+        "content": [
+          {
+            "type": "",
+            "text": {
+              "value": "",
+              "annotations": []
+            }
+          }
+        ],
+        "attachments": [],
+        "metadata": {}
+      }
+    },
+    {
+      "operation": "update_thread_message",
+      "title": "Update a Thread Message",
+      "description": "Updates a message in a thread based on the specified input parameters.",
+      "category": "miscellaneous",
+      "annotation": "update_thread_message",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Thread ID",
+          "type": "text",
+          "name": "thread_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of the thread to create a message for.",
+          "tooltip": "Specify the ID of the thread to create a message for."
+        },
+        {
+          "title": "Message ID",
+          "type": "text",
+          "name": "message_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of the message to be updated.",
+          "tooltip": "Specify the ID of the message to be updated."
+        },
+        {
+          "title": "Metadata",
+          "type": "json",
+          "name": "metadata",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": {
+            "creator": "Jane Doe",
+            "creation_date": "2024-05-28",
+            "purpose": "Customer support",
+            "organization": "ABC Inc.",
+            "project_id": "123456789",
+            "department": "Customer Service",
+            "version": "1.0",
+            "tags": [
+              "customer support",
+              "AI assistant",
+              "version 1.0"
+            ]
+          },
+          "description": "(Optional) Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. For example, {\n            \"creator\": \"Jane Doe\",\n            \"creation_date\": \"2024-05-28\",\n            \"purpose\": \"Customer support\",\n            \"organization\": \"ABC Inc.\",\n            \"project_id\": \"123456789\",\n            \"department\": \"Customer Service\",\n            \"version\": \"1.0\",\n            \"tags\": [\n              \"customer support\",\n              \"AI assistant\",\n              \"version 1.0\"\n            ]\n          }",
+          "tooltip": "Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long."
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "object": "",
+        "created_at": "",
+        "assistant_id": "",
+        "thread_id": "",
+        "run_id": "",
+        "role": "",
+        "content": [
+          {
+            "type": "",
+            "text": {
+              "value": "",
+              "annotations": []
+            }
+          }
+        ],
+        "file_ids": [],
+        "metadata": {
+          "modified": "",
+          "user": ""
+        }
+      }
+    },
+    {
+      "operation": "list_thread_messages",
+      "title": "List Messages in a Thread",
+      "description": "Retrieves a list of messages for specified thread based on the specified input parameters.",
+      "category": "miscellaneous",
+      "annotation": "list_thread_messages",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Thread ID",
+          "type": "text",
+          "name": "thread_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of the thread whose messages are to retrieved.",
+          "tooltip": "Specify the ID of the thread whose messages are to retrieved."
+        },
+        {
+          "title": "Run ID",
+          "type": "text",
+          "name": "run_id",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of the run generated for the messages to be retrieved.",
+          "tooltip": "Specify the ID of the run generated for the messages to be retrieved."
+        },
+        {
+          "title": "Sort Order",
+          "type": "select",
+          "name": "order",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Select the order in which to retrieve the message list sorted by creation time. You can choose from Ascending or Descending.",
+          "tooltip": "Select the order in which to retrieve the message list sorted by creation time.",
+          "value": "Descending",
+          "options": [
+            "Ascending",
+            "Descending"
+          ]
+        },
+        {
+          "title": "Starting ID",
+          "type": "text",
+          "name": "after",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the message ID to retrieve messages after this ID.",
+          "tooltip": "Specify the message ID to retrieve messages after this ID."
+        },
+        {
+          "title": "Ending ID",
+          "type": "text",
+          "name": "before",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the message ID to retrieve messages before this ID.",
+          "tooltip": "Specify the message ID to retrieve messages before this ID."
+        },
+        {
+          "title": "Limit",
+          "type": "integer",
+          "name": "limit",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the maximum number of items to be retrieved. By default it retrieves 20.",
+          "tooltip": "Specify the maximum number of items to be retrieved. By default it retrieves 20.",
+          "value": "20"
+        }
+      ],
+      "output_schema": {
+        "object": "",
+        "data": [
+          {
+            "id": "",
+            "object": "",
+            "created_at": "",
+            "assistant_id": "",
+            "thread_id": "",
+            "run_id": "",
+            "role": "",
+            "content": [
+              {
+                "type": "",
+                "text": {
+                  "value": "",
+                  "annotations": []
+                }
+              }
+            ],
+            "attachments": [],
+            "metadata": {}
+          }
+        ],
+        "first_id": "",
+        "last_id": "",
+        "has_more": ""
+      }
+    },
+    {
+      "operation": "get_thread_message",
+      "title": "Get a Thread Message",
+      "description": "Retrieves a specific message based on Thread ID and Message ID.",
+      "category": "miscellaneous",
+      "annotation": "get_thread_message",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Thread ID",
+          "type": "text",
+          "name": "thread_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of the thread whose message is to be retrieved.",
+          "tooltip": "Specify the ID of the thread whose message is to be retrieved."
+        },
+        {
+          "title": "Message ID",
+          "type": "text",
+          "name": "message_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of the message to be retrieved.",
+          "tooltip": "Specify the ID of the message to be retrieved."
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "object": "",
+        "created_at": "",
+        "assistant_id": "",
+        "thread_id": "",
+        "run_id": "",
+        "role": "",
+        "content": [
+          {
+            "type": "",
+            "text": {
+              "value": "",
+              "annotations": []
+            }
+          }
+        ],
+        "attachments": [],
+        "metadata": {}
+      }
+    },
+    {
+      "operation": "delete_thread_message",
+      "title": "Delete a Thread Message",
+      "description": "Deletes a message based on Thread ID and Message ID.",
+      "category": "miscellaneous",
+      "annotation": "delete_thread_message",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Thread ID",
+          "type": "text",
+          "name": "thread_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of the thread whose message is to be deleted.",
+          "tooltip": "Specify the ID of the thread whose message is to be deleted."
+        },
+        {
+          "title": "Message ID",
+          "type": "text",
+          "name": "message_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of the message to be deleted.",
+          "tooltip": "Specify the ID of the message to be deleted."
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "object": "",
+        "deleted": ""
+      }
+    },
+    {
+      "operation": "list_runs",
+      "title": "List Runs",
+      "description": "Retrieves a list of runs belonging to a thread.",
+      "category": "miscellaneous",
+      "annotation": "list_runs",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Thread ID",
+          "type": "text",
+          "name": "thread_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of thread whose runs are to be retrieved",
+          "tooltip": "Specify the ID of thread whose runs are to be retrieved"
+        },
+        {
+          "title": "Sort Order",
+          "type": "select",
+          "name": "order",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Select the order in which to retrieve the run list sorted by creation time. You can choose from Ascending or Descending.",
+          "tooltip": "Select the order in which to retrieve the run list sorted by creation time.",
+          "value": "Descending",
+          "options": [
+            "Ascending",
+            "Descending"
+          ]
+        },
+        {
+          "title": "Starting ID",
+          "type": "text",
+          "name": "after",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the run ID to retrieve runs after this ID.",
+          "tooltip": "Specify the run ID to retrieve runs after this ID."
+        },
+        {
+          "title": "Ending ID",
+          "type": "text",
+          "name": "before",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the run ID to retrieve runs before this ID.",
+          "tooltip": "Specify the run ID to retrieve runs before this ID."
+        },
+        {
+          "title": "Limit",
+          "type": "integer",
+          "name": "limit",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the maximum number of items to be retrieved. By default it retrieves 20.",
+          "tooltip": "Specify the maximum number of items to be retrieved. By default it retrieves 20.",
+          "value": "20"
+        }
+      ],
+      "output_schema": {
+        "object": "",
+        "data": [
+          {
+            "id": "",
+            "object": "",
+            "created_at": "",
+            "assistant_id": "",
+            "thread_id": "",
+            "status": "",
+            "started_at": "",
+            "expires_at": "",
+            "cancelled_at": "",
+            "failed_at": "",
+            "completed_at": "",
+            "last_error": "",
+            "model": "",
+            "instructions": "",
+            "incomplete_details": "",
+            "tools": [
+              {
+                "type": ""
+              }
+            ],
+            "tool_resources": {
+              "code_interpreter": {
+                "file_ids": []
+              }
+            },
+            "metadata": {},
+            "usage": {
+              "prompt_tokens": "",
+              "completion_tokens": "",
+              "total_tokens": ""
+            },
+            "temperature": "",
+            "top_p": "",
+            "max_prompt_tokens": "",
+            "max_completion_tokens": "",
+            "truncation_strategy": {
+              "type": "",
+              "last_messages": ""
+            },
+            "response_format": "",
+            "tool_choice": ""
+          }
+        ],
+        "first_id": "",
+        "last_id": "",
+        "has_more": ""
+      }
+    },
+    {
+      "operation": "get_run",
+      "title": "Get a Run",
+      "description": "Retrieves a specific run for a thread.",
+      "category": "miscellaneous",
+      "annotation": "get_run",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Thread ID",
+          "type": "text",
+          "name": "thread_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of thread whose run is to be retrieved",
+          "tooltip": "Specify the ID of thread whose run is to be retrieved"
+        },
+        {
+          "title": "Run ID",
+          "type": "text",
+          "name": "run_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of run to be retrieved",
+          "tooltip": "Specify the ID of run to be retrieved"
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "object": "",
+        "created_at": "",
+        "assistant_id": "",
+        "thread_id": "",
+        "status": "",
+        "started_at": "",
+        "expires_at": "",
+        "cancelled_at": "",
+        "failed_at": "",
+        "completed_at": "",
+        "last_error": "",
+        "model": "",
+        "instructions": "",
+        "incomplete_details": "",
+        "tools": [
+          {
+            "type": ""
+          }
+        ],
+        "metadata": {},
+        "usage": {
+          "prompt_tokens": "",
+          "completion_tokens": "",
+          "total_tokens": ""
+        },
+        "temperature": "",
+        "top_p": "",
+        "max_prompt_tokens": "",
+        "max_completion_tokens": "",
+        "truncation_strategy": {
+          "type": "",
+          "last_messages": ""
+        },
+        "response_format": "",
+        "tool_choice": ""
+      }
+    },
+    {
+      "operation": "create_run",
+      "title": "Create a Run",
+      "description": "Creates a run based on specified input parameters.",
+      "category": "miscellaneous",
+      "annotation": "create_run",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Thread ID",
+          "type": "text",
+          "name": "thread_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of thread for which run is to be created.",
+          "tooltip": "Specify the ID of thread for which run is to be created."
+        },
+        {
+          "title": "Assistant ID",
+          "type": "text",
+          "name": "assistant_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of assistant to use to execute this run.",
+          "tooltip": "Specify the ID of assistant to use to execute this run."
+        },
+        {
+          "title": "Model",
+          "type": "text",
+          "name": "model",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of model to be used to execute this run. If a value is provided here, it will override the model associated with the assistant. If not, the model associated with the assistant will be used. You can use the \"List Available Models\" action to see all of your available models.",
+          "tooltip": "Specify the ID of model to be used to create a run. If a value is provided here, it will override the model associated with the assistant. If not, the model associated with the assistant will be used. You can use the \"List Available Models\" action to see all of your available models."
+        },
+        {
+          "title": "Instructions",
+          "type": "textarea",
+          "name": "instructions",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the system instructions that the assistant uses. Overrides the instructions of the assistant. This is useful for modifying the behavior on a per-run basis.",
+          "tooltip": "Specify the system instructions that the run uses. Overrides the instructions of the assistant. This is useful for modifying the behavior on a per-run basis."
+        },
+        {
+          "title": "Additional Instructions",
+          "type": "textarea",
+          "name": "additional_instructions",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the additional instructions that the assistant uses after the assistant instruction. This is useful for modifying the behavior on a per-run basis without overriding other instructions.",
+          "tooltip": "Specify the additional instructions that the run uses after the assistant instruction. This is useful for modifying the behavior on a per-run basis without overriding other instructions."
+        },
+        {
+          "title": "Additional Messages",
+          "type": "json",
+          "name": "additional_messages",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the list of additional messages to the thread before creating the run.. For example, [\n            {\n              \"role\": \"\",\n              \"content\": \"\"\n            }\n          ]",
+          "tooltip": "Specify the list of additional messages to the thread before creating the run.. For example, [\n            {\n              \"role\": \"\",\n              \"content\": \"\"\n            }\n          ]",
+          "value": [
+            {
+              "role": "",
+              "content": ""
+            }
+          ]
+        },
+        {
+          "title": "Tools",
+          "type": "json",
+          "name": "tools",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify a list tools assistant can use for this run. Overrides the tools of the assistant if provided. This is useful for modifying the behavior on a per-run basis.",
+          "tooltip": "Specify a list tools assistant can use for this run. Overrides the tools of the assistant if provided. This is useful for modifying the behavior on a per-run basis."
+        },
+        {
+          "title": "Temperature",
+          "type": "decimal",
+          "name": "temperature",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the sampling temperature between 0 and 2. Higher values, such as, 0.8 make the output more random, while lower values make the output more focused and deterministic. NOTE: It is recommended to use either this parameter or the 'Top Probability' parameter, not both. By default, this parameter is set to 1.",
+          "tooltip": "Specify the sampling temperature between 0 and 2. Higher values, such as, 0.8 make the output more random, while lower values make the output more focused and deterministic. NOTE: It is recommended to use either this parameter or the 'Top Probability' parameter, not both."
+        },
+        {
+          "title": "Top Probability",
+          "type": "decimal",
+          "name": "top_p",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the top probability, an alternative to sampling with temperature, also called nucleus sampling. The model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. NOTE: It is recommended to use either this parameter or the 'Temperature' parameter, not both. By default, this parameter is set to 1.",
+          "tooltip": "Specify the top probability, an alternative to sampling with temperature, also called nucleus sampling. The model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. NOTE: It is recommended to use either this parameter or the 'Temperature' parameter, not both."
+        },
+        {
+          "title": "Metadata",
+          "type": "json",
+          "name": "metadata",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": {
+            "creator": "Jane Doe",
+            "creation_date": "2024-05-28",
+            "purpose": "Customer support",
+            "organization": "ABC Inc.",
+            "project_id": "123456789",
+            "department": "Customer Service",
+            "version": "1.0",
+            "tags": [
+              "customer support",
+              "AI run",
+              "version 1.0"
+            ]
+          },
+          "description": "(Optional) Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. For example, {\n            \"creator\": \"Jane Doe\",\n            \"creation_date\": \"2024-05-28\",\n            \"purpose\": \"Customer support\",\n            \"organization\": \"ABC Inc.\",\n            \"project_id\": \"123456789\",\n            \"department\": \"Customer Service\",\n            \"version\": \"1.0\",\n            \"tags\": [\n              \"customer support\",\n              \"AI run\",\n              \"version 1.0\"\n            ]\n          }",
+          "tooltip": "Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long."
+        },
+        {
+          "title": "Max Prompt Tokens",
+          "type": "integer",
+          "name": "max_prompt_tokens",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "(Optional) Specify the maximum number of prompt tokens  that may be used over the course of the run. The run will make a best effort to use only the number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of completion tokens specified, the run will end with status incomplete. See incomplete_details for more info.",
+          "tooltip": "Specify the maximum number of prompt tokens  that may be used over the course of the run. The run will make a best effort to use only the number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of completion tokens specified, the run will end with status incomplete. See incomplete_details for more info."
+        },
+        {
+          "title": "Additional Inputs",
+          "type": "json",
+          "name": "other_fields",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "(Optional) Use this to add any other inputs to the OpenAI Completions API request as a key-value pair. For example, {\n            \"tool_choice\": auto\n          }",
+          "tooltip": "Use this to add any other inputs to the OpenAI Completions API request as a key-value pair. For example, {\n            \"tool_choice\": auto\n          }"
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "object": "",
+        "created_at": "",
+        "assistant_id": "",
+        "thread_id": "",
+        "status": "",
+        "started_at": "",
+        "expires_at": "",
+        "cancelled_at": "",
+        "failed_at": "",
+        "completed_at": "",
+        "last_error": "",
+        "model": "",
+        "instructions": "",
+        "incomplete_details": "",
+        "tools": [
+          {
+            "type": ""
+          }
+        ],
+        "metadata": {},
+        "usage": "",
+        "temperature": "",
+        "top_p": "",
+        "max_prompt_tokens": "",
+        "max_completion_tokens": "",
+        "truncation_strategy": {
+          "type": "",
+          "last_messages": ""
+        },
+        "response_format": "",
+        "tool_choice": ""
+      }
+    },
+    {
+      "operation": "create_thread_and_run",
+      "title": "Create Thread and Run",
+      "description": "Creates a thread and run in one request.",
+      "category": "miscellaneous",
+      "annotation": "create_thread_and_run",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Assistant ID",
+          "type": "text",
+          "name": "assistant_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of assistant to use to execute this run.",
+          "tooltip": "Specify the ID of assistant to use to execute this run."
+        },
+        {
+          "title": "Thread",
+          "type": "json",
+          "name": "thread",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the thread object to create and run. For example, {\n    \"messages\": [\n      {\"role\": \"user\", \"content\": \"Explain deep learning to a 5 year old.\"}\n    ]\n  }",
+          "tooltip": "Specify the thread object to create and run.",
+          "value": {
+            "messages": [
+              {
+                "role": "user",
+                "content": "Explain deep learning to a 5 year old."
+              }
+            ]
+          }
+        },
+        {
+          "title": "Model",
+          "type": "text",
+          "name": "model",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of model to be used to execute this run. If a value is provided here, it will override the model associated with the assistant. If not, the model associated with the assistant will be used. You can use the \"List Available Models\" action to see all of your available models.",
+          "tooltip": "Specify the ID of model to be used to create a run. If a value is provided here, it will override the model associated with the assistant. If not, the model associated with the assistant will be used. You can use the \"List Available Models\" action to see all of your available models."
+        },
+        {
+          "title": "Instructions",
+          "type": "textarea",
+          "name": "instructions",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the system instructions that the assistant uses. Overrides the instructions of the assistant. This is useful for modifying the behavior on a per-run basis.",
+          "tooltip": "Specify the system instructions that the run uses. Overrides the instructions of the assistant. This is useful for modifying the behavior on a per-run basis."
+        },
+        {
+          "title": "Tools",
+          "type": "json",
+          "name": "tools",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify a list tools assistant can use for this run. Overrides the tools of the assistant if provided. This is useful for modifying the behavior on a per-run basis.",
+          "tooltip": "Specify a list tools assistant can use for this run. Overrides the tools of the assistant if provided. This is useful for modifying the behavior on a per-run basis."
+        },
+        {
+          "title": "Tool Resources",
+          "type": "json",
+          "name": "tool_resources",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": {
+            "code_interpreter": {
+              "file_ids": [
+                "file_id_1",
+                "file_id_2"
+              ]
+            },
+            "file_search": {
+              "vector_store_ids": [
+                "vector_store_id_1",
+                "vector_store_id_2"
+              ]
+            }
+          },
+          "description": "(Optional) Specify the set of resources that are used by the assistant's tools. The resources are specific to the type of tools.  For example, the code_interpreter tool requires a list of file IDs, while the file_search tool requires a list of vector store IDs. For example, \"value\": {\n            \"code_interpreter\": {\n              \"file_ids\": [\n                \"file_id_1\",\n                \"file_id_2\"\n              ]\n            },\n            \"file_search\": {\n              \"vector_store_ids\": [\n                \"vector_store_id_1\",\n                \"vector_store_id_2\"\n              ]\n            }\n          },",
+          "tooltip": "Specify the set of resources that are used by the assistant's tools. The resources are specific to the type of tools."
+        },
+        {
+          "title": "Metadata",
+          "type": "json",
+          "name": "metadata",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": {
+            "creator": "Jane Doe",
+            "creation_date": "2024-05-28",
+            "purpose": "Customer support",
+            "organization": "ABC Inc.",
+            "project_id": "123456789",
+            "department": "Customer Service",
+            "version": "1.0",
+            "tags": [
+              "customer support",
+              "AI run",
+              "version 1.0"
+            ]
+          },
+          "description": "(Optional) Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. For example, {\n            \"creator\": \"Jane Doe\",\n            \"creation_date\": \"2024-05-28\",\n            \"purpose\": \"Customer support\",\n            \"organization\": \"ABC Inc.\",\n            \"project_id\": \"123456789\",\n            \"department\": \"Customer Service\",\n            \"version\": \"1.0\",\n            \"tags\": [\n              \"customer support\",\n              \"AI run\",\n              \"version 1.0\"\n            ]\n          }",
+          "tooltip": "Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long."
+        },
+        {
+          "title": "Temperature",
+          "type": "decimal",
+          "name": "temperature",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the sampling temperature between 0 and 2. Higher values, such as, 0.8 make the output more random, while lower values make the output more focused and deterministic. NOTE: It is recommended to use either this parameter or the 'Top Probability' parameter, not both. By default, this parameter is set to 1.",
+          "tooltip": "Specify the sampling temperature between 0 and 2. Higher values, such as, 0.8 make the output more random, while lower values make the output more focused and deterministic. NOTE: It is recommended to use either this parameter or the 'Top Probability' parameter, not both."
+        },
+        {
+          "title": "Top Probability",
+          "type": "decimal",
+          "name": "top_p",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the top probability, an alternative to sampling with temperature, also called nucleus sampling. The model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. NOTE: It is recommended to use either this parameter or the 'Temperature' parameter, not both. By default, this parameter is set to 1.",
+          "tooltip": "Specify the top probability, an alternative to sampling with temperature, also called nucleus sampling. The model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. NOTE: It is recommended to use either this parameter or the 'Temperature' parameter, not both."
+        },
+        {
+          "title": "Max Prompt Tokens",
+          "type": "integer",
+          "name": "max_prompt_tokens",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "(Optional) Specify the maximum number of prompt tokens  that may be used over the course of the run. The run will make a best effort to use only the number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of completion tokens specified, the run will end with status incomplete. See incomplete_details for more info.",
+          "tooltip": "Specify the maximum number of prompt tokens  that may be used over the course of the run. The run will make a best effort to use only the number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of completion tokens specified, the run will end with status incomplete. See incomplete_details for more info."
+        },
+        {
+          "title": "Additional Inputs",
+          "type": "json",
+          "name": "other_fields",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "(Optional) Use this to add any other inputs to the OpenAI Completions API request as a key-value pair. For example, {\n            \"tool_choice\": auto\n          }",
+          "tooltip": "Use this to add any other inputs to the OpenAI Completions API request as a key-value pair. For example, {\n            \"tool_choice\": auto\n          }"
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "object": "",
+        "created_at": "",
+        "assistant_id": "",
+        "thread_id": "",
+        "status": "",
+        "started_at": "",
+        "expires_at": "",
+        "cancelled_at": "",
+        "failed_at": "",
+        "completed_at": "",
+        "required_action": "",
+        "last_error": "",
+        "model": "",
+        "instructions": "",
+        "tools": [],
+        "tool_resources": {},
+        "metadata": {},
+        "temperature": "",
+        "top_p": "",
+        "max_completion_tokens": "",
+        "max_prompt_tokens": "",
+        "truncation_strategy": {
+          "type": "",
+          "last_messages": ""
+        },
+        "incomplete_details": "",
+        "usage": "",
+        "response_format": "",
+        "tool_choice": ""
+      }
+    },
+    {
+      "operation": "update_run",
+      "title": "Update a Run",
+      "description": "Updates a run based on specified input parameters.",
+      "category": "miscellaneous",
+      "annotation": "update_run",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Thread ID",
+          "type": "text",
+          "name": "thread_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "The ID of the thread that was run.",
+          "tooltip": "The ID of the thread that was run."
+        },
+        {
+          "title": "Run ID",
+          "type": "text",
+          "name": "run_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of run to be updated.",
+          "tooltip": "Specify the ID of run to be updated."
+        },
+        {
+          "title": "Metadata",
+          "type": "json",
+          "name": "metadata",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": {
+            "user_id": "user_abc123"
+          },
+          "description": "(Optional) Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. For example, {\n            \"user_id\": \"user_abc123\"\n          }",
+          "tooltip": "Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long."
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "object": "",
+        "created_at": "",
+        "assistant_id": "",
+        "thread_id": "",
+        "status": "",
+        "started_at": "",
+        "expires_at": "",
+        "cancelled_at": "",
+        "failed_at": "",
+        "completed_at": "",
+        "last_error": "",
+        "model": "",
+        "instructions": "",
+        "incomplete_details": "",
+        "tools": [
+          {
+            "type": ""
+          }
+        ],
+        "tool_resources": {
+          "code_interpreter": {
+            "file_ids": []
+          }
+        },
+        "metadata": {
+          "user_id": ""
+        },
+        "usage": {
+          "prompt_tokens": "",
+          "completion_tokens": "",
+          "total_tokens": ""
+        },
+        "temperature": "",
+        "top_p": "",
+        "max_prompt_tokens": "",
+        "max_completion_tokens": "",
+        "truncation_strategy": {
+          "type": "",
+          "last_messages": ""
+        },
+        "response_format": "",
+        "tool_choice": ""
+      }
+    },
+    {
+      "operation": "cancel_run",
+      "title": "Cancel a Run",
+      "description": "Cancels a run that is in progress.",
+      "category": "miscellaneous",
+      "annotation": "cancel_run",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Thread ID",
+          "type": "text",
+          "name": "thread_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of the thread to which this run belongs.",
+          "tooltip": "Specify the ID of the thread to which this run belongs."
+        },
+        {
+          "title": "Run ID",
+          "type": "text",
+          "name": "run_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of the run to cancel.",
+          "tooltip": "Specify the ID of the run to cancel."
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "object": "",
+        "created_at": "",
+        "assistant_id": "",
+        "thread_id": "",
+        "status": "",
+        "started_at": "",
+        "expires_at": "",
+        "cancelled_at": "",
+        "failed_at": "",
+        "completed_at": "",
+        "last_error": "",
+        "model": "",
+        "instructions": "",
+        "tools": [
+          {
+            "type": ""
+          }
+        ],
+        "tool_resources": {
+          "file_search": {
+            "vector_store_ids": []
+          }
+        },
+        "metadata": {},
+        "usage": "",
+        "temperature": "",
+        "top_p": "",
+        "response_format": ""
+      }
+    },
+    {
+      "operation": "submit_tool_outputs_to_run",
+      "title": "Submit Tool Outputs To Run",
+      "description": "Submits the outputs from the tool calls once they're all completed. All outputs must be submitted in a single request.",
+      "category": "miscellaneous",
+      "annotation": "submit_tool_outputs_to_run",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Thread ID",
+          "type": "text",
+          "name": "thread_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of the thread to which this run belongs.",
+          "tooltip": "Specify the ID of the thread to which this run belongs."
+        },
+        {
+          "title": "Run ID",
+          "type": "text",
+          "name": "run_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of the run that requires the tool output submission.",
+          "tooltip": "Specify the ID of the run that requires the tool output submission."
+        },
+        {
+          "title": "Tool Outputs",
+          "type": "json",
+          "name": "tool_outputs",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "value": [
+            {
+              "tool_call_id": "call_001",
+              "output": "70 degrees and sunny."
+            }
+          ],
+          "description": "Specify the list of tools for which the outputs are being submitted. For example, [\n            {\n              \"tool_call_id\": \"call_001\",\n              \"output\": \"70 degrees and sunny.\"\n            }\n          ]",
+          "tooltip": "Specify the list of tools for which the outputs are being submitted."
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "object": "",
+        "created_at": "",
+        "assistant_id": "",
+        "thread_id": "",
+        "status": "",
+        "started_at": "",
+        "expires_at": "",
+        "cancelled_at": "",
+        "failed_at": "",
+        "completed_at": "",
+        "last_error": "",
+        "model": "",
+        "instructions": "",
+        "tools": [
+          {
+            "type": "",
+            "function": {
+              "name": "",
+              "description": "",
+              "parameters": {
+                "type": "",
+                "properties": {
+                  "location": {
+                    "type": "",
+                    "description": ""
+                  },
+                  "unit": {
+                    "type": "",
+                    "enum": []
+                  }
+                },
+                "required": []
+              }
+            }
+          }
+        ],
+        "metadata": {},
+        "usage": "",
+        "temperature": "",
+        "top_p": "",
+        "max_prompt_tokens": "",
+        "max_completion_tokens": "",
+        "truncation_strategy": {
+          "type": "",
+          "last_messages": ""
+        },
+        "response_format": "",
+        "tool_choice": ""
+      }
+    },
+    {
+      "operation": "list_run_steps",
+      "title": "List Run Steps",
+      "description": "Retrieves a list of run steps belonging to a run.",
+      "category": "miscellaneous",
+      "annotation": "list_run_steps",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Thread ID",
+          "type": "text",
+          "name": "thread_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of the thread to which this run belongs.",
+          "tooltip": "Specify the ID of the thread to which this run belongs."
+        },
+        {
+          "title": "Run ID",
+          "type": "text",
+          "name": "run_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of the run the run steps belong to.",
+          "tooltip": "Specify the ID of the run the run steps belong to."
+        },
+        {
+          "title": "Sort Order",
+          "type": "select",
+          "name": "order",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Select the order in which to retrieve the run list sorted by creation time. You can choose from Ascending or Descending.",
+          "tooltip": "Select the order in which to retrieve the run list sorted by creation time.",
+          "value": "Descending",
+          "options": [
+            "Ascending",
+            "Descending"
+          ]
+        },
+        {
+          "title": "Starting ID",
+          "type": "text",
+          "name": "after",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the step ID to retrieve run steps after this ID.",
+          "tooltip": "Specify the step ID to retrieve run steps after this ID."
+        },
+        {
+          "title": "Ending ID",
+          "type": "text",
+          "name": "before",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the step ID to retrieve run steps before this ID.",
+          "tooltip": "Specify the step ID to retrieve run steps before this ID."
+        },
+        {
+          "title": "Limit",
+          "type": "integer",
+          "name": "limit",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the maximum number of items to be retrieved. By default it retrieves 20.",
+          "tooltip": "Specify the maximum number of items to be retrieved. By default it retrieves 20.",
+          "value": "20"
+        }
+      ],
+      "output_schema": {
+        "object": "",
+        "data": [
+          {
+            "id": "",
+            "object": "",
+            "created_at": "",
+            "run_id": "",
+            "assistant_id": "",
+            "thread_id": "",
+            "type": "",
+            "status": "",
+            "cancelled_at": "",
+            "completed_at": "",
+            "expired_at": "",
+            "failed_at": "",
+            "last_error": "",
+            "step_details": {
+              "type": "",
+              "message_creation": {
+                "message_id": ""
+              }
+            },
+            "usage": {
+              "prompt_tokens": "",
+              "completion_tokens": "",
+              "total_tokens": ""
+            }
+          }
+        ],
+        "first_id": "",
+        "last_id": "",
+        "has_more": ""
+      }
+    },
+    {
+      "operation": "get_run_step",
+      "title": "Get Run Step",
+      "description": "Retrieves a step of a run.",
+      "category": "miscellaneous",
+      "annotation": "get_run_step",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Thread ID",
+          "type": "text",
+          "name": "thread_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of the thread to which this run belongs.",
+          "tooltip": "Specify the ID of the thread to which this run belongs."
+        },
+        {
+          "title": "Run ID",
+          "type": "text",
+          "name": "run_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of the run to which the run step belongs.",
+          "tooltip": "Specify the ID of the run to which the run step belongs."
+        },
+        {
+          "title": "Step ID",
+          "type": "text",
+          "name": "step_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of the step to be retrieved.",
+          "tooltip": "Specify the ID of the step to be retrieved."
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "object": "",
+        "created_at": "",
+        "run_id": "",
+        "assistant_id": "",
+        "thread_id": "",
+        "type": "",
+        "status": "",
+        "cancelled_at": "",
+        "completed_at": "",
+        "expired_at": "",
+        "failed_at": "",
+        "last_error": "",
+        "step_details": {
+          "type": "",
+          "message_creation": {
+            "message_id": ""
+          }
+        },
+        "usage": {
+          "prompt_tokens": "",
+          "completion_tokens": "",
+          "total_tokens": ""
+        }
+      }
+    },
+    {
+      "operation": "create_vector_store",
+      "title": "Create Vector Store",
+      "description": "Creates a vector store.",
+      "category": "miscellaneous",
+      "annotation": "create_vector_store",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "File IDs",
+          "type": "text",
+          "name": "file_ids",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the comma separated File IDs that the vector should use. Useful for tools like file_search that can access files.",
+          "tooltip": "Specify the comma separated File IDs that the vector should use. Useful for tools like file_search that can access files."
+        },
+        {
+          "title": "Name",
+          "type": "text",
+          "name": "name",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the name of the vector store.",
+          "tooltip": "Specify the name of the vector store."
+        },
+        {
+          "title": "Expiration Policy",
+          "type": "json",
+          "name": "expires_after",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": {
+            "anchor": "",
+            "days": ""
+          },
+          "description": "Specify The expiration policy for a vector store. For example, {\n            \"anchor\": \"last_active_at\",\n            \"days\": \"1\"\n          }",
+          "tooltip": "Specify The expiration policy for a vector store."
+        },
+        {
+          "title": "Metadata",
+          "type": "json",
+          "name": "metadata",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "(Optional) Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long.",
+          "tooltip": "Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long."
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "object": "",
+        "created_at": "",
+        "name": "",
+        "bytes": "",
+        "file_counts": {
+          "in_progress": "",
+          "completed": "",
+          "failed": "",
+          "cancelled": "",
+          "total": ""
+        }
+      }
+    },
+    {
+      "operation": "get_vector_store",
+      "title": "Get Vector Store",
+      "description": "Retrieves a vector store details.",
+      "category": "miscellaneous",
+      "annotation": "get_vector_store",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Vector Store ID",
+          "type": "text",
+          "name": "vector_store_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of the vector store to retrieve.",
+          "tooltip": "Specify the ID of the vector store to retrieve."
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "object": "",
+        "created_at": ""
+      }
+    },
+    {
+      "operation": "create_vector_store_file",
+      "title": "Create Vector Store File",
+      "description": "Creates a vector store file by attaching a File to a vector store.",
+      "category": "miscellaneous",
+      "annotation": "create_vector_store_file",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Vector Store ID",
+          "type": "text",
+          "name": "vector_store_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of the vector store for which to create a File Batch.",
+          "tooltip": "Specify the ID of the vector store for which to create a File Batch."
+        },
+        {
+          "title": "File ID",
+          "type": "text",
+          "name": "file_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify a File ID that the vector store should use. Useful for tools like file_search that can access files.",
+          "tooltip": "Specify a File ID that the vector store should use. Useful for tools like file_search that can access files."
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "object": "",
+        "created_at": "",
+        "usage_bytes": "",
+        "vector_store_id": "",
+        "status": "",
+        "last_error": ""
+      }
+    },
+    {
+      "operation": "create_vector_store_file_batch",
+      "title": "Create Vector Store File Batch",
+      "description": "Creates a vector store file batch.",
+      "category": "miscellaneous",
+      "annotation": "create_vector_store_file_batch",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Vector Store ID",
+          "type": "text",
+          "name": "vector_store_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of the vector store for which to create a File Batch.",
+          "tooltip": "Specify the ID of the vector store for which to create a File Batch."
+        },
+        {
+          "title": "File IDs",
+          "type": "text",
+          "name": "file_ids",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the comma separated File IDs that the vector should use. Useful for tools like file_search that can access files.",
+          "tooltip": "Specify the comma separated File IDs that the vector should use. Useful for tools like file_search that can access files."
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "object": "",
+        "created_at": "",
+        "vector_store_id": "",
+        "status": "",
+        "file_counts": {
+          "in_progress": "",
+          "completed": "",
+          "failed": "",
+          "cancelled": "",
+          "total": ""
+        }
+      }
+    },
+    {
+      "operation": "get_vector_store_file_batch",
+      "title": "Get Vector Store File Batch",
+      "description": "Creates a vector store file batch.",
+      "category": "miscellaneous",
+      "annotation": "get_vector_store_file_batch",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Vector Store ID",
+          "type": "text",
+          "name": "vector_store_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of the vector store that the file batch belongs to.",
+          "tooltip": "Specify the ID of the vector store that the file batch belongs to."
+        },
+        {
+          "title": "Batch ID",
+          "type": "text",
+          "name": "batch_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of the file batch being retrieved.",
+          "tooltip": "Specify the ID of the file batch being retrieved."
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "object": "",
+        "created_at": "",
+        "vector_store_id": "",
+        "status": "",
+        "file_counts": {
+          "in_progress": "",
+          "completed": "",
+          "failed": "",
+          "cancelled": "",
+          "total": ""
+        }
+      }
+    },
+    {
+      "operation": "cancel_vector_store_file_batch",
+      "title": "Cancel Vector Store File Batch",
+      "description": "Cancel a vector store file batch. This attempts to cancel the processing of files in this batch as soon as possible.",
+      "category": "miscellaneous",
+      "annotation": "cancel_vector_store_file_batch",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Vector Store ID",
+          "type": "text",
+          "name": "vector_store_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of the vector store that the file batch belongs to.",
+          "tooltip": "Specify the ID of the vector store that the file batch belongs to."
+        },
+        {
+          "title": "Batch ID",
+          "type": "text",
+          "name": "batch_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of the file batch being retrieved.",
+          "tooltip": "Specify the ID of the file batch being retrieved."
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "object": "",
+        "created_at": "",
+        "vector_store_id": "",
+        "status": "",
+        "file_counts": {
+          "in_progress": "",
+          "completed": "",
+          "failed": "",
+          "cancelled": "",
+          "total": ""
+        }
+      }
+    },
+    {
+      "operation": "create_speech",
+      "title": "Create speech",
+      "description": "Generates audio from the input text.",
+      "category": "miscellaneous",
+      "annotation": "create_speech",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Model",
+          "type": "select",
+          "name": "model",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "options": [
+            "TTS-1",
+            "TTS-1 HD"
+          ],
+          "description": "Select the text to search model.",
+          "tooltip": "Select the text to search model. You can choose TTS-1 or TTS-1 HD"
+        },
+        {
+          "title": "Input",
+          "type": "textarea",
+          "name": "input",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the text to generate audio for. The maximum length is 4096 characters.",
+          "tooltip": "Specify the text to generate audio for. The maximum length is 4096 characters. "
+        },
+        {
+          "title": "Voice",
+          "type": "select",
+          "name": "voice",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Select the voice to use when generating the audio. Supported voices are Alloy, Echo, Fable, Onyx, Nova, and Shimmer",
+          "tooltip": "Select the voice to use when generating the audio.",
+          "options": [
+            "Alloy",
+            "Echo",
+            "Fable",
+            "Onyx",
+            "Nova",
+            "Shimmer"
+          ]
+        },
+        {
+          "title": "File Path",
+          "type": "text",
+          "name": "file_path",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the path or the filename where you want to save the audio.",
+          "tooltip": "Specify the path or the filename where you want to save the audio."
+        },
+        {
+          "title": "Audio Format",
+          "type": "select",
+          "name": "response_format",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": "mp3",
+          "description": "Specify the audio format in which you want to get the generated audio. By default it is set to mp3.",
+          "tooltip": "Specify the audio format in which you want to get the generated audio.",
+          "options": [
+            "mp3",
+            "opus",
+            "aac",
+            "flac",
+            "wav",
+            "pcm"
+          ]
+        },
+        {
+          "title": "Speed",
+          "type": "decimal",
+          "name": "speed",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": 1.0,
+          "description": "Specify the speed of the generated audio. Select a value from 0.25 to 4.0. By default it is set to 1.",
+          "tooltip": "Specify the speed of the generated audio. Select a value from 0.25 to 4.0."
+        }
+      ],
+      "output_schema": {}
+    },
+    {
+      "operation": "create_transcription",
+      "title": "Create Transcription",
+      "description": "Transcribes audio into the input language.",
+      "category": "miscellaneous",
+      "annotation": "create_transcription",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Model",
+          "type": "text",
+          "name": "model",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "value": "whisper-1",
+          "description": "Specify the tID of the model to use. Only whisper-1 (which is powered by our open source Whisper V2 model) is currently available.",
+          "tooltip": "Specify the ID of the model to use."
+        },
+        {
+          "title": "File",
+          "type": "file",
+          "name": "file",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "The audio file to transcribe, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.",
+          "tooltip": "The audio file to transcribe, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm."
+        },
+        {
+          "title": "Language",
+          "type": "text",
+          "name": "language",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the language of the input audio. Supplying the input language in ISO-639-1 (https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) format will improve accuracy and latency.",
+          "tooltip": "Specify the language of the input audio. Supplying the input language in ISO-639-1 format will improve accuracy and latency."
+        },
+        {
+          "title": "Prompt",
+          "type": "text",
+          "name": "prompt",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the optional text to guide the model's style or continue a previous audio segment. The prompt should match the audio language.",
+          "tooltip": "Specify the optional text to guide the model's style or continue a previous audio segment. The prompt should match the audio language."
+        },
+        {
+          "title": "Temperature",
+          "type": "decimal",
+          "name": "temperature",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. If set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
+          "tooltip": "Specify the sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. If set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit."
+        },
+        {
+          "title": "Timestamp Granularities",
+          "type": "multiselect",
+          "name": "timestamp_granularities",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": "segment",
+          "description": "Select the timestamp granularities for the transcription. Note: Generating word timestamps incurs additional latency. You can choose either or both from Word, Segment",
+          "tooltip": "Select the timestamp granularities for the transcription. Note: Generating word timestamps incurs additional latency.",
+          "options": [
+            "Word",
+            "Segment"
+          ]
+        }
+      ],
+      "output_schema": {}
+    },
+    {
+      "operation": "create_translation",
+      "title": "Create Translation",
+      "description": "Translates audio into English.",
+      "category": "miscellaneous",
+      "annotation": "create_translation",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Model",
+          "type": "text",
+          "name": "model",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "value": "whisper-1",
+          "description": "Specify the tID of the model to use. Only whisper-1 (which is powered by our open source Whisper V2 model) is currently available.",
+          "tooltip": "Specify the ID of the model to use."
+        },
+        {
+          "title": "File",
+          "type": "file",
+          "name": "file",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "The audio file to transcribe, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.",
+          "tooltip": "The audio file to transcribe, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm."
+        },
+        {
+          "title": "Prompt",
+          "type": "text",
+          "name": "temperature",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the optional text to guide the model's style or continue a previous audio segment. The prompt should match the audio language.",
+          "tooltip": "Specify the optional text to guide the model's style or continue a previous audio segment. The prompt should match the audio language."
+        },
+        {
+          "title": "Temperature",
+          "type": "decimal",
+          "name": "temperature",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. If set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
+          "tooltip": "Specify the sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. If set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit."
+        }
+      ],
+      "output_schema": {}
+    },
+    {
+      "operation": "get_file",
+      "title": "Get File",
+      "description": "Retrieves information about a specific file.",
+      "category": "miscellaneous",
+      "annotation": "get_file",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "File ID",
+          "type": "text",
+          "name": "file_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of the file to be retrieved.",
+          "tooltip": "Specify the ID of the file to be retrieved."
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "object": "",
+        "bytes": "",
+        "created_at": "",
+        "filename": "",
+        "purpose": ""
+      }
+    },
+    {
+      "operation": "upload_file",
+      "title": "Upload File",
+      "description": "Uploads a file that can be used in various actions. Individual files can be up to 512 MB, and the size of all files uploaded by one organization can be up to 100 GB.",
+      "category": "miscellaneous",
+      "annotation": "get_file",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "File",
+          "type": "file",
+          "name": "file",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "The file to be uploaded.",
+          "tooltip": "The file to be uploaded."
+        },
+        {
+          "title": "Purpose",
+          "type": "select",
+          "name": "purpose",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Select the intended purpose of the uploaded file. Use \"Assistants\" for Assistants and Message files, \"Vision\" for Assistants image file inputs, \"Batch\" for Batch API, and \"Fine-tune\" for Fine-tuning.",
+          "tooltip": "Select the intended purpose of the uploaded file.",
+          "options": [
+            "Assistants",
+            "Vision",
+            "Batch",
+            "Fine-tune"
+          ]
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "object": "",
+        "bytes": "",
+        "created_at": "",
+        "filename": "",
+        "purpose": ""
       }
     }
   ]

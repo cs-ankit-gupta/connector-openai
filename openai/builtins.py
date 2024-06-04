@@ -12,5 +12,49 @@ supported_operations = {
     'chat_conversation': chat_completions,
     'list_models': list_models,
     'get_usage': get_usage,
-    'count_tokens': count_tokens
+    'count_tokens': count_tokens,
+
+    'create_assistant': create_assistant,
+    'list_assistants': list_assistants,
+    'get_assistant': get_assistant,
+    'delete_assistant': delete_assistant,
+    'update_assistant': update_assistant,
+
+    'get_thread': get_thread,
+    'delete_thread': delete_thread,
+    'update_thread': update_thread,
+    'create_thread': create_thread,
+
+    'create_thread_message': create_thread_message,
+    'list_thread_messages': list_thread_messages,
+    'delete_thread_message': delete_thread_message,
+    'get_thread_message': get_thread_message,
+    'update_thread_message': update_thread_message,
+
+    'list_runs': list_runs,
+    'get_run': get_run,
+    'create_run': create_run,
+    'update_run': update_run,
+    'cancel_run': cancel_run,
+    'create_thread_and_run': create_thread_and_run,
+    'submit_tool_outputs_to_run': submit_tool_outputs_to_run,
+
+    'list_run_steps': list_run_steps,
+    'get_run_step': get_run_step,
+
+    'create_vector_store': create_vector_store,
+    'get_vector_store': get_vector_store,
+    'create_vector_store_file': create_vector_store_file,
+
+    'create_vector_store_file_batch': create_vector_store_file_batch,
+    'get_vector_store_file_batch': get_vector_store_file_batch,
+    'cancel_vector_store_file_batch': cancel_vector_store_file_batch,
+
+    'create_speech': create_speech,
+    'create_transcription': create_transcription,
+    'create_translation': create_translation,
+
+    'get_file': get_file,
+    'upload_file': upload_file
+
     }

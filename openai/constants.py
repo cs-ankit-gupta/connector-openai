@@ -26,3 +26,7 @@ MESSAGES_SCHEMA = {
 }
 
 USAGE_URL = 'https://api.openai.com/v1/usage'
+SORT_ORDER_MAPPING = {
+  'Ascending': 'asc',
+  'Descending': 'desc'
+}

@@ -44,7 +44,7 @@
                   "max_tokens": "",
                   "timeout": 600
                 },
-                "version": "2.1.0",
+                "version": "3.0.0",
                 "connector": "openai",
                 "operation": "chat_completions",
                 "operationTitle": "Ask a Question"
@@ -119,7 +119,7 @@
                   "max_tokens": "",
                   "timeout": 600
                 },
-                "version": "2.1.0",
+                "version": "3.0.0",
                 "connector": "openai",
                 "operation": "chat_conversation",
                 "operationTitle": "Converse With OpenAI"
@@ -187,7 +187,7 @@
                 "name": "OpenAI",
                 "config": "''",
                 "params": [],
-                "version": "2.1.0",
+                "version": "3.0.0",
                 "connector": "openai",
                 "operation": "list_models",
                 "operationTitle": "List Available Models"
@@ -257,7 +257,7 @@
                 "params": {
                   "date": ""
                 },
-                "version": "2.1.0",
+                "version": "3.0.0",
                 "connector": "openai",
                 "operation": "get_usage",
                 "operationTitle": "Get Tokens Usage"
@@ -328,7 +328,7 @@
                   "input_text": "",
                   "model": "gpt-4"
                 },
-                "version": "2.1.0",
+                "version": "3.0.0",
                 "connector": "openai",
                 "operation": "count_tokens",
                 "operationTitle": "Get Token Count"
@@ -363,9 +363,2677 @@
               "targetStep": "/api/3/workflow_steps/345a6325-183a-429e-bbfb-979af97e0f3d"
             }
           ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "e309c82a-2f2c-4bdc-a751-be1758e797f0",
+          "collection": "/api/3/workflow_collections/823f4dbb-59d8-4c7a-bd30-3e72d2950706",
+          "steps": [
+            {
+              "uuid": "0eeec409-50e7-4c8e-ae74-44f9e42cc1a4",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "b01a3710-f6d9-442f-95bc-92e2e3e61db1",
+              "@type": "WorkflowStep",
+              "name": "List Assistants",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "order": "Descending",
+                  "after": "",
+                  "before": "",
+                  "limit": "20"
+                },
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "list_assistants",
+                "operationTitle": "List Assistants"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieves a list of assistants.",
+          "name": "List Assistants",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "Openai",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/0eeec409-50e7-4c8e-ae74-44f9e42cc1a4",
+          "routes": [
+            {
+              "uuid": "604748c9-2065-49ce-bd65-2dd9fb07703d",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> List Assistants",
+              "sourceStep": "/api/3/workflow_steps/0eeec409-50e7-4c8e-ae74-44f9e42cc1a4",
+              "targetStep": "/api/3/workflow_steps/b01a3710-f6d9-442f-95bc-92e2e3e61db1"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "9cea3b33-4dec-4bff-8e8b-5f4e558c57db",
+          "collection": "/api/3/workflow_collections/823f4dbb-59d8-4c7a-bd30-3e72d2950706",
+          "steps": [
+            {
+              "uuid": "d1f03a3f-d5fc-4669-9130-58ee18c95d29",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "f816cb7b-83bc-4300-b087-927c6822a661",
+              "@type": "WorkflowStep",
+              "name": "Get an Assistant",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "assistant_id": ""
+                },
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "get_assistant",
+                "operationTitle": "Get an Assistant"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieves an assistant based on assistant ID.",
+          "name": "Get an Assistant",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "Openai",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/d1f03a3f-d5fc-4669-9130-58ee18c95d29",
+          "routes": [
+            {
+              "uuid": "5cc59697-b780-4a77-aba5-c55d13d47907",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get an Assistant",
+              "sourceStep": "/api/3/workflow_steps/d1f03a3f-d5fc-4669-9130-58ee18c95d29",
+              "targetStep": "/api/3/workflow_steps/f816cb7b-83bc-4300-b087-927c6822a661"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "c38872c2-61c7-439a-a4ad-df06400f9561",
+          "collection": "/api/3/workflow_collections/823f4dbb-59d8-4c7a-bd30-3e72d2950706",
+          "steps": [
+            {
+              "uuid": "dbddee2d-5628-4c80-a3cd-c6747aa7ea01",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "d8adcdc9-db22-4f7b-9120-57a7c83da2a1",
+              "@type": "WorkflowStep",
+              "name": "Create an Assistant",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "model": "",
+                  "name": "",
+                  "description": "",
+                  "instructions": "",
+                  "tools": "",
+                  "tool_resources": {
+                    "code_interpreter": {
+                      "file_ids": [
+                        "file_id_1",
+                        "file_id_2"
+                      ]
+                    },
+                    "file_search": {
+                      "vector_store_ids": [
+                        "vector_store_id_1",
+                        "vector_store_id_2"
+                      ]
+                    }
+                  },
+                  "temperature": "",
+                  "top_p": "",
+                  "metadata": {
+                    "creator": "Jane Doe",
+                    "creation_date": "2024-05-28",
+                    "purpose": "Customer support",
+                    "organization": "ABC Inc.",
+                    "project_id": "123456789",
+                    "department": "Customer Service",
+                    "version": "1.0",
+                    "tags": [
+                      "customer support",
+                      "AI assistant",
+                      "version 1.0"
+                    ]
+                  }
+                },
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "create_assistant",
+                "operationTitle": "Create an Assistant"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Creates an assistant based on specified input parameters.",
+          "name": "Create an Assistant",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "Openai",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/dbddee2d-5628-4c80-a3cd-c6747aa7ea01",
+          "routes": [
+            {
+              "uuid": "9c031ad4-ebe6-4921-99ce-9ed2aabf303a",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Create an Assistant",
+              "sourceStep": "/api/3/workflow_steps/dbddee2d-5628-4c80-a3cd-c6747aa7ea01",
+              "targetStep": "/api/3/workflow_steps/d8adcdc9-db22-4f7b-9120-57a7c83da2a1"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "357ea00d-e519-403d-a43f-5d83e87560bf",
+          "collection": "/api/3/workflow_collections/823f4dbb-59d8-4c7a-bd30-3e72d2950706",
+          "steps": [
+            {
+              "uuid": "193b2073-e511-48f6-a0f0-4bcd063be8d8",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "4817ba0f-2ddd-4c7d-9392-8c40f509ce76",
+              "@type": "WorkflowStep",
+              "name": "Update an Assistant",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "model": "",
+                  "assistant_id": "",
+                  "name": "",
+                  "description": "",
+                  "instructions": "",
+                  "tools": "",
+                  "tool_resources": {
+                    "code_interpreter": {
+                      "file_ids": [
+                        "file_id_1",
+                        "file_id_2"
+                      ]
+                    },
+                    "file_search": {
+                      "vector_store_ids": [
+                        "vector_store_id_1",
+                        "vector_store_id_2"
+                      ]
+                    }
+                  },
+                  "temperature": "",
+                  "top_p": "",
+                  "metadata": {
+                    "creator": "Jane Doe",
+                    "creation_date": "2024-05-28",
+                    "purpose": "Customer support",
+                    "organization": "ABC Inc.",
+                    "project_id": "123456789",
+                    "department": "Customer Service",
+                    "version": "1.0",
+                    "tags": [
+                      "customer support",
+                      "AI assistant",
+                      "version 1.0"
+                    ]
+                  }
+                },
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "update_assistant",
+                "operationTitle": "Update an Assistant"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Updates an assistant based on specified input parameters.",
+          "name": "Update an Assistant",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "Openai",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/193b2073-e511-48f6-a0f0-4bcd063be8d8",
+          "routes": [
+            {
+              "uuid": "9c858151-95c0-4c4e-b742-20240e663de3",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Update an Assistant",
+              "sourceStep": "/api/3/workflow_steps/193b2073-e511-48f6-a0f0-4bcd063be8d8",
+              "targetStep": "/api/3/workflow_steps/4817ba0f-2ddd-4c7d-9392-8c40f509ce76"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "fc2cbb5f-f24d-4dde-9b9f-46637fba809e",
+          "collection": "/api/3/workflow_collections/823f4dbb-59d8-4c7a-bd30-3e72d2950706",
+          "steps": [
+            {
+              "uuid": "518b331b-b8b9-411f-96cd-0ecee1a51060",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "99236364-c482-40f8-a39a-5905e3b28e5a",
+              "@type": "WorkflowStep",
+              "name": "Delete an Assistant",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "assistant_id": ""
+                },
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "delete_assistant",
+                "operationTitle": "Delete an Assistant"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Deletes an assistant based on assistant ID.",
+          "name": "Delete an Assistant",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "Openai",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/518b331b-b8b9-411f-96cd-0ecee1a51060",
+          "routes": [
+            {
+              "uuid": "a2e166e7-fe05-472f-9e1a-e1296e1e005e",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Delete an Assistant",
+              "sourceStep": "/api/3/workflow_steps/518b331b-b8b9-411f-96cd-0ecee1a51060",
+              "targetStep": "/api/3/workflow_steps/99236364-c482-40f8-a39a-5905e3b28e5a"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "d80096ba-c994-44cc-a9d1-248c283658c6",
+          "collection": "/api/3/workflow_collections/823f4dbb-59d8-4c7a-bd30-3e72d2950706",
+          "steps": [
+            {
+              "uuid": "1e4c62f7-0540-4f64-9dc9-f03d43914c60",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "877480b6-da0f-496b-97b1-24ab9abdf48d",
+              "@type": "WorkflowStep",
+              "name": "Get Thread",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "thread_id": ""
+                },
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "get_thread",
+                "operationTitle": "Get Thread"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieves a thread based on the thread ID.",
+          "name": "Get Thread",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "Openai",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/1e4c62f7-0540-4f64-9dc9-f03d43914c60",
+          "routes": [
+            {
+              "uuid": "a6d98eb4-fd11-4336-8092-689b4be7c14d",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Thread",
+              "sourceStep": "/api/3/workflow_steps/1e4c62f7-0540-4f64-9dc9-f03d43914c60",
+              "targetStep": "/api/3/workflow_steps/877480b6-da0f-496b-97b1-24ab9abdf48d"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "add2f153-00ee-43ff-b6d0-eed9cb4fa3f9",
+          "collection": "/api/3/workflow_collections/823f4dbb-59d8-4c7a-bd30-3e72d2950706",
+          "steps": [
+            {
+              "uuid": "816e6caa-fd7c-4fda-ac3f-98a7181e0601",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "c6f910e5-3931-475a-af31-952561f39425",
+              "@type": "WorkflowStep",
+              "name": "Delete Thread",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "thread_id": ""
+                },
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "delete_thread",
+                "operationTitle": "Delete Thread"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Deletes a thread based on thread ID.",
+          "name": "Delete Thread",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "Openai",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/816e6caa-fd7c-4fda-ac3f-98a7181e0601",
+          "routes": [
+            {
+              "uuid": "89b62119-83a0-411a-ad22-aeef480a50c3",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Delete Thread",
+              "sourceStep": "/api/3/workflow_steps/816e6caa-fd7c-4fda-ac3f-98a7181e0601",
+              "targetStep": "/api/3/workflow_steps/c6f910e5-3931-475a-af31-952561f39425"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "62618d35-1550-4daa-b22b-f7db7e82f4ff",
+          "collection": "/api/3/workflow_collections/823f4dbb-59d8-4c7a-bd30-3e72d2950706",
+          "steps": [
+            {
+              "uuid": "2f572367-b226-4b27-b045-460e1f0d7e31",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "afe22ff7-17d5-4d26-821e-bf3f51232e7f",
+              "@type": "WorkflowStep",
+              "name": "Create Thread",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "messages": [
+                    {
+                      "role": "",
+                      "content": ""
+                    }
+                  ],
+                  "tool_resources": {
+                    "code_interpreter": {
+                      "file_ids": [
+                        "file_id_1",
+                        "file_id_2"
+                      ]
+                    },
+                    "file_search": {
+                      "vector_store_ids": [
+                        "vector_store_id_1",
+                        "vector_store_id_2"
+                      ]
+                    }
+                  },
+                  "metadata": {
+                    "creator": "Jane Doe",
+                    "creation_date": "2024-05-28",
+                    "purpose": "Customer support",
+                    "organization": "ABC Inc.",
+                    "project_id": "123456789",
+                    "department": "Customer Service",
+                    "version": "1.0",
+                    "tags": [
+                      "customer support",
+                      "AI assistant",
+                      "version 1.0"
+                    ]
+                  }
+                },
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "create_thread",
+                "operationTitle": "Create Thread"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Creates a thread based on the specified input parameters.",
+          "name": "Create Thread",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "Openai",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/2f572367-b226-4b27-b045-460e1f0d7e31",
+          "routes": [
+            {
+              "uuid": "fbb84c3f-97ee-4f90-b0a8-d1553b0d05de",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Create Thread",
+              "sourceStep": "/api/3/workflow_steps/2f572367-b226-4b27-b045-460e1f0d7e31",
+              "targetStep": "/api/3/workflow_steps/afe22ff7-17d5-4d26-821e-bf3f51232e7f"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "923a7539-96a3-4349-8dd1-1b9980c0f55a",
+          "collection": "/api/3/workflow_collections/823f4dbb-59d8-4c7a-bd30-3e72d2950706",
+          "steps": [
+            {
+              "uuid": "0dac8e91-4f7b-485d-ac33-421fa78eb26f",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "25dabd27-7725-4ba2-92bf-7d8eb33bcdf8",
+              "@type": "WorkflowStep",
+              "name": "Update Thread",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "thread_id": "",
+                  "tool_resources": {
+                    "code_interpreter": {
+                      "file_ids": [
+                        "file_id_1",
+                        "file_id_2"
+                      ]
+                    },
+                    "file_search": {
+                      "vector_store_ids": [
+                        "vector_store_id_1",
+                        "vector_store_id_2"
+                      ]
+                    }
+                  },
+                  "metadata": {
+                    "modified": "true",
+                    "user": "abc123"
+                  }
+                },
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "update_thread",
+                "operationTitle": "Update Thread"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Updates a thread based on the specified input parameters.",
+          "name": "Update Thread",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "Openai",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/0dac8e91-4f7b-485d-ac33-421fa78eb26f",
+          "routes": [
+            {
+              "uuid": "aeb569b1-6277-447e-a41d-426977e6a75c",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Update Thread",
+              "sourceStep": "/api/3/workflow_steps/0dac8e91-4f7b-485d-ac33-421fa78eb26f",
+              "targetStep": "/api/3/workflow_steps/25dabd27-7725-4ba2-92bf-7d8eb33bcdf8"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "61e1f43b-4fc6-4a10-9875-a1cd66c8dec9",
+          "collection": "/api/3/workflow_collections/823f4dbb-59d8-4c7a-bd30-3e72d2950706",
+          "steps": [
+            {
+              "uuid": "2d693224-6134-4aff-bf74-eae726f83bf5",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "55a1dd1d-945d-4844-902d-f93ebb104e18",
+              "@type": "WorkflowStep",
+              "name": "Create Message",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "thread_id": "",
+                  "role": "",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": {
+                        "value": "How does AI work? Explain it in simple terms.",
+                        "annotations": []
+                      }
+                    }
+                  ],
+                  "attachments": "",
+                  "metadata": {
+                    "creator": "Jane Doe",
+                    "creation_date": "2024-05-28",
+                    "purpose": "Customer support",
+                    "organization": "ABC Inc.",
+                    "project_id": "123456789",
+                    "department": "Customer Service",
+                    "version": "1.0",
+                    "tags": [
+                      "customer support",
+                      "AI assistant",
+                      "version 1.0"
+                    ]
+                  }
+                },
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "create_thread_message",
+                "operationTitle": "Create Message"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Creates a message based on the specified input parameters.",
+          "name": "Create Message",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "Openai",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/2d693224-6134-4aff-bf74-eae726f83bf5",
+          "routes": [
+            {
+              "uuid": "a3ba04a4-f44a-414e-9614-1c7a7ad23991",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Create Message",
+              "sourceStep": "/api/3/workflow_steps/2d693224-6134-4aff-bf74-eae726f83bf5",
+              "targetStep": "/api/3/workflow_steps/55a1dd1d-945d-4844-902d-f93ebb104e18"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "43765920-7211-4fad-a1e8-4a37bd4027c2",
+          "collection": "/api/3/workflow_collections/823f4dbb-59d8-4c7a-bd30-3e72d2950706",
+          "steps": [
+            {
+              "uuid": "28dc513e-bb55-4e5e-a538-ec5199280e43",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "0154adc6-3976-407d-aac1-0591f1df54ec",
+              "@type": "WorkflowStep",
+              "name": "Update a Thread Message",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "thread_id": "",
+                  "message_id": "",
+                  "metadata": {
+                    "creator": "Jane Doe",
+                    "creation_date": "2024-05-28",
+                    "purpose": "Customer support",
+                    "organization": "ABC Inc.",
+                    "project_id": "123456789",
+                    "department": "Customer Service",
+                    "version": "1.0",
+                    "tags": [
+                      "customer support",
+                      "AI assistant",
+                      "version 1.0"
+                    ]
+                  }
+                },
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "update_thread_message",
+                "operationTitle": "Update a Thread Message"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Updates a message in a thread based on the specified input parameters.",
+          "name": "Update a Thread Message",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "Openai",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/28dc513e-bb55-4e5e-a538-ec5199280e43",
+          "routes": [
+            {
+              "uuid": "49ee49e1-9a0b-4fb1-8d3c-37e1aa8cc763",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Update a Thread Message",
+              "sourceStep": "/api/3/workflow_steps/28dc513e-bb55-4e5e-a538-ec5199280e43",
+              "targetStep": "/api/3/workflow_steps/0154adc6-3976-407d-aac1-0591f1df54ec"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "cb48984d-a760-47d2-a9ed-44b55f2334d5",
+          "collection": "/api/3/workflow_collections/823f4dbb-59d8-4c7a-bd30-3e72d2950706",
+          "steps": [
+            {
+              "uuid": "3e2cb57b-d755-48a0-b380-8b17154d3927",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "1f642547-4660-4fcd-86e7-87463cae0639",
+              "@type": "WorkflowStep",
+              "name": "List Messages in a Thread",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "thread_id": "",
+                  "run_id": "",
+                  "order": "Descending",
+                  "after": "",
+                  "before": "",
+                  "limit": "20"
+                },
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "list_thread_messages",
+                "operationTitle": "List Messages in a Thread"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieves a list of messages for specified thread based on the specified input parameters.",
+          "name": "List Messages in a Thread",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "Openai",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/3e2cb57b-d755-48a0-b380-8b17154d3927",
+          "routes": [
+            {
+              "uuid": "a3211926-b068-467e-959a-7a8d370b6168",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> List Messages in a Thread",
+              "sourceStep": "/api/3/workflow_steps/3e2cb57b-d755-48a0-b380-8b17154d3927",
+              "targetStep": "/api/3/workflow_steps/1f642547-4660-4fcd-86e7-87463cae0639"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "431aa96e-e83b-47aa-8013-181d3456752a",
+          "collection": "/api/3/workflow_collections/823f4dbb-59d8-4c7a-bd30-3e72d2950706",
+          "steps": [
+            {
+              "uuid": "024c2693-54ae-4e5e-aa01-168c291a3344",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "69673a09-6bc9-41f6-90e5-f9465494d8bf",
+              "@type": "WorkflowStep",
+              "name": "Get a Thread Message",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "thread_id": "",
+                  "message_id": ""
+                },
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "get_thread_message",
+                "operationTitle": "Get a Thread Message"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieves a specific message based on Thread ID and Message ID.",
+          "name": "Get a Thread Message",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "Openai",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/024c2693-54ae-4e5e-aa01-168c291a3344",
+          "routes": [
+            {
+              "uuid": "cceef31c-5667-40fb-96d2-8c021c734ad2",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get a Thread Message",
+              "sourceStep": "/api/3/workflow_steps/024c2693-54ae-4e5e-aa01-168c291a3344",
+              "targetStep": "/api/3/workflow_steps/69673a09-6bc9-41f6-90e5-f9465494d8bf"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "3e3d55b8-2ac3-42e4-b881-d14b513b93b2",
+          "collection": "/api/3/workflow_collections/823f4dbb-59d8-4c7a-bd30-3e72d2950706",
+          "steps": [
+            {
+              "uuid": "9d1ac833-dc30-4b4f-9ec5-1cfe9647c0d6",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "11433946-8fe6-4596-a229-81dd4591e105",
+              "@type": "WorkflowStep",
+              "name": "Delete a Thread Message",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "thread_id": "",
+                  "message_id": ""
+                },
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "delete_thread_message",
+                "operationTitle": "Delete a Thread Message"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Deletes a message based on Thread ID and Message ID.",
+          "name": "Delete a Thread Message",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "Openai",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/9d1ac833-dc30-4b4f-9ec5-1cfe9647c0d6",
+          "routes": [
+            {
+              "uuid": "63111efd-89f6-4240-88d4-627bdb1511cd",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Delete a Thread Message",
+              "sourceStep": "/api/3/workflow_steps/9d1ac833-dc30-4b4f-9ec5-1cfe9647c0d6",
+              "targetStep": "/api/3/workflow_steps/11433946-8fe6-4596-a229-81dd4591e105"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "f426015d-ed70-4d8f-9234-66b1b833a70d",
+          "collection": "/api/3/workflow_collections/823f4dbb-59d8-4c7a-bd30-3e72d2950706",
+          "steps": [
+            {
+              "uuid": "1268972b-72b1-44ef-ae4a-4a2445f84e52",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "0882bc9b-0c2f-4ace-a07b-cc3a7689696b",
+              "@type": "WorkflowStep",
+              "name": "List Runs",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "thread_id": "",
+                  "order": "Descending",
+                  "after": "",
+                  "before": "",
+                  "limit": "20"
+                },
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "list_runs",
+                "operationTitle": "List Runs"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieves a list of runs belonging to a thread.",
+          "name": "List Runs",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "Openai",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/1268972b-72b1-44ef-ae4a-4a2445f84e52",
+          "routes": [
+            {
+              "uuid": "4118e7e4-a761-4c6f-8daf-cfc2fe0ba915",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> List Runs",
+              "sourceStep": "/api/3/workflow_steps/1268972b-72b1-44ef-ae4a-4a2445f84e52",
+              "targetStep": "/api/3/workflow_steps/0882bc9b-0c2f-4ace-a07b-cc3a7689696b"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "0d491aaf-24f2-4667-969e-eb9005227fad",
+          "collection": "/api/3/workflow_collections/823f4dbb-59d8-4c7a-bd30-3e72d2950706",
+          "steps": [
+            {
+              "uuid": "feb4c159-7cc8-4528-aad4-f002cf1a7fc4",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "a683579e-6584-4cfc-aee7-8f274759648d",
+              "@type": "WorkflowStep",
+              "name": "Get a Run",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "thread_id": "",
+                  "run_id": ""
+                },
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "get_run",
+                "operationTitle": "Get a Run"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieves a specific run for a thread.",
+          "name": "Get a Run",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "Openai",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/feb4c159-7cc8-4528-aad4-f002cf1a7fc4",
+          "routes": [
+            {
+              "uuid": "986d7bc4-12b0-4d32-b300-269562e29bb3",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get a Run",
+              "sourceStep": "/api/3/workflow_steps/feb4c159-7cc8-4528-aad4-f002cf1a7fc4",
+              "targetStep": "/api/3/workflow_steps/a683579e-6584-4cfc-aee7-8f274759648d"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "e7964f19-5a04-4bc5-97a0-7cdfccec08e0",
+          "collection": "/api/3/workflow_collections/823f4dbb-59d8-4c7a-bd30-3e72d2950706",
+          "steps": [
+            {
+              "uuid": "f60081b3-39cb-44c0-be69-2c83a92f7883",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "b1a469bb-d3dc-49a4-bce8-9ad180fce178",
+              "@type": "WorkflowStep",
+              "name": "Create a Run",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "thread_id": "",
+                  "assistant_id": "",
+                  "model": "",
+                  "instructions": "",
+                  "additional_instructions": "",
+                  "additional_messages": [
+                    {
+                      "role": "",
+                      "content": ""
+                    }
+                  ],
+                  "tools": "",
+                  "temperature": "",
+                  "top_p": "",
+                  "metadata": {
+                    "creator": "Jane Doe",
+                    "creation_date": "2024-05-28",
+                    "purpose": "Customer support",
+                    "organization": "ABC Inc.",
+                    "project_id": "123456789",
+                    "department": "Customer Service",
+                    "version": "1.0",
+                    "tags": [
+                      "customer support",
+                      "AI run",
+                      "version 1.0"
+                    ]
+                  },
+                  "max_prompt_tokens": "",
+                  "other_fields": ""
+                },
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "create_run",
+                "operationTitle": "Create a Run"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Creates a run based on specified input parameters.",
+          "name": "Create a Run",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "Openai",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/f60081b3-39cb-44c0-be69-2c83a92f7883",
+          "routes": [
+            {
+              "uuid": "5edd486f-29e4-4195-b8e3-d483434743d5",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Create a Run",
+              "sourceStep": "/api/3/workflow_steps/f60081b3-39cb-44c0-be69-2c83a92f7883",
+              "targetStep": "/api/3/workflow_steps/b1a469bb-d3dc-49a4-bce8-9ad180fce178"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "504a565a-8ee8-4540-8dad-207ff5e67100",
+          "collection": "/api/3/workflow_collections/823f4dbb-59d8-4c7a-bd30-3e72d2950706",
+          "steps": [
+            {
+              "uuid": "b7659d65-2303-4363-b055-cde51d912b55",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "2644aead-ad86-487e-9e22-26446c794c60",
+              "@type": "WorkflowStep",
+              "name": "Create Thread and Run",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "assistant_id": "",
+                  "thread": {
+                    "messages": [
+                      {
+                        "role": "user",
+                        "content": "Explain deep learning to a 5 year old."
+                      }
+                    ]
+                  },
+                  "model": "",
+                  "instructions": "",
+                  "tools": "",
+                  "tool_resources": {
+                    "code_interpreter": {
+                      "file_ids": [
+                        "file_id_1",
+                        "file_id_2"
+                      ]
+                    },
+                    "file_search": {
+                      "vector_store_ids": [
+                        "vector_store_id_1",
+                        "vector_store_id_2"
+                      ]
+                    }
+                  },
+                  "metadata": {
+                    "creator": "Jane Doe",
+                    "creation_date": "2024-05-28",
+                    "purpose": "Customer support",
+                    "organization": "ABC Inc.",
+                    "project_id": "123456789",
+                    "department": "Customer Service",
+                    "version": "1.0",
+                    "tags": [
+                      "customer support",
+                      "AI run",
+                      "version 1.0"
+                    ]
+                  },
+                  "temperature": "",
+                  "top_p": "",
+                  "max_prompt_tokens": "",
+                  "other_fields": ""
+                },
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "create_thread_and_run",
+                "operationTitle": "Create Thread and Run"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Creates a thread and run in one request.",
+          "name": "Create Thread and Run",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "Openai",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/b7659d65-2303-4363-b055-cde51d912b55",
+          "routes": [
+            {
+              "uuid": "65323616-a937-4dae-a91e-f5e3490dc2e3",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Create Thread and Run",
+              "sourceStep": "/api/3/workflow_steps/b7659d65-2303-4363-b055-cde51d912b55",
+              "targetStep": "/api/3/workflow_steps/2644aead-ad86-487e-9e22-26446c794c60"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "dbeb22a6-75e6-4118-8ad0-407a657bd91c",
+          "collection": "/api/3/workflow_collections/823f4dbb-59d8-4c7a-bd30-3e72d2950706",
+          "steps": [
+            {
+              "uuid": "17e5194b-4cbb-432a-973b-9339a4d4d56a",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "78dda212-697e-46e4-8488-58512b9dc4ae",
+              "@type": "WorkflowStep",
+              "name": "Update a Run",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "thread_id": "",
+                  "run_id": "",
+                  "metadata": {
+                    "user_id": "user_abc123"
+                  }
+                },
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "update_run",
+                "operationTitle": "Update a Run"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Updates a run based on specified input parameters.",
+          "name": "Update a Run",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "Openai",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/17e5194b-4cbb-432a-973b-9339a4d4d56a",
+          "routes": [
+            {
+              "uuid": "43a5c0ab-e4f1-4e22-86b2-5ff77c900c10",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Update a Run",
+              "sourceStep": "/api/3/workflow_steps/17e5194b-4cbb-432a-973b-9339a4d4d56a",
+              "targetStep": "/api/3/workflow_steps/78dda212-697e-46e4-8488-58512b9dc4ae"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "f89bc5a9-9ea6-41df-bf84-f333acfc5366",
+          "collection": "/api/3/workflow_collections/823f4dbb-59d8-4c7a-bd30-3e72d2950706",
+          "steps": [
+            {
+              "uuid": "9e0a4529-a1c3-4e01-86ce-bfc4ab10d45c",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "7bf143a4-ec45-45d6-999b-287fe03449e4",
+              "@type": "WorkflowStep",
+              "name": "Cancel a Run",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "thread_id": "",
+                  "run_id": ""
+                },
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "cancel_run",
+                "operationTitle": "Cancel a Run"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Cancels a run that is in progress.",
+          "name": "Cancel a Run",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "Openai",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/9e0a4529-a1c3-4e01-86ce-bfc4ab10d45c",
+          "routes": [
+            {
+              "uuid": "9272a27c-10a7-4fa3-9cc3-73ffef931468",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Cancel a Run",
+              "sourceStep": "/api/3/workflow_steps/9e0a4529-a1c3-4e01-86ce-bfc4ab10d45c",
+              "targetStep": "/api/3/workflow_steps/7bf143a4-ec45-45d6-999b-287fe03449e4"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "861ddf2c-7567-4763-a365-6de3a3f863b2",
+          "collection": "/api/3/workflow_collections/823f4dbb-59d8-4c7a-bd30-3e72d2950706",
+          "steps": [
+            {
+              "uuid": "cfc2a905-42a3-4c4f-bc84-c962ecc823cf",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "4fd36391-15f6-477a-9116-daf037336372",
+              "@type": "WorkflowStep",
+              "name": "Submit Tool Outputs To Run",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "thread_id": "",
+                  "run_id": "",
+                  "tool_outputs": [
+                    {
+                      "tool_call_id": "call_001",
+                      "output": "70 degrees and sunny."
+                    }
+                  ]
+                },
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "submit_tool_outputs_to_run",
+                "operationTitle": "Submit Tool Outputs To Run"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Submits the outputs from the tool calls once they're all completed. All outputs must be submitted in a single request.",
+          "name": "Submit Tool Outputs To Run",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "Openai",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/cfc2a905-42a3-4c4f-bc84-c962ecc823cf",
+          "routes": [
+            {
+              "uuid": "6d494a49-b8f4-4ea6-92b1-1357c813c775",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Submit Tool Outputs To Run",
+              "sourceStep": "/api/3/workflow_steps/cfc2a905-42a3-4c4f-bc84-c962ecc823cf",
+              "targetStep": "/api/3/workflow_steps/4fd36391-15f6-477a-9116-daf037336372"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "f380ef06-82ef-439f-a93f-d8cfb2c53630",
+          "collection": "/api/3/workflow_collections/823f4dbb-59d8-4c7a-bd30-3e72d2950706",
+          "steps": [
+            {
+              "uuid": "0c1a6357-a420-477e-a04b-6b891d055c08",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "dcb0a342-7bf2-47bc-a199-51d993144ac1",
+              "@type": "WorkflowStep",
+              "name": "List Run Steps",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "thread_id": "",
+                  "run_id": "",
+                  "order": "Descending",
+                  "after": "",
+                  "before": "",
+                  "limit": "20"
+                },
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "list_run_steps",
+                "operationTitle": "List Run Steps"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieves a list of run steps belonging to a run.",
+          "name": "List Run Steps",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "Openai",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/0c1a6357-a420-477e-a04b-6b891d055c08",
+          "routes": [
+            {
+              "uuid": "a9da2b2a-f304-4ee6-897d-26686496bdd7",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> List Run Steps",
+              "sourceStep": "/api/3/workflow_steps/0c1a6357-a420-477e-a04b-6b891d055c08",
+              "targetStep": "/api/3/workflow_steps/dcb0a342-7bf2-47bc-a199-51d993144ac1"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "1209a19f-d3ec-4305-8411-0a73f897c83a",
+          "collection": "/api/3/workflow_collections/823f4dbb-59d8-4c7a-bd30-3e72d2950706",
+          "steps": [
+            {
+              "uuid": "3d16157a-6615-4f7e-83c4-0b6b89622754",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "7f074dc4-8c34-4eee-9649-5a465136a5d4",
+              "@type": "WorkflowStep",
+              "name": "Get Run Step",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "thread_id": "",
+                  "run_id": "",
+                  "step_id": ""
+                },
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "get_run_step",
+                "operationTitle": "Get Run Step"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieves a step of a run.",
+          "name": "Get Run Step",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "Openai",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/3d16157a-6615-4f7e-83c4-0b6b89622754",
+          "routes": [
+            {
+              "uuid": "ac07848a-3870-42db-9a8f-3f48cb00f168",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Run Step",
+              "sourceStep": "/api/3/workflow_steps/3d16157a-6615-4f7e-83c4-0b6b89622754",
+              "targetStep": "/api/3/workflow_steps/7f074dc4-8c34-4eee-9649-5a465136a5d4"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "088623bb-1a85-4d3f-851f-604c23e8a376",
+          "collection": "/api/3/workflow_collections/823f4dbb-59d8-4c7a-bd30-3e72d2950706",
+          "steps": [
+            {
+              "uuid": "45ee16ab-627d-4b88-8611-cb094843b858",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "1ea31b89-2ff7-4297-b22a-c81d3ea2a551",
+              "@type": "WorkflowStep",
+              "name": "Create Vector Store",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "file_ids": "",
+                  "name": "",
+                  "expires_after": {
+                    "anchor": "",
+                    "days": ""
+                  },
+                  "metadata": ""
+                },
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "create_vector_store",
+                "operationTitle": "Create Vector Store"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Creates a vector store.",
+          "name": "Create Vector Store",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "Openai",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/45ee16ab-627d-4b88-8611-cb094843b858",
+          "routes": [
+            {
+              "uuid": "a0ba8159-4e2b-44f9-92e2-fe9cb5a26820",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Create Vector Store",
+              "sourceStep": "/api/3/workflow_steps/45ee16ab-627d-4b88-8611-cb094843b858",
+              "targetStep": "/api/3/workflow_steps/1ea31b89-2ff7-4297-b22a-c81d3ea2a551"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "1107d7e7-7687-49ea-a42e-5c3aa94dcba5",
+          "collection": "/api/3/workflow_collections/823f4dbb-59d8-4c7a-bd30-3e72d2950706",
+          "steps": [
+            {
+              "uuid": "e5531c6b-958c-45ef-a15f-d49d468d2523",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "4766c816-a94c-4033-83cf-65b12f5c1f91",
+              "@type": "WorkflowStep",
+              "name": "Get Vector Store",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "vector_store_id": ""
+                },
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "get_vector_store",
+                "operationTitle": "Get Vector Store"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieves a vector store details.",
+          "name": "Get Vector Store",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "Openai",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/e5531c6b-958c-45ef-a15f-d49d468d2523",
+          "routes": [
+            {
+              "uuid": "2a2a3e19-24cf-441c-8f68-30a411eef881",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Vector Store",
+              "sourceStep": "/api/3/workflow_steps/e5531c6b-958c-45ef-a15f-d49d468d2523",
+              "targetStep": "/api/3/workflow_steps/4766c816-a94c-4033-83cf-65b12f5c1f91"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "8c90b404-faa2-4487-a2d1-e13d02b107d9",
+          "collection": "/api/3/workflow_collections/823f4dbb-59d8-4c7a-bd30-3e72d2950706",
+          "steps": [
+            {
+              "uuid": "f27dc1b8-02f8-4f15-9e52-f822d4b13d25",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "f941f4a9-2f9a-49f7-a829-d763ea1d6f6d",
+              "@type": "WorkflowStep",
+              "name": "Create Vector Store File",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "vector_store_id": "",
+                  "file_id": ""
+                },
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "create_vector_store_file",
+                "operationTitle": "Create Vector Store File"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Creates a vector store file by attaching a File to a vector store.",
+          "name": "Create Vector Store File",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "Openai",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/f27dc1b8-02f8-4f15-9e52-f822d4b13d25",
+          "routes": [
+            {
+              "uuid": "faff3fc9-222c-4d93-aaf3-86b74a581cea",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Create Vector Store File",
+              "sourceStep": "/api/3/workflow_steps/f27dc1b8-02f8-4f15-9e52-f822d4b13d25",
+              "targetStep": "/api/3/workflow_steps/f941f4a9-2f9a-49f7-a829-d763ea1d6f6d"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "e45956de-233b-4a09-9cd9-a4e02a5c2c46",
+          "collection": "/api/3/workflow_collections/823f4dbb-59d8-4c7a-bd30-3e72d2950706",
+          "steps": [
+            {
+              "uuid": "5595b483-4c0e-48eb-97a6-05d09be1fbd7",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "ad26cefe-79a5-4f07-9916-cf238d321235",
+              "@type": "WorkflowStep",
+              "name": "Create Vector Store File Batch",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "vector_store_id": "",
+                  "file_ids": ""
+                },
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "create_vector_store_file_batch",
+                "operationTitle": "Create Vector Store File Batch"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Creates a vector store file batch.",
+          "name": "Create Vector Store File Batch",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "Openai",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/5595b483-4c0e-48eb-97a6-05d09be1fbd7",
+          "routes": [
+            {
+              "uuid": "c9ee56bd-0297-41da-87be-d965de42746a",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Create Vector Store File Batch",
+              "sourceStep": "/api/3/workflow_steps/5595b483-4c0e-48eb-97a6-05d09be1fbd7",
+              "targetStep": "/api/3/workflow_steps/ad26cefe-79a5-4f07-9916-cf238d321235"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "83fd1f30-52f2-438b-bc82-91aad4958df6",
+          "collection": "/api/3/workflow_collections/823f4dbb-59d8-4c7a-bd30-3e72d2950706",
+          "steps": [
+            {
+              "uuid": "f3b5b7a5-2e72-4a74-b135-647b6d591d2e",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "fd0dc16f-d54e-422a-9c08-a973635ddea1",
+              "@type": "WorkflowStep",
+              "name": "Get Vector Store File Batch",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "vector_store_id": "",
+                  "batch_id": ""
+                },
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "get_vector_store_file_batch",
+                "operationTitle": "Get Vector Store File Batch"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Creates a vector store file batch.",
+          "name": "Get Vector Store File Batch",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "Openai",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/f3b5b7a5-2e72-4a74-b135-647b6d591d2e",
+          "routes": [
+            {
+              "uuid": "f7adcc0b-ee27-4280-9db2-df5a4f4413fb",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get Vector Store File Batch",
+              "sourceStep": "/api/3/workflow_steps/f3b5b7a5-2e72-4a74-b135-647b6d591d2e",
+              "targetStep": "/api/3/workflow_steps/fd0dc16f-d54e-422a-9c08-a973635ddea1"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "86283971-fd6c-4708-a5cd-ec8bcedeacc2",
+          "collection": "/api/3/workflow_collections/823f4dbb-59d8-4c7a-bd30-3e72d2950706",
+          "steps": [
+            {
+              "uuid": "f32c7107-218c-4967-bef9-f9462ccd7644",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "3b935946-10da-4b77-ba22-047a279d3369",
+              "@type": "WorkflowStep",
+              "name": "Cancel Vector Store File Batch",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "vector_store_id": "",
+                  "batch_id": ""
+                },
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "cancel_vector_store_file_batch",
+                "operationTitle": "Cancel Vector Store File Batch"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Cancel a vector store file batch. This attempts to cancel the processing of files in this batch as soon as possible.",
+          "name": "Cancel Vector Store File Batch",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "Openai",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/f32c7107-218c-4967-bef9-f9462ccd7644",
+          "routes": [
+            {
+              "uuid": "46d55947-83a1-414e-9528-4800db5ca041",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Cancel Vector Store File Batch",
+              "sourceStep": "/api/3/workflow_steps/f32c7107-218c-4967-bef9-f9462ccd7644",
+              "targetStep": "/api/3/workflow_steps/3b935946-10da-4b77-ba22-047a279d3369"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "441b99eb-2678-47fa-b195-298b8b90cd65",
+          "collection": "/api/3/workflow_collections/823f4dbb-59d8-4c7a-bd30-3e72d2950706",
+          "steps": [
+            {
+              "uuid": "5693cc26-f56c-435f-8a11-9e7d570b1ca2",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "e411a549-429d-4218-aaa6-7aeb59e7e51f",
+              "@type": "WorkflowStep",
+              "name": "Create speech",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "model": "",
+                  "input": "",
+                  "voice": "",
+                  "speed": 1.0,
+                  "response_format": "mp3"
+                },
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "create_speech",
+                "operationTitle": "Create speech"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Generates audio from the input text.",
+          "name": "Create speech",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "Openai",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/5693cc26-f56c-435f-8a11-9e7d570b1ca2",
+          "routes": [
+            {
+              "uuid": "5ba22a91-54d3-4fa6-8a36-f78dbb62b4e3",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Create speech",
+              "sourceStep": "/api/3/workflow_steps/5693cc26-f56c-435f-8a11-9e7d570b1ca2",
+              "targetStep": "/api/3/workflow_steps/e411a549-429d-4218-aaa6-7aeb59e7e51f"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "51bf7f32-da94-441d-97b5-4051caad9019",
+          "collection": "/api/3/workflow_collections/823f4dbb-59d8-4c7a-bd30-3e72d2950706",
+          "steps": [
+            {
+              "uuid": "c3300a61-e920-491e-9ca9-9309241f7937",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "83801304-01d5-4b7d-b356-dc678b418ae8",
+              "@type": "WorkflowStep",
+              "name": "Create Transcription",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "model": "whisper-1",
+                  "file": "",
+                  "language": "",
+                  "prompt": "",
+                  "temperature": "",
+                  "timestamp_granularities": "segment"
+                },
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "create_transcription",
+                "operationTitle": "Create Transcription"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Transcribes audio into the input language.",
+          "name": "Create Transcription",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "Openai",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/c3300a61-e920-491e-9ca9-9309241f7937",
+          "routes": [
+            {
+              "uuid": "a39e60ab-5465-413d-a570-e14a6fc2db19",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Create Transcription",
+              "sourceStep": "/api/3/workflow_steps/c3300a61-e920-491e-9ca9-9309241f7937",
+              "targetStep": "/api/3/workflow_steps/83801304-01d5-4b7d-b356-dc678b418ae8"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "215404b4-cb9f-4641-93a5-45e4c037cab3",
+          "collection": "/api/3/workflow_collections/823f4dbb-59d8-4c7a-bd30-3e72d2950706",
+          "steps": [
+            {
+              "uuid": "7e7619d4-5a96-4270-8971-b79167749bac",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "8268d435-22df-492b-a73d-9d42ef5a9034",
+              "@type": "WorkflowStep",
+              "name": "Create Translation",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "model": "whisper-1",
+                  "file": "",
+                  "temperature": ""
+                },
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "create_translation",
+                "operationTitle": "Create Translation"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Translates audio into English.",
+          "name": "Create Translation",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "Openai",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/7e7619d4-5a96-4270-8971-b79167749bac",
+          "routes": [
+            {
+              "uuid": "f992636c-df2e-41c8-9bf2-70cb8fb34e4e",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Create Translation",
+              "sourceStep": "/api/3/workflow_steps/7e7619d4-5a96-4270-8971-b79167749bac",
+              "targetStep": "/api/3/workflow_steps/8268d435-22df-492b-a73d-9d42ef5a9034"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "7ebe3195-06b0-4494-9aa7-84c71dbfcc46",
+          "collection": "/api/3/workflow_collections/823f4dbb-59d8-4c7a-bd30-3e72d2950706",
+          "steps": [
+            {
+              "uuid": "08b7688c-7fdc-4437-9cda-9d04e5315569",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "cf7f40f3-d235-4362-ad18-14b1b901b38d",
+              "@type": "WorkflowStep",
+              "name": "Get File",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "file_id": ""
+                },
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "get_file",
+                "operationTitle": "Get File"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Retrieves information about a specific file.",
+          "name": "Get File",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "Openai",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/08b7688c-7fdc-4437-9cda-9d04e5315569",
+          "routes": [
+            {
+              "uuid": "6e745541-53c0-481a-b0ef-6f7faab9ceca",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Get File",
+              "sourceStep": "/api/3/workflow_steps/08b7688c-7fdc-4437-9cda-9d04e5315569",
+              "targetStep": "/api/3/workflow_steps/cf7f40f3-d235-4362-ad18-14b1b901b38d"
+            }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "uuid": "4ac9ae86-512d-4144-b87c-246dc30279b0",
+          "collection": "/api/3/workflow_collections/823f4dbb-59d8-4c7a-bd30-3e72d2950706",
+          "steps": [
+            {
+              "uuid": "39375e78-f42a-491f-9176-ca1c76dadb45",
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                }
+              },
+              "left": "20",
+              "top": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62"
+            },
+            {
+              "uuid": "66f523ad-2179-4197-b2bf-cf2dedd25f0a",
+              "@type": "WorkflowStep",
+              "name": "Upload File",
+              "description": null,
+              "status": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "''",
+                "params": {
+                  "file": "",
+                  "purpose": ""
+                },
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "upload_file",
+                "operationTitle": "Upload File"
+              },
+              "left": "188",
+              "top": "120",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671"
+            }
+          ],
+          "triggerLimit": null,
+          "description": "Uploads a file that can be used in various actions. Individual files can be up to 512 MB, and the size of all files uploaded by one organization can be up to 100 GB.",
+          "name": "Upload File",
+          "tag": "#OpenAI",
+          "recordTags": [
+            "Openai",
+            "openai"
+          ],
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "parameters": [],
+          "synchronous": false,
+          "triggerStep": "/api/3/workflow_steps/39375e78-f42a-491f-9176-ca1c76dadb45",
+          "routes": [
+            {
+              "uuid": "75ca899c-f32c-496f-abd5-2592df0472b0",
+              "@type": "WorkflowRoute",
+              "label": null,
+              "isExecuted": false,
+              "name": "Start-> Upload File",
+              "sourceStep": "/api/3/workflow_steps/39375e78-f42a-491f-9176-ca1c76dadb45",
+              "targetStep": "/api/3/workflow_steps/66f523ad-2179-4197-b2bf-cf2dedd25f0a"
+            }
+          ]
         }
       ],
-      "name": "Sample - OpenAI - 2.1.0",
+      "name": "Sample - OpenAI - 3.0.0",
       "description": "This integration supports interacting with OpenAI's powerful language model, ChatGPT from FortiSOAR workflows",
       "visible": true,
       "recordTags": [
