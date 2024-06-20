@@ -1103,7 +1103,7 @@
           "title": "Attachments",
           "type": "json",
           "name": "attachments",
-          "required": true,
+          "required": false,
           "visible": true,
           "editable": true,
           "value": [],
