@@ -12,11 +12,15 @@ import re
 from bs4 import BeautifulSoup
 from jsonschema import validate
 from connectors.core.connector import get_logger, ConnectorError
+from integrations.crudhub import make_request
 from .constants import *
 import tiktoken
 import requests
 import httpx
 import os
+from pathlib import Path
+from connectors.cyops_utilities.files import save_file_in_env
+
 
 logger = get_logger(LOGGER_NAME)
 
@@ -79,6 +83,7 @@ def __init_openai(config):
         openai.http_client = httpx.Client(proxy=https_proxy, verify=verify_ssl)
     else:
         openai.http_client = httpx.Client(verify=verify_ssl)
+    openai_args['http_client'] = openai.http_client
     return openai_args
 
 
@@ -170,6 +175,7 @@ def make_rest_call(config, url, method='GET', **kwargs):
                 logger.error("Error: {0}".format(response.json()))
                 raise ConnectorError('Error: {0}'.format(response.json()))
             except Exception as error:
+                logger.exception('Error occurred: {0}'.format(str(error)))
                 raise ConnectorError('{0}'.format(response.text if response.text else str(response)))
     except requests.exceptions.SSLError as e:
         logger.exception('{0}'.format(e))
@@ -180,3 +186,335 @@ def make_rest_call(config, url, method='GET', **kwargs):
     except Exception as e:
         logger.error('{0}'.format(e))
         raise ConnectorError('{0}'.format(e))
+
+
+def build_payload(params: dict):
+    data = {}
+    for k, v in params.items():
+        if isinstance(v, (int, bool)):
+            data[k] = v
+        elif v:
+            if isinstance(v, dict):
+                data[k] = build_payload(v)
+            elif isinstance(v, (list, tuple)):
+                data[k] = list(v)
+            else:
+                data[k] = v
+    return data
+
+
+def create_assistant(config, params):
+    __init_openai(config)
+    payload = build_payload(params)
+    payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    client = openai.OpenAI(api_key=openai.api_key)
+    return client.beta.assistants.create(**payload).model_dump()
+
+
+def list_assistants(config, params):
+    __init_openai(config)
+    params['order'] = SORT_ORDER_MAPPING.get(params.get('order'))
+    payload = build_payload(params)
+    payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    client = openai.OpenAI(api_key=openai.api_key)
+    return client.beta.assistants.list(**payload).model_dump()
+
+
+def get_assistant(config, params):
+    __init_openai(config)
+    client = openai.OpenAI(api_key=openai.api_key)
+    return client.beta.assistants.retrieve(assistant_id=params.get('assistant_id'), timeout=600).model_dump()
+
+
+def delete_assistant(config, params):
+    __init_openai(config)
+    client = openai.OpenAI(api_key=openai.api_key)
+    return client.beta.assistants.delete(assistant_id=params.get('assistant_id'), timeout=600).model_dump()
+
+
+def update_assistant(config, params):
+    __init_openai(config)
+    payload = build_payload(params)
+    payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    client = openai.OpenAI(api_key=openai.api_key)
+    return client.beta.assistants.update(**payload).model_dump()
+
+
+def get_thread(config, params):
+    __init_openai(config)
+    params['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    client = openai.OpenAI(api_key=openai.api_key)
+    return client.beta.threads.retrieve(**params).model_dump()
+
+
+def delete_thread(config, params):
+    __init_openai(config)
+    params['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    client = openai.OpenAI(api_key=openai.api_key)
+    return client.beta.threads.delete(**params).model_dump()
+
+
+def create_thread(config, params):
+    __init_openai(config)
+    payload = build_payload(params)
+    payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    client = openai.OpenAI(api_key=openai.api_key)
+    return client.beta.threads.create(**payload).model_dump()
+
+
+def update_thread(config, params):
+    __init_openai(config)
+    payload = build_payload(params)
+    payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    client = openai.OpenAI(api_key=openai.api_key)
+    return client.beta.threads.update(**payload).model_dump()
+
+
+def create_thread_message(config, params):
+    __init_openai(config)
+    params['role'] = params.get('role', '').lower()
+    payload = build_payload(params)
+    payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    client = openai.OpenAI(api_key=openai.api_key)
+    return client.beta.threads.messages.create(**payload).model_dump()
+
+
+def list_thread_messages(config, params):
+    __init_openai(config)
+    params['order'] = SORT_ORDER_MAPPING.get(params.get('order'))
+    payload = build_payload(params)
+    payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    client = openai.OpenAI(api_key=openai.api_key)
+    return client.beta.threads.messages.list(**payload).model_dump()
+
+
+def delete_thread_message(config, params):
+    __init_openai(config)
+    payload = build_payload(params)
+    payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    client = openai.OpenAI(api_key=openai.api_key)
+    return client.beta.threads.messages.delete(**payload).model_dump()
+
+
+def get_thread_message(config, params):
+    __init_openai(config)
+    payload = build_payload(params)
+    payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    client = openai.OpenAI(api_key=openai.api_key)
+    return client.beta.threads.messages.retrieve(**payload).model_dump()
+
+
+def update_thread_message(config, params):
+    __init_openai(config)
+    payload = build_payload(params)
+    payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    client = openai.OpenAI(api_key=openai.api_key)
+    return client.beta.threads.messages.create(**payload).model_dump()
+
+
+def list_runs(config, params):
+    __init_openai(config)
+    params['order'] = SORT_ORDER_MAPPING.get(params.get('order'))
+    payload = build_payload(params)
+    payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    client = openai.OpenAI(api_key=openai.api_key)
+    return client.beta.threads.runs.list(**payload).model_dump()
+
+
+def get_run(config, params):
+    __init_openai(config)
+    payload = build_payload(params)
+    payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    client = openai.OpenAI(api_key=openai.api_key)
+    return client.beta.threads.runs.retrieve(**payload).model_dump()
+
+
+def create_run(config, params):
+    __init_openai(config)
+    payload = build_payload(params)
+    other_fields = params.pop('other_fields', {})
+    if other_fields:
+        payload.update(other_fields)
+    payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    client = openai.OpenAI(api_key=openai.api_key)
+    return client.beta.threads.runs.create(**payload).model_dump()
+
+
+def update_run(config, params):
+    __init_openai(config)
+    payload = build_payload(params)
+    payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    client = openai.OpenAI(api_key=openai.api_key)
+    return client.beta.threads.runs.update(**payload).model_dump()
+
+
+def cancel_run(config, params):
+    __init_openai(config)
+    payload = build_payload(params)
+    payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    client = openai.OpenAI(api_key=openai.api_key)
+    return client.beta.threads.runs.cancel(**payload).model_dump()
+
+
+def create_thread_and_run(config, params):
+    __init_openai(config)
+    payload = build_payload(params)
+    other_fields = params.pop('other_fields', {})
+    if other_fields:
+        payload.update(other_fields)
+    payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    client = openai.OpenAI(api_key=openai.api_key)
+    return client.beta.threads.create_and_run(**payload).model_dump()
+
+
+def submit_tool_outputs_to_run(config, params):
+    __init_openai(config)
+    payload = build_payload(params)
+    payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    client = openai.OpenAI(api_key=openai.api_key)
+    return client.beta.threads.runs.submit_tool_outputs(**payload).model_dump()
+
+
+def list_run_steps(config, params):
+    __init_openai(config)
+    params['order'] = SORT_ORDER_MAPPING.get(params.get('order'))
+    payload = build_payload(params)
+    payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    client = openai.OpenAI(api_key=openai.api_key)
+    return client.beta.threads.runs.steps.list(**payload).model_dump()
+
+
+def get_run_step(config, params):
+    __init_openai(config)
+    payload = build_payload(params)
+    payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    client = openai.OpenAI(api_key=openai.api_key)
+    return client.beta.threads.runs.steps.retrieve(**payload).model_dump()
+
+
+def create_vector_store(config, params):
+    __init_openai(config)
+    payload = build_payload(params)
+    payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    client = openai.OpenAI(api_key=openai.api_key)
+    return client.beta.vector_stores.create(**payload).model_dump()
+
+
+def get_vector_store(config, params):
+    __init_openai(config)
+    payload = build_payload(params)
+    payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    client = openai.OpenAI(api_key=openai.api_key)
+    return client.beta.vector_stores.retrieve(**payload).model_dump()
+
+
+def create_vector_store_file(config, params):
+    __init_openai(config)
+    payload = build_payload(params)
+    payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    client = openai.OpenAI(api_key=openai.api_key)
+    return client.beta.vector_stores.files.create(**payload).model_dump()
+
+
+def create_vector_store_file_batch(config, params):
+    __init_openai(config)
+    file_ids = params.get('file_ids')
+    if isinstance(file_ids, (tuple, list)):
+        params['file_ids'] = list(file_ids)
+    elif isinstance(file_ids, str):
+        params['file_ids'] = [file_id.strip() if isinstance(file_id, str) else file_id for file_id in file_ids.split(",")]
+    payload = build_payload(params)
+    payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    client = openai.OpenAI(api_key=openai.api_key)
+    return client.beta.vector_stores.file_batches.create(**payload).model_dump()
+
+
+def get_vector_store_file_batch(config, params):
+    __init_openai(config)
+    payload = build_payload(params)
+    payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    client = openai.OpenAI(api_key=openai.api_key)
+    return client.beta.vector_stores.file_batches.retrieve(**payload).model_dump()
+
+
+def cancel_vector_store_file_batch(config, params):
+    __init_openai(config)
+    payload = build_payload(params)
+    payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    client = openai.OpenAI(api_key=openai.api_key)
+    return client.beta.vector_stores.file_batches.cancel(**payload).model_dump()
+
+
+def create_speech(config, params, *args, **kwargs):
+    __init_openai(config)
+    env = kwargs.get('env', {})
+    file_path = params.pop('file_path')
+    _list = file_path.split('.')
+    file_format = params.get('response_format') if params.get('response_format') else 'mp3'
+    if len(_list) == 1:
+        file_path += '.{0}'.format(file_format)
+    elif _list[-1] not in ["mp3", "opus", "aac", "flac", "wav", "pcm"]:
+        logger.warning('File extension is not in supported format. Supported formats: "mp3", "opus", "aac", "flac", "wav", "pcm"')
+    if file_path.startswith('/tmp/'):
+        speech_file_path = Path(file_path)
+    else:
+        speech_file_path = Path("/tmp") / file_path
+    params['model'] = params.get('model', '').lower()
+    params['voice'] = params.get('voice', '').lower()
+    payload = build_payload(params)
+    payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    openai.audio.speech.create(**payload).stream_to_file(speech_file_path)
+    return_path = str(speech_file_path)
+    save_file_in_env(env, return_path)
+    return {'path': return_path}
+
+
+def get_file_input(file_payload:str):
+    if isinstance(file_payload, dict) and file_payload.get('@type') == "File":
+        url = file_payload.get('@id')
+        file_content = make_request(url, 'GET').encode("utf-8")
+    else:
+        logger.warning("File path is provided.")
+        if not file_payload.startswith('/tmp/'):
+            file_payload = '/tmp/{0}'.format(file_payload)
+        with open(file_payload, 'rb') as file:
+            file_content = file.read()
+    return file_content
+
+
+def create_transcription(config, params):
+    __init_openai(config)
+    params['voice'] = params.get('voice', '').lower()
+    params['file'] = get_file_input(params.get('file'))
+    timestamp_granularities = [granularity.lower() for granularity in params.get('timestamp_granularities')]
+    if 'word' in timestamp_granularities:
+        params['response_format'] = 'verbose_json'
+    payload = build_payload(params)
+    payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    return openai.audio.transcriptions.create(**payload).model_dump()
+
+
+def create_translation(config, params):
+    __init_openai(config)
+    params['file'] = get_file_input(params.get('file'))
+    payload = build_payload(params)
+    payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    return openai.audio.translations.create(**payload).model_dump()
+
+
+def get_file(config, params):
+    __init_openai(config)
+    payload = build_payload(params)
+    payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    client = openai.OpenAI(api_key=openai.api_key)
+    return client.files.retrieve(**payload).model_dump()
+
+
+def upload_file(config, params):
+    __init_openai(config)
+    params['file'] = get_file_input(params.get('file'))
+    params['purpose'] = params.get('purpose', '').lower()
+    payload = build_payload(params)
+    payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    client = openai.OpenAI(api_key=openai.api_key)
+    return client.files.create(**payload).model_dump()
