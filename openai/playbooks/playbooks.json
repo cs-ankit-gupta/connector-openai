@@ -474,7 +474,7 @@
                 "version": "3.0.0",
                 "connector": "openai",
                 "operation": "get_assistant",
-                "operationTitle": "Get an Assistant"
+                "operationTitle": "Get Assistant Details"
               },
               "left": "188",
               "top": "120",
@@ -578,7 +578,7 @@
                 "version": "3.0.0",
                 "connector": "openai",
                 "operation": "create_assistant",
-                "operationTitle": "Create an Assistant"
+                "operationTitle": "Create Assistant"
               },
               "left": "188",
               "top": "120",
@@ -683,7 +683,7 @@
                 "version": "3.0.0",
                 "connector": "openai",
                 "operation": "update_assistant",
-                "operationTitle": "Update an Assistant"
+                "operationTitle": "Update Assistant"
               },
               "left": "188",
               "top": "120",
@@ -753,7 +753,7 @@
                 "version": "3.0.0",
                 "connector": "openai",
                 "operation": "delete_assistant",
-                "operationTitle": "Delete an Assistant"
+                "operationTitle": "Delete Assistant"
               },
               "left": "188",
               "top": "120",
@@ -823,7 +823,7 @@
                 "version": "3.0.0",
                 "connector": "openai",
                 "operation": "get_thread",
-                "operationTitle": "Get Thread"
+                "operationTitle": "Get Thread Details"
               },
               "left": "188",
               "top": "120",
@@ -1264,7 +1264,7 @@
                 "version": "3.0.0",
                 "connector": "openai",
                 "operation": "update_thread_message",
-                "operationTitle": "Update a Thread Message"
+                "operationTitle": "Update Thread Message"
               },
               "left": "188",
               "top": "120",
@@ -1339,7 +1339,7 @@
                 "version": "3.0.0",
                 "connector": "openai",
                 "operation": "list_thread_messages",
-                "operationTitle": "List Messages in a Thread"
+                "operationTitle": "List Messages in Thread"
               },
               "left": "188",
               "top": "120",
@@ -1410,7 +1410,7 @@
                 "version": "3.0.0",
                 "connector": "openai",
                 "operation": "get_thread_message",
-                "operationTitle": "Get a Thread Message"
+                "operationTitle": "Get Thread Message Details"
               },
               "left": "188",
               "top": "120",
@@ -1481,7 +1481,7 @@
                 "version": "3.0.0",
                 "connector": "openai",
                 "operation": "delete_thread_message",
-                "operationTitle": "Delete a Thread Message"
+                "operationTitle": "Delete Thread Message"
               },
               "left": "188",
               "top": "120",
@@ -1626,7 +1626,7 @@
                 "version": "3.0.0",
                 "connector": "openai",
                 "operation": "get_run",
-                "operationTitle": "Get a Run"
+                "operationTitle": "Get Run Details"
               },
               "left": "188",
               "top": "120",
@@ -1725,7 +1725,7 @@
                 "version": "3.0.0",
                 "connector": "openai",
                 "operation": "create_run",
-                "operationTitle": "Create a Run"
+                "operationTitle": "Create Run"
               },
               "left": "188",
               "top": "120",
@@ -1912,7 +1912,7 @@
                 "version": "3.0.0",
                 "connector": "openai",
                 "operation": "update_run",
-                "operationTitle": "Update a Run"
+                "operationTitle": "Update Run"
               },
               "left": "188",
               "top": "120",
@@ -1983,7 +1983,7 @@
                 "version": "3.0.0",
                 "connector": "openai",
                 "operation": "cancel_run",
-                "operationTitle": "Cancel a Run"
+                "operationTitle": "Cancel Run"
               },
               "left": "188",
               "top": "120",
@@ -2207,7 +2207,7 @@
                 "version": "3.0.0",
                 "connector": "openai",
                 "operation": "get_run_step",
-                "operationTitle": "Get Run Step"
+                "operationTitle": "Get Run Step Details"
               },
               "left": "188",
               "top": "120",
@@ -2353,7 +2353,7 @@
                 "version": "3.0.0",
                 "connector": "openai",
                 "operation": "get_vector_store",
-                "operationTitle": "Get Vector Store"
+                "operationTitle": "Get Vector Store Details"
               },
               "left": "188",
               "top": "120",
@@ -2928,7 +2928,7 @@
                 "version": "3.0.0",
                 "connector": "openai",
                 "operation": "get_file",
-                "operationTitle": "Get File"
+                "operationTitle": "Get File Details"
               },
               "left": "188",
               "top": "120",

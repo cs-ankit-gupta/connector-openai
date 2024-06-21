@@ -394,125 +394,8 @@
       }
     },
     {
-      "operation": "list_assistants",
-      "title": "List Assistants",
-      "description": "Retrieves a list of assistants.",
-      "category": "miscellaneous",
-      "annotation": "list_assistants",
-      "enabled": true,
-      "parameters": [
-        {
-          "title": "Sort Order",
-          "type": "select",
-          "name": "order",
-          "required": false,
-          "visible": true,
-          "editable": true,
-          "description": "Select the order in which to retrieve the assistant list sorted by creation time. You can choose from Ascending or Descending.",
-          "tooltip": "Select the order in which to retrieve the assistant list sorted by creation time.",
-          "value": "Descending",
-          "options": [
-            "Ascending",
-            "Descending"
-          ]
-        },
-        {
-          "title": "Starting ID",
-          "type": "text",
-          "name": "after",
-          "required": false,
-          "visible": true,
-          "editable": true,
-          "description": "Specify the assistant ID to retrieve assistants after this ID.",
-          "tooltip": "Specify the assistant ID to retrieve assistants after this ID."
-        },
-        {
-          "title": "Ending ID",
-          "type": "text",
-          "name": "before",
-          "required": false,
-          "visible": true,
-          "editable": true,
-          "description": "Specify the assistant ID to retrieve assistants before this ID.",
-          "tooltip": "Specify the assistant ID to retrieve assistants before this ID."
-        },
-        {
-          "title": "Limit",
-          "type": "integer",
-          "name": "limit",
-          "required": false,
-          "visible": true,
-          "editable": true,
-          "description": "Specify the maximum number of items to be retrieved. By default it retrieves 20.",
-          "tooltip": "Specify the maximum number of items to be retrieved. By default it retrieves 20.",
-          "value": "20"
-        }
-      ],
-      "output_schema": {
-        "object": "",
-        "data": [
-          {
-            "id": "",
-            "object": "",
-            "created_at": "",
-            "name": "",
-            "description": "",
-            "model": "",
-            "instructions": "",
-            "tools": [],
-            "tool_resources": {},
-            "metadata": {},
-            "top_p": "",
-            "temperature": "",
-            "response_format": ""
-          }
-        ],
-        "first_id": "",
-        "last_id": "",
-        "has_more": ""
-      }
-    },
-    {
-      "operation": "get_assistant",
-      "title": "Get an Assistant",
-      "description": "Retrieves an assistant based on assistant ID.",
-      "category": "miscellaneous",
-      "annotation": "get_assistant",
-      "enabled": true,
-      "parameters": [
-        {
-          "title": "Assistant ID",
-          "type": "text",
-          "name": "assistant_id",
-          "required": true,
-          "visible": true,
-          "editable": true,
-          "description": "Specify the ID of assistant to be retrieved",
-          "tooltip": "Specify the ID of assistant to be retrieved"
-        }
-      ],
-      "output_schema": {
-        "id": "",
-        "object": "",
-        "created_at": "",
-        "name": "",
-        "description": "",
-        "model": "",
-        "instructions": "",
-        "tools": [
-          {
-            "type": ""
-          }
-        ],
-        "metadata": {},
-        "top_p": "",
-        "temperature": "",
-        "response_format": ""
-      }
-    },
-    {
       "operation": "create_assistant",
-      "title": "Create an Assistant",
+      "title": "Create Assistant",
       "description": "Creates an assistant based on specified input parameters.",
       "category": "miscellaneous",
       "annotation": "create_assistant",
@@ -658,8 +541,125 @@
       }
     },
     {
+      "operation": "list_assistants",
+      "title": "List Assistants",
+      "description": "Retrieves a list of assistants.",
+      "category": "miscellaneous",
+      "annotation": "list_assistants",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Sort Order",
+          "type": "select",
+          "name": "order",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Select the order in which to retrieve the assistant list sorted by creation time. You can choose from Ascending or Descending.",
+          "tooltip": "Select the order in which to retrieve the assistant list sorted by creation time.",
+          "value": "Descending",
+          "options": [
+            "Ascending",
+            "Descending"
+          ]
+        },
+        {
+          "title": "Starting ID",
+          "type": "text",
+          "name": "after",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the assistant ID to retrieve assistants after this ID.",
+          "tooltip": "Specify the assistant ID to retrieve assistants after this ID."
+        },
+        {
+          "title": "Ending ID",
+          "type": "text",
+          "name": "before",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the assistant ID to retrieve assistants before this ID.",
+          "tooltip": "Specify the assistant ID to retrieve assistants before this ID."
+        },
+        {
+          "title": "Limit",
+          "type": "integer",
+          "name": "limit",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the maximum number of items to be retrieved. By default it retrieves 20.",
+          "tooltip": "Specify the maximum number of items to be retrieved. By default it retrieves 20.",
+          "value": "20"
+        }
+      ],
+      "output_schema": {
+        "object": "",
+        "data": [
+          {
+            "id": "",
+            "object": "",
+            "created_at": "",
+            "name": "",
+            "description": "",
+            "model": "",
+            "instructions": "",
+            "tools": [],
+            "tool_resources": {},
+            "metadata": {},
+            "top_p": "",
+            "temperature": "",
+            "response_format": ""
+          }
+        ],
+        "first_id": "",
+        "last_id": "",
+        "has_more": ""
+      }
+    },
+    {
+      "operation": "get_assistant",
+      "title": "Get Assistant Details",
+      "description": "Retrieves an assistant based on assistant ID.",
+      "category": "miscellaneous",
+      "annotation": "get_assistant",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Assistant ID",
+          "type": "text",
+          "name": "assistant_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of assistant to be retrieved",
+          "tooltip": "Specify the ID of assistant to be retrieved"
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "object": "",
+        "created_at": "",
+        "name": "",
+        "description": "",
+        "model": "",
+        "instructions": "",
+        "tools": [
+          {
+            "type": ""
+          }
+        ],
+        "metadata": {},
+        "top_p": "",
+        "temperature": "",
+        "response_format": ""
+      }
+    },
+    {
       "operation": "update_assistant",
-      "title": "Update an Assistant",
+      "title": "Update Assistant",
       "description": "Updates an assistant based on specified input parameters.",
       "category": "miscellaneous",
       "annotation": "update_assistant",
@@ -820,7 +820,7 @@
     },
     {
       "operation": "delete_assistant",
-      "title": "Delete an Assistant",
+      "title": "Delete Assistant",
       "description": "Deletes an assistant based on assistant ID.",
       "category": "miscellaneous",
       "annotation": "delete_assistant",
@@ -835,62 +835,6 @@
           "editable": true,
           "description": "Specify the ID of assistant to be deleted",
           "tooltip": "Specify the ID of assistant to be deleted"
-        }
-      ],
-      "output_schema": {
-        "id": "",
-        "object": "",
-        "deleted": ""
-      }
-    },
-    {
-      "operation": "get_thread",
-      "title": "Get Thread",
-      "description": "Retrieves a thread based on the thread ID.",
-      "category": "miscellaneous",
-      "annotation": "get_thread",
-      "enabled": true,
-      "parameters": [
-        {
-          "title": "Thread ID",
-          "type": "text",
-          "name": "thread_id",
-          "required": true,
-          "visible": true,
-          "editable": true,
-          "description": "Specify the ID of thread to be retrieved",
-          "tooltip": "Specify the ID of thread to be retrieved"
-        }
-      ],
-      "output_schema": {
-        "id": "",
-        "object": "",
-        "created_at": "",
-        "metadata": {},
-        "tool_resources": {
-          "code_interpreter": {
-            "file_ids": []
-          }
-        }
-      }
-    },
-    {
-      "operation": "delete_thread",
-      "title": "Delete Thread",
-      "description": "Deletes a thread based on thread ID.",
-      "category": "miscellaneous",
-      "annotation": "delete_thread",
-      "enabled": true,
-      "parameters": [
-        {
-          "title": "Thread ID",
-          "type": "text",
-          "name": "thread_id",
-          "required": true,
-          "visible": true,
-          "editable": true,
-          "description": "Specify the ID of thread to be deleted",
-          "tooltip": "Specify the ID of thread to be deleted"
         }
       ],
       "output_schema": {
@@ -981,6 +925,37 @@
       }
     },
     {
+      "operation": "get_thread",
+      "title": "Get Thread Details",
+      "description": "Retrieves a thread based on the thread ID.",
+      "category": "miscellaneous",
+      "annotation": "get_thread",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Thread ID",
+          "type": "text",
+          "name": "thread_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of thread to be retrieved",
+          "tooltip": "Specify the ID of thread to be retrieved"
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "object": "",
+        "created_at": "",
+        "metadata": {},
+        "tool_resources": {
+          "code_interpreter": {
+            "file_ids": []
+          }
+        }
+      }
+    },
+    {
       "operation": "update_thread",
       "title": "Update Thread",
       "description": "Updates a thread based on the specified input parameters.",
@@ -1046,6 +1021,31 @@
           "user": ""
         },
         "tool_resources": {}
+      }
+    },
+    {
+      "operation": "delete_thread",
+      "title": "Delete Thread",
+      "description": "Deletes a thread based on thread ID.",
+      "category": "miscellaneous",
+      "annotation": "delete_thread",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Thread ID",
+          "type": "text",
+          "name": "thread_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of thread to be deleted",
+          "tooltip": "Specify the ID of thread to be deleted"
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "object": "",
+        "deleted": ""
       }
     },
     {
@@ -1157,85 +1157,8 @@
       }
     },
     {
-      "operation": "update_thread_message",
-      "title": "Update a Thread Message",
-      "description": "Updates a message in a thread based on the specified input parameters.",
-      "category": "miscellaneous",
-      "annotation": "update_thread_message",
-      "enabled": true,
-      "parameters": [
-        {
-          "title": "Thread ID",
-          "type": "text",
-          "name": "thread_id",
-          "required": true,
-          "visible": true,
-          "editable": true,
-          "description": "Specify the ID of the thread to create a message for.",
-          "tooltip": "Specify the ID of the thread to create a message for."
-        },
-        {
-          "title": "Message ID",
-          "type": "text",
-          "name": "message_id",
-          "required": true,
-          "visible": true,
-          "editable": true,
-          "description": "Specify the ID of the message to be updated.",
-          "tooltip": "Specify the ID of the message to be updated."
-        },
-        {
-          "title": "Metadata",
-          "type": "json",
-          "name": "metadata",
-          "required": false,
-          "visible": true,
-          "editable": true,
-          "value": {
-            "creator": "Jane Doe",
-            "creation_date": "2024-05-28",
-            "purpose": "Customer support",
-            "organization": "ABC Inc.",
-            "project_id": "123456789",
-            "department": "Customer Service",
-            "version": "1.0",
-            "tags": [
-              "customer support",
-              "AI assistant",
-              "version 1.0"
-            ]
-          },
-          "description": "(Optional) Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. For example, {\n            \"creator\": \"Jane Doe\",\n            \"creation_date\": \"2024-05-28\",\n            \"purpose\": \"Customer support\",\n            \"organization\": \"ABC Inc.\",\n            \"project_id\": \"123456789\",\n            \"department\": \"Customer Service\",\n            \"version\": \"1.0\",\n            \"tags\": [\n              \"customer support\",\n              \"AI assistant\",\n              \"version 1.0\"\n            ]\n          }",
-          "tooltip": "Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long."
-        }
-      ],
-      "output_schema": {
-        "id": "",
-        "object": "",
-        "created_at": "",
-        "assistant_id": "",
-        "thread_id": "",
-        "run_id": "",
-        "role": "",
-        "content": [
-          {
-            "type": "",
-            "text": {
-              "value": "",
-              "annotations": []
-            }
-          }
-        ],
-        "file_ids": [],
-        "metadata": {
-          "modified": "",
-          "user": ""
-        }
-      }
-    },
-    {
       "operation": "list_thread_messages",
-      "title": "List Messages in a Thread",
+      "title": "List Messages in Thread",
       "description": "Retrieves a list of messages for specified thread based on the specified input parameters.",
       "category": "miscellaneous",
       "annotation": "list_thread_messages",
@@ -1339,7 +1262,7 @@
     },
     {
       "operation": "get_thread_message",
-      "title": "Get a Thread Message",
+      "title": "Get Thread Message Details",
       "description": "Retrieves a specific message based on Thread ID and Message ID.",
       "category": "miscellaneous",
       "annotation": "get_thread_message",
@@ -1388,8 +1311,85 @@
       }
     },
     {
+      "operation": "update_thread_message",
+      "title": "Update Thread Message",
+      "description": "Updates a message in a thread based on the specified input parameters.",
+      "category": "miscellaneous",
+      "annotation": "update_thread_message",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Thread ID",
+          "type": "text",
+          "name": "thread_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of the thread to create a message for.",
+          "tooltip": "Specify the ID of the thread to create a message for."
+        },
+        {
+          "title": "Message ID",
+          "type": "text",
+          "name": "message_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of the message to be updated.",
+          "tooltip": "Specify the ID of the message to be updated."
+        },
+        {
+          "title": "Metadata",
+          "type": "json",
+          "name": "metadata",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "value": {
+            "creator": "Jane Doe",
+            "creation_date": "2024-05-28",
+            "purpose": "Customer support",
+            "organization": "ABC Inc.",
+            "project_id": "123456789",
+            "department": "Customer Service",
+            "version": "1.0",
+            "tags": [
+              "customer support",
+              "AI assistant",
+              "version 1.0"
+            ]
+          },
+          "description": "(Optional) Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. For example, {\n            \"creator\": \"Jane Doe\",\n            \"creation_date\": \"2024-05-28\",\n            \"purpose\": \"Customer support\",\n            \"organization\": \"ABC Inc.\",\n            \"project_id\": \"123456789\",\n            \"department\": \"Customer Service\",\n            \"version\": \"1.0\",\n            \"tags\": [\n              \"customer support\",\n              \"AI assistant\",\n              \"version 1.0\"\n            ]\n          }",
+          "tooltip": "Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long."
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "object": "",
+        "created_at": "",
+        "assistant_id": "",
+        "thread_id": "",
+        "run_id": "",
+        "role": "",
+        "content": [
+          {
+            "type": "",
+            "text": {
+              "value": "",
+              "annotations": []
+            }
+          }
+        ],
+        "file_ids": [],
+        "metadata": {
+          "modified": "",
+          "user": ""
+        }
+      }
+    },
+    {
       "operation": "delete_thread_message",
-      "title": "Delete a Thread Message",
+      "title": "Delete Thread Message",
       "description": "Deletes a message based on Thread ID and Message ID.",
       "category": "miscellaneous",
       "annotation": "delete_thread_message",
@@ -1423,193 +1423,8 @@
       }
     },
     {
-      "operation": "list_runs",
-      "title": "List Runs",
-      "description": "Retrieves a list of runs belonging to a thread.",
-      "category": "miscellaneous",
-      "annotation": "list_runs",
-      "enabled": true,
-      "parameters": [
-        {
-          "title": "Thread ID",
-          "type": "text",
-          "name": "thread_id",
-          "required": true,
-          "visible": true,
-          "editable": true,
-          "description": "Specify the ID of thread whose runs are to be retrieved",
-          "tooltip": "Specify the ID of thread whose runs are to be retrieved"
-        },
-        {
-          "title": "Sort Order",
-          "type": "select",
-          "name": "order",
-          "required": false,
-          "visible": true,
-          "editable": true,
-          "description": "Select the order in which to retrieve the run list sorted by creation time. You can choose from Ascending or Descending.",
-          "tooltip": "Select the order in which to retrieve the run list sorted by creation time.",
-          "value": "Descending",
-          "options": [
-            "Ascending",
-            "Descending"
-          ]
-        },
-        {
-          "title": "Starting ID",
-          "type": "text",
-          "name": "after",
-          "required": false,
-          "visible": true,
-          "editable": true,
-          "description": "Specify the run ID to retrieve runs after this ID.",
-          "tooltip": "Specify the run ID to retrieve runs after this ID."
-        },
-        {
-          "title": "Ending ID",
-          "type": "text",
-          "name": "before",
-          "required": false,
-          "visible": true,
-          "editable": true,
-          "description": "Specify the run ID to retrieve runs before this ID.",
-          "tooltip": "Specify the run ID to retrieve runs before this ID."
-        },
-        {
-          "title": "Limit",
-          "type": "integer",
-          "name": "limit",
-          "required": false,
-          "visible": true,
-          "editable": true,
-          "description": "Specify the maximum number of items to be retrieved. By default it retrieves 20.",
-          "tooltip": "Specify the maximum number of items to be retrieved. By default it retrieves 20.",
-          "value": "20"
-        }
-      ],
-      "output_schema": {
-        "object": "",
-        "data": [
-          {
-            "id": "",
-            "object": "",
-            "created_at": "",
-            "assistant_id": "",
-            "thread_id": "",
-            "status": "",
-            "started_at": "",
-            "expires_at": "",
-            "cancelled_at": "",
-            "failed_at": "",
-            "completed_at": "",
-            "last_error": "",
-            "model": "",
-            "instructions": "",
-            "incomplete_details": "",
-            "tools": [
-              {
-                "type": ""
-              }
-            ],
-            "tool_resources": {
-              "code_interpreter": {
-                "file_ids": []
-              }
-            },
-            "metadata": {},
-            "usage": {
-              "prompt_tokens": "",
-              "completion_tokens": "",
-              "total_tokens": ""
-            },
-            "temperature": "",
-            "top_p": "",
-            "max_prompt_tokens": "",
-            "max_completion_tokens": "",
-            "truncation_strategy": {
-              "type": "",
-              "last_messages": ""
-            },
-            "response_format": "",
-            "tool_choice": ""
-          }
-        ],
-        "first_id": "",
-        "last_id": "",
-        "has_more": ""
-      }
-    },
-    {
-      "operation": "get_run",
-      "title": "Get a Run",
-      "description": "Retrieves a specific run for a thread.",
-      "category": "miscellaneous",
-      "annotation": "get_run",
-      "enabled": true,
-      "parameters": [
-        {
-          "title": "Thread ID",
-          "type": "text",
-          "name": "thread_id",
-          "required": true,
-          "visible": true,
-          "editable": true,
-          "description": "Specify the ID of thread whose run is to be retrieved",
-          "tooltip": "Specify the ID of thread whose run is to be retrieved"
-        },
-        {
-          "title": "Run ID",
-          "type": "text",
-          "name": "run_id",
-          "required": true,
-          "visible": true,
-          "editable": true,
-          "description": "Specify the ID of run to be retrieved",
-          "tooltip": "Specify the ID of run to be retrieved"
-        }
-      ],
-      "output_schema": {
-        "id": "",
-        "object": "",
-        "created_at": "",
-        "assistant_id": "",
-        "thread_id": "",
-        "status": "",
-        "started_at": "",
-        "expires_at": "",
-        "cancelled_at": "",
-        "failed_at": "",
-        "completed_at": "",
-        "last_error": "",
-        "model": "",
-        "instructions": "",
-        "incomplete_details": "",
-        "tools": [
-          {
-            "type": ""
-          }
-        ],
-        "metadata": {},
-        "usage": {
-          "prompt_tokens": "",
-          "completion_tokens": "",
-          "total_tokens": ""
-        },
-        "temperature": "",
-        "top_p": "",
-        "max_prompt_tokens": "",
-        "max_completion_tokens": "",
-        "truncation_strategy": {
-          "type": "",
-          "last_messages": ""
-        },
-        "response_format": "",
-        "tool_choice": ""
-      }
-    },
-    {
       "operation": "create_run",
-      "title": "Create a Run",
+      "title": "Create Run",
       "description": "Creates a run based on specified input parameters.",
       "category": "miscellaneous",
       "annotation": "create_run",
@@ -1779,6 +1594,191 @@
         ],
         "metadata": {},
         "usage": "",
+        "temperature": "",
+        "top_p": "",
+        "max_prompt_tokens": "",
+        "max_completion_tokens": "",
+        "truncation_strategy": {
+          "type": "",
+          "last_messages": ""
+        },
+        "response_format": "",
+        "tool_choice": ""
+      }
+    },
+    {
+      "operation": "list_runs",
+      "title": "List Runs",
+      "description": "Retrieves a list of runs belonging to a thread.",
+      "category": "miscellaneous",
+      "annotation": "list_runs",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Thread ID",
+          "type": "text",
+          "name": "thread_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of thread whose runs are to be retrieved",
+          "tooltip": "Specify the ID of thread whose runs are to be retrieved"
+        },
+        {
+          "title": "Sort Order",
+          "type": "select",
+          "name": "order",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Select the order in which to retrieve the run list sorted by creation time. You can choose from Ascending or Descending.",
+          "tooltip": "Select the order in which to retrieve the run list sorted by creation time.",
+          "value": "Descending",
+          "options": [
+            "Ascending",
+            "Descending"
+          ]
+        },
+        {
+          "title": "Starting ID",
+          "type": "text",
+          "name": "after",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the run ID to retrieve runs after this ID.",
+          "tooltip": "Specify the run ID to retrieve runs after this ID."
+        },
+        {
+          "title": "Ending ID",
+          "type": "text",
+          "name": "before",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the run ID to retrieve runs before this ID.",
+          "tooltip": "Specify the run ID to retrieve runs before this ID."
+        },
+        {
+          "title": "Limit",
+          "type": "integer",
+          "name": "limit",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the maximum number of items to be retrieved. By default it retrieves 20.",
+          "tooltip": "Specify the maximum number of items to be retrieved. By default it retrieves 20.",
+          "value": "20"
+        }
+      ],
+      "output_schema": {
+        "object": "",
+        "data": [
+          {
+            "id": "",
+            "object": "",
+            "created_at": "",
+            "assistant_id": "",
+            "thread_id": "",
+            "status": "",
+            "started_at": "",
+            "expires_at": "",
+            "cancelled_at": "",
+            "failed_at": "",
+            "completed_at": "",
+            "last_error": "",
+            "model": "",
+            "instructions": "",
+            "incomplete_details": "",
+            "tools": [
+              {
+                "type": ""
+              }
+            ],
+            "tool_resources": {
+              "code_interpreter": {
+                "file_ids": []
+              }
+            },
+            "metadata": {},
+            "usage": {
+              "prompt_tokens": "",
+              "completion_tokens": "",
+              "total_tokens": ""
+            },
+            "temperature": "",
+            "top_p": "",
+            "max_prompt_tokens": "",
+            "max_completion_tokens": "",
+            "truncation_strategy": {
+              "type": "",
+              "last_messages": ""
+            },
+            "response_format": "",
+            "tool_choice": ""
+          }
+        ],
+        "first_id": "",
+        "last_id": "",
+        "has_more": ""
+      }
+    },
+    {
+      "operation": "get_run",
+      "title": "Get Run Details",
+      "description": "Retrieves a specific run for a thread.",
+      "category": "miscellaneous",
+      "annotation": "get_run",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Thread ID",
+          "type": "text",
+          "name": "thread_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of thread whose run is to be retrieved",
+          "tooltip": "Specify the ID of thread whose run is to be retrieved"
+        },
+        {
+          "title": "Run ID",
+          "type": "text",
+          "name": "run_id",
+          "required": true,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of run to be retrieved",
+          "tooltip": "Specify the ID of run to be retrieved"
+        }
+      ],
+      "output_schema": {
+        "id": "",
+        "object": "",
+        "created_at": "",
+        "assistant_id": "",
+        "thread_id": "",
+        "status": "",
+        "started_at": "",
+        "expires_at": "",
+        "cancelled_at": "",
+        "failed_at": "",
+        "completed_at": "",
+        "last_error": "",
+        "model": "",
+        "instructions": "",
+        "incomplete_details": "",
+        "tools": [
+          {
+            "type": ""
+          }
+        ],
+        "metadata": {},
+        "usage": {
+          "prompt_tokens": "",
+          "completion_tokens": "",
+          "total_tokens": ""
+        },
         "temperature": "",
         "top_p": "",
         "max_prompt_tokens": "",
@@ -1981,7 +1981,7 @@
     },
     {
       "operation": "update_run",
-      "title": "Update a Run",
+      "title": "Update Run",
       "description": "Updates a run based on specified input parameters.",
       "category": "miscellaneous",
       "annotation": "update_run",
@@ -2069,7 +2069,7 @@
     },
     {
       "operation": "cancel_run",
-      "title": "Cancel a Run",
+      "title": "Cancel Run",
       "description": "Cancels a run that is in progress.",
       "category": "miscellaneous",
       "annotation": "cancel_run",
@@ -2337,7 +2337,7 @@
     },
     {
       "operation": "get_run_step",
-      "title": "Get Run Step",
+      "title": "Get Run Step Details",
       "description": "Retrieves a step of a run.",
       "category": "miscellaneous",
       "annotation": "get_run_step",
@@ -2471,7 +2471,7 @@
     },
     {
       "operation": "get_vector_store",
-      "title": "Get Vector Store",
+      "title": "Get Vector Store Details",
       "description": "Retrieves a vector store details.",
       "category": "miscellaneous",
       "annotation": "get_vector_store",
@@ -2580,7 +2580,7 @@
     {
       "operation": "get_vector_store_file_batch",
       "title": "Get Vector Store File Batch",
-      "description": "Creates a vector store file batch.",
+      "description": "Retrieves a vector store file batch.",
       "category": "miscellaneous",
       "annotation": "get_vector_store_file_batch",
       "enabled": true,
@@ -2667,7 +2667,7 @@
     },
     {
       "operation": "create_speech",
-      "title": "Create speech",
+      "title": "Create Speech",
       "description": "Generates audio from the input text.",
       "category": "miscellaneous",
       "annotation": "create_speech",
@@ -2889,7 +2889,7 @@
     },
     {
       "operation": "get_file",
-      "title": "Get File",
+      "title": "Get File Details",
       "description": "Retrieves information about a specific file.",
       "category": "miscellaneous",
       "annotation": "get_file",
