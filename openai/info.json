@@ -72,6 +72,26 @@
         }
       },
       {
+        "title": "Organization ID",
+        "type": "text",
+        "name": "organization",
+        "tooltip": "Specify the organization ID to access a specific organization.",
+        "description": "Specify the organization ID to access a specific organization.",
+        "required": false,
+        "visible": true,
+        "editable": true
+      },
+      {
+        "title": "Project ID",
+        "type": "text",
+        "name": "project",
+        "tooltip": "Specify the project name to access a specific project within the organization.",
+        "description": "Specify the project name to access a specific project within the organization.",
+        "required": false,
+        "visible": true,
+        "editable": true
+      },
+      {
         "title": "Verify SSL",
         "type": "checkbox",
         "name": "verify_ssl",
