@@ -5,7 +5,7 @@ Copyright (c) 2024 Fortinet Inc
 Copyright end
 """
 
-from .assistant_event_halder import EventHandler
+from .assistant_event_handler import EventHandler
 from .operations import *
 
 logger = get_logger(LOGGER_NAME)
