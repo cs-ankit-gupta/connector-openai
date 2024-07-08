@@ -1,5 +1,8 @@
 #### What's Improved
-- Added following new actions
+- Added the following new configuration parameters:
+  - Organization ID
+  - Project ID
+- Added following new actions:
   - Create Assistant
   - Retrieve Assistant
   - Delete Assistant

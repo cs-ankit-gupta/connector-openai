@@ -63,7 +63,7 @@ def _build_messages(params):
 
 def __init_openai(config):
     openai.api_key = config.get('apiKey')
-    openai_args = {"key": config.get('apiKey')}
+    openai_args = {"api_key": config.get('apiKey')}
     api_type = config.get("api_type")
     https_proxy = os.environ.get('HTTPS_PROXY')
     no_proxy = os.environ.get('NO_PROXY', 'localhost')
@@ -78,6 +78,10 @@ def __init_openai(config):
             "api_version": config.get("api_version")
         })
         base_url = config.get("api_base")
+    if config.get('project'):
+        openai.project = config.get('project')
+    if config.get('organization'):
+        openai.organization = config.get('organization')
     verify_ssl = config.get('verify_ssl')
     if https_proxy and base_url not in no_proxy:
         openai.http_client = httpx.Client(proxy=https_proxy, verify=verify_ssl)
@@ -207,7 +211,7 @@ def create_assistant(config, params):
     __init_openai(config)
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
-    client = openai.OpenAI(api_key=openai.api_key)
+    client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.assistants.create(**payload).model_dump()
 
 
@@ -216,19 +220,19 @@ def list_assistants(config, params):
     params['order'] = SORT_ORDER_MAPPING.get(params.get('order'))
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
-    client = openai.OpenAI(api_key=openai.api_key)
+    client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.assistants.list(**payload).model_dump()
 
 
 def get_assistant(config, params):
     __init_openai(config)
-    client = openai.OpenAI(api_key=openai.api_key)
+    client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.assistants.retrieve(assistant_id=params.get('assistant_id'), timeout=600).model_dump()
 
 
 def delete_assistant(config, params):
     __init_openai(config)
-    client = openai.OpenAI(api_key=openai.api_key)
+    client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.assistants.delete(assistant_id=params.get('assistant_id'), timeout=600).model_dump()
 
 
@@ -236,21 +240,21 @@ def update_assistant(config, params):
     __init_openai(config)
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
-    client = openai.OpenAI(api_key=openai.api_key)
+    client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.assistants.update(**payload).model_dump()
 
 
 def get_thread(config, params):
     __init_openai(config)
     params['timeout'] = params.get('timeout') if params.get('timeout') else 600
-    client = openai.OpenAI(api_key=openai.api_key)
+    client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.threads.retrieve(**params).model_dump()
 
 
 def delete_thread(config, params):
     __init_openai(config)
     params['timeout'] = params.get('timeout') if params.get('timeout') else 600
-    client = openai.OpenAI(api_key=openai.api_key)
+    client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.threads.delete(**params).model_dump()
 
 
@@ -258,7 +262,7 @@ def create_thread(config, params):
     __init_openai(config)
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
-    client = openai.OpenAI(api_key=openai.api_key)
+    client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.threads.create(**payload).model_dump()
 
 
@@ -266,7 +270,7 @@ def update_thread(config, params):
     __init_openai(config)
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
-    client = openai.OpenAI(api_key=openai.api_key)
+    client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.threads.update(**payload).model_dump()
 
 
@@ -275,7 +279,7 @@ def create_thread_message(config, params):
     params['role'] = params.get('role', '').lower()
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
-    client = openai.OpenAI(api_key=openai.api_key)
+    client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.threads.messages.create(**payload).model_dump()
 
 
@@ -284,7 +288,7 @@ def list_thread_messages(config, params):
     params['order'] = SORT_ORDER_MAPPING.get(params.get('order'))
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
-    client = openai.OpenAI(api_key=openai.api_key)
+    client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.threads.messages.list(**payload).model_dump()
 
 
@@ -292,7 +296,7 @@ def delete_thread_message(config, params):
     __init_openai(config)
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
-    client = openai.OpenAI(api_key=openai.api_key)
+    client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.threads.messages.delete(**payload).model_dump()
 
 
@@ -300,7 +304,7 @@ def get_thread_message(config, params):
     __init_openai(config)
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
-    client = openai.OpenAI(api_key=openai.api_key)
+    client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.threads.messages.retrieve(**payload).model_dump()
 
 
@@ -308,7 +312,7 @@ def update_thread_message(config, params):
     __init_openai(config)
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
-    client = openai.OpenAI(api_key=openai.api_key)
+    client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.threads.messages.create(**payload).model_dump()
 
 
@@ -317,7 +321,7 @@ def list_runs(config, params):
     params['order'] = SORT_ORDER_MAPPING.get(params.get('order'))
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
-    client = openai.OpenAI(api_key=openai.api_key)
+    client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.threads.runs.list(**payload).model_dump()
 
 
@@ -325,7 +329,7 @@ def get_run(config, params):
     __init_openai(config)
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
-    client = openai.OpenAI(api_key=openai.api_key)
+    client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.threads.runs.retrieve(**payload).model_dump()
 
 
@@ -336,7 +340,7 @@ def create_run(config, params):
     if other_fields:
         payload.update(other_fields)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
-    client = openai.OpenAI(api_key=openai.api_key)
+    client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.threads.runs.create(**payload).model_dump()
 
 
@@ -344,7 +348,7 @@ def update_run(config, params):
     __init_openai(config)
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
-    client = openai.OpenAI(api_key=openai.api_key)
+    client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.threads.runs.update(**payload).model_dump()
 
 
@@ -352,7 +356,7 @@ def cancel_run(config, params):
     __init_openai(config)
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
-    client = openai.OpenAI(api_key=openai.api_key)
+    client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.threads.runs.cancel(**payload).model_dump()
 
 
@@ -363,7 +367,7 @@ def create_thread_and_run(config, params):
     if other_fields:
         payload.update(other_fields)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
-    client = openai.OpenAI(api_key=openai.api_key)
+    client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.threads.create_and_run(**payload).model_dump()
 
 
@@ -371,7 +375,7 @@ def submit_tool_outputs_to_run(config, params):
     __init_openai(config)
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
-    client = openai.OpenAI(api_key=openai.api_key)
+    client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.threads.runs.submit_tool_outputs(**payload).model_dump()
 
 
@@ -380,7 +384,7 @@ def list_run_steps(config, params):
     params['order'] = SORT_ORDER_MAPPING.get(params.get('order'))
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
-    client = openai.OpenAI(api_key=openai.api_key)
+    client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.threads.runs.steps.list(**payload).model_dump()
 
 
@@ -388,7 +392,7 @@ def get_run_step(config, params):
     __init_openai(config)
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
-    client = openai.OpenAI(api_key=openai.api_key)
+    client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.threads.runs.steps.retrieve(**payload).model_dump()
 
 
@@ -396,7 +400,7 @@ def create_vector_store(config, params):
     __init_openai(config)
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
-    client = openai.OpenAI(api_key=openai.api_key)
+    client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.vector_stores.create(**payload).model_dump()
 
 
@@ -404,7 +408,7 @@ def get_vector_store(config, params):
     __init_openai(config)
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
-    client = openai.OpenAI(api_key=openai.api_key)
+    client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.vector_stores.retrieve(**payload).model_dump()
 
 
@@ -412,7 +416,7 @@ def create_vector_store_file(config, params):
     __init_openai(config)
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
-    client = openai.OpenAI(api_key=openai.api_key)
+    client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.vector_stores.files.create(**payload).model_dump()
 
 
@@ -425,7 +429,7 @@ def create_vector_store_file_batch(config, params):
         params['file_ids'] = [file_id.strip() if isinstance(file_id, str) else file_id for file_id in file_ids.split(",")]
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
-    client = openai.OpenAI(api_key=openai.api_key)
+    client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.vector_stores.file_batches.create(**payload).model_dump()
 
 
@@ -433,7 +437,7 @@ def get_vector_store_file_batch(config, params):
     __init_openai(config)
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
-    client = openai.OpenAI(api_key=openai.api_key)
+    client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.vector_stores.file_batches.retrieve(**payload).model_dump()
 
 
@@ -441,7 +445,7 @@ def cancel_vector_store_file_batch(config, params):
     __init_openai(config)
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
-    client = openai.OpenAI(api_key=openai.api_key)
+    client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.vector_stores.file_batches.cancel(**payload).model_dump()
 
 
@@ -506,7 +510,7 @@ def get_file(config, params):
     __init_openai(config)
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
-    client = openai.OpenAI(api_key=openai.api_key)
+    client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.files.retrieve(**payload).model_dump()
 
 
@@ -516,5 +520,5 @@ def upload_file(config, params):
     params['purpose'] = params.get('purpose', '').lower()
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
-    client = openai.OpenAI(api_key=openai.api_key)
+    client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.files.create(**payload).model_dump()
