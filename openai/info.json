@@ -2978,6 +2978,56 @@
         "filename": "",
         "purpose": ""
       }
+    },
+    {
+      "operation": "get_llm_response",
+      "title": "Get LLM Response",
+      "annotation": "get_llm_response",
+      "description": "Get LLM Response",
+      "category": "investigation",
+      "is_config_required": true,
+      "visible": true,
+      "enabled": true,
+      "parameters": [
+        {
+          "name": "thread_id",
+          "title": "Thread ID",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Thread ID is add user prompt.",
+          "description": "Thread ID is add user prompt.",
+          "isOnChange": false,
+          "onchange": {}
+        },
+        {
+          "name": "Role",
+          "title": "Role",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "tooltip": "Specify the role of content.",
+          "description": "Specify the role of content.",
+          "isOnChange": false,
+          "onchange": {}
+        },
+        {
+          "name": "content",
+          "title": "Content",
+          "type": "text",
+          "editable": true,
+          "visible": true,
+          "required": true,
+          "value": "",
+          "tooltip": "Specify the message or question for which you want to generate a response.",
+          "description": "Specify the message or question for which you want to generate a response.",
+          "isOnChange": false,
+          "onchange": {}
+        }
+      ],
+      "output_schema": {}
     }
   ]
 }
