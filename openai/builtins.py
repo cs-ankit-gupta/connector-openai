@@ -6,7 +6,8 @@ Copyright (c) 2024 Fortinet Inc
 Copyright end
 """
 from .operations import *
- 
+from .assistant_manager import *
+
 supported_operations = {
     'chat_completions': chat_completions,
     'chat_conversation': chat_completions,
@@ -55,6 +56,7 @@ supported_operations = {
     'create_translation': create_translation,
 
     'get_file': get_file,
-    'upload_file': upload_file
+    'upload_file': upload_file,
+    'get_llm_response': get_llm_response
 
     }
