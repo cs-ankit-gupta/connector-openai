@@ -1,3 +1,9 @@
+"""
+Copyright start
+MIT License
+Copyright (c) 2024 Fortinet Inc
+Copyright end
+"""
 from integrations.crudhub import make_request
 
 
