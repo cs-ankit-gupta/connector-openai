@@ -24,6 +24,7 @@ class EventHandler(AssistantEventHandler):
         self.config = config
         self.params = params
         self.tool_outputs = []
+        self.usage = {}
 
     # Executes on every event
     @override
@@ -43,7 +44,7 @@ class EventHandler(AssistantEventHandler):
     # thread.run.step.delta
     @override
     def on_run_step_done(self, run_step: RunStep) -> None:
-        pass
+        self.usage = run_step.usage
 
     # thread.message.created
     @override
@@ -77,9 +78,10 @@ class EventHandler(AssistantEventHandler):
                 run_status = get_run(config=self.config,
                                      params={'thread_id': self.params['threadId'], 'run_id': self.run_id})
             if run_status['status'] == "requires_action":
+                logger.info(f'Calling tool function, Function Name: {tool_call.function.name}, Function Argument: {tool_call.function.arguments}')
                 to_add_message, function_output = self.call_required_function(tool_call.function.name,
                                                                               tool_call.function.arguments)
-                logger.info(f'Function Calling output: {to_add_message}, {function_output}')
+                logger.error(f'Function Calling output: {function_output}')
                 if to_add_message:
                     self.tool_outputs.append({"tool_call_id": tool_call.id, "output": function_output})
                 else:
@@ -124,7 +126,8 @@ class EventHandler(AssistantEventHandler):
                        "function_name": function_name, "arguments": arguments,
                        "ioc_data": self.params['ioc_data'],
                        "auth_token": self.params['authToken'],
-                       "recordIRI": self.params['recordIRI']}
+                       "recordIRI": self.params['recordIRI'],
+                       "record_data": self.params['record_data']}
             response = execute_connector_action(None, 'aiassistant-utils', 'tool_function_caller', payload)
             to_add_message = response['data'].get('to_add_message')
             data = response['data'].get('data')
