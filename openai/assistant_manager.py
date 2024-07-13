@@ -33,7 +33,7 @@ class AssistantManager:
                 event_handler=event_handler
         ) as stream:
             stream.until_done()
-        return event_handler.get_resposne()
+        return {"llm_response": event_handler.get_resposne(), "usage": event_handler.usage}
 
 
 def get_llm_response(config, params):
