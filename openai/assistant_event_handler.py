@@ -92,7 +92,7 @@ class EventHandler(AssistantEventHandler):
 
     @override
     def on_end(self):
-        client = openai.OpenAI(api_key=self.config['apiKey'])
+        client = openai.OpenAI(api_key=self.config['apiKey'], project=self.config.get('project'), organization=self.config.get('organization'))
         run_status = client.beta.threads.runs.retrieve(
             run_id=self.run_id,
             thread_id=self.params['threadId']
