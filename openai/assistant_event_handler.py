@@ -41,10 +41,10 @@ class EventHandler(AssistantEventHandler):
     def on_run_step_delta(self, delta: RunStepDelta, snapshot: RunStep):
         pass
 
-    # thread.run.step.delta
+    # thread.run.completed
     @override
     def on_run_step_done(self, run_step: RunStep) -> None:
-        self.usage = run_step.usage
+        pass
 
     # thread.message.created
     @override
@@ -81,7 +81,7 @@ class EventHandler(AssistantEventHandler):
                 logger.info(f'Calling tool function, Function Name: {tool_call.function.name}, Function Argument: {tool_call.function.arguments}')
                 to_add_message, function_output = self.call_required_function(tool_call.function.name,
                                                                               tool_call.function.arguments)
-                logger.error(f'Function Calling output: {function_output}')
+                logger.info(f'Function Calling output: {function_output}')
                 if to_add_message:
                     self.tool_outputs.append({"tool_call_id": tool_call.id, "output": function_output})
                 else:
@@ -93,11 +93,11 @@ class EventHandler(AssistantEventHandler):
     @override
     def on_end(self):
         client = openai.OpenAI(api_key=self.config['apiKey'], project=self.config.get('project'), organization=self.config.get('organization'))
-        run_status = client.beta.threads.runs.retrieve(
+        run_object = client.beta.threads.runs.retrieve(
             run_id=self.run_id,
             thread_id=self.params['threadId']
         )
-        if run_status.status == 'requires_action':
+        if run_object.status == 'requires_action':
             with client.beta.threads.runs.submit_tool_outputs_stream(
                     thread_id=self.params['threadId'],
                     run_id=self.run_id,
@@ -105,13 +105,14 @@ class EventHandler(AssistantEventHandler):
                     event_handler=EventHandler(self.config, self.params)
             ) as stream:
                 stream.until_done()
-        while run_status.status not in ['completed', 'cancelled']:
-            run_status = client.beta.threads.runs.retrieve(
+        while run_object.status not in ['completed', 'cancelled']:
+            run_object = client.beta.threads.runs.retrieve(
                 run_id=self.run_id,
                 thread_id=self.params['threadId']
             )
         thread_messages = list_thread_messages(config=self.config, params={'thread_id': self.params['threadId']})
         self.llm_response = thread_messages['data'][0]['content'][0]['text']['value']
+        self.usage = run_object.usage
 
     @override
     def on_exception(self, exception: Exception) -> None:
