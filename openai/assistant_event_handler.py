@@ -25,6 +25,7 @@ class EventHandler(AssistantEventHandler):
         self.params = params
         self.tool_outputs = []
         self.usage = {}
+        self.function_call_token_usage = None
 
     # Executes on every event
     @override
@@ -78,10 +79,13 @@ class EventHandler(AssistantEventHandler):
                 run_status = get_run(config=self.config,
                                      params={'thread_id': self.params['threadId'], 'run_id': self.run_id})
             if run_status['status'] == "requires_action":
-                logger.info(f'Calling tool function, Function Name: {tool_call.function.name}, Function Argument: {tool_call.function.arguments}')
-                to_add_message, function_output = self.call_required_function(tool_call.function.name,
-                                                                              tool_call.function.arguments)
+                logger.info(
+                    f'Calling tool function, Function Name: {tool_call.function.name}, Function Argument: {tool_call.function.arguments}')
+                to_add_message, function_output, self.function_call_token_usage = self.call_required_function(
+                    tool_call.function.name,
+                    tool_call.function.arguments)
                 logger.info(f'Function Calling output: {function_output}')
+                logger.info(f'usage: {self.function_call_token_usage}')
                 if to_add_message:
                     self.tool_outputs.append({"tool_call_id": tool_call.id, "output": function_output})
                 else:
@@ -92,7 +96,8 @@ class EventHandler(AssistantEventHandler):
 
     @override
     def on_end(self):
-        client = openai.OpenAI(api_key=self.config['apiKey'], project=self.config.get('project'), organization=self.config.get('organization'))
+        client = openai.OpenAI(api_key=self.config['apiKey'], project=self.config.get('project'),
+                               organization=self.config.get('organization'))
         run_object = client.beta.threads.runs.retrieve(
             run_id=self.run_id,
             thread_id=self.params['threadId']
@@ -112,7 +117,10 @@ class EventHandler(AssistantEventHandler):
             )
         thread_messages = list_thread_messages(config=self.config, params={'thread_id': self.params['threadId']})
         self.llm_response = thread_messages['data'][0]['content'][0]['text']['value']
-        self.usage = run_object.usage
+        if self.function_call_token_usage is not None:
+            self.usage = self.set_token_usage(run_object.usage)
+        else:
+            self.usage = run_object.usage
 
     @override
     def on_exception(self, exception: Exception) -> None:
@@ -130,10 +138,23 @@ class EventHandler(AssistantEventHandler):
                        "recordIRI": self.params['recordIRI'],
                        "record_data": self.params['record_data']}
             response = execute_connector_action(None, 'aiassistant-utils', 'tool_function_caller', payload)
-            to_add_message = response['data'].get('to_add_message')
-            data = response['data'].get('data')
             if response.get('status') == 'Success':
-                return to_add_message, data
+                to_add_message = response['data'].get('to_add_message')
+                llm_response = response['data'].get('data')
+                usage = response['data'].get('usage')
+                return to_add_message, llm_response, usage
             return True, response.get('message', 'Unknown error')
         except Exception as error:
             return True, f'Error: {error}'
+
+    def set_token_usage(self, usage):
+        self.function_call_token_usage = dict(self.function_call_token_usage)
+        usage = dict(usage)
+
+        for key in self.function_call_token_usage:
+            if key in usage:
+                usage[key] += self.function_call_token_usage[key]
+
+        # Convert back to list of lists
+        final_token_usage = [[key, value] for key, value in usage.items()]
+        return final_token_usage
