@@ -134,9 +134,10 @@ class EventHandler(AssistantEventHandler):
             payload = {"connector_name": 'openai', "config_id": self.config['config_id'],
                        "function_name": function_name, "arguments": arguments,
                        "ioc_data": self.params['ioc_data'],
-                       "auth_token": self.params['authToken'],
-                       "recordIRI": self.params['recordIRI'],
-                       "record_data": self.params['record_data']}
+                       "auth_token": self.params['auth_token'],
+                       "record_iri": self.params['record_iri'],
+                       "record_data": self.params['record_data'],
+                       "page_name": self.params['page_name']}
             response = execute_connector_action(None, 'aiassistant-utils', 'tool_function_caller', payload)
             if response.get('status') == 'Success':
                     to_add_message = response['data'].get('to_add_message')
