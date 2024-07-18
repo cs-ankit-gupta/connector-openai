@@ -139,13 +139,16 @@ class EventHandler(AssistantEventHandler):
                        "record_data": self.params['record_data']}
             response = execute_connector_action(None, 'aiassistant-utils', 'tool_function_caller', payload)
             if response.get('status') == 'Success':
-                to_add_message = response['data'].get('to_add_message')
-                llm_response = response['data'].get('data')
-                usage = response['data'].get('usage')
-                return to_add_message, llm_response, usage
-            return True, response.get('message', 'Unknown error')
+                    to_add_message = response['data'].get('to_add_message')
+                    llm_response = response['data'].get('data')
+                    usage = response['data'].get('usage')
+                    return to_add_message, llm_response, usage
+            error_message = response.get('message')
+            if not error_message:
+                error_message = 'Unknown error occurred.'
+            return True, error_message, {}
         except Exception as error:
-            return True, f'Error: {error}'
+            return True, f'Error: {error}', {}
 
     def set_token_usage(self, usage):
         self.function_call_token_usage = dict(self.function_call_token_usage)
