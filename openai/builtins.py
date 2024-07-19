@@ -56,7 +56,7 @@ supported_operations = {
     'create_translation': create_translation,
 
     'get_file': get_file,
+    'list_files': list_files,
     'upload_file': upload_file,
     'get_llm_response': get_llm_response
-
     }
