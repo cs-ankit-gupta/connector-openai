@@ -313,7 +313,7 @@ def update_thread_message(config, params):
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
     client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
-    return client.beta.threads.messages.create(**payload).model_dump()
+    return client.beta.threads.messages.update(**payload).model_dump()
 
 
 def list_runs(config, params):
@@ -398,6 +398,7 @@ def get_run_step(config, params):
 
 def create_vector_store(config, params):
     __init_openai(config)
+    handle_comma_separated_input(params, ['file_ids'])
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
     client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
@@ -473,17 +474,20 @@ def create_speech(config, params, *args, **kwargs):
     return {'path': return_path}
 
 
-def get_file_input(file_payload:str):
+def get_file_input(file_payload):
     if isinstance(file_payload, dict) and file_payload.get('@type') == "File":
         url = file_payload.get('@id')
         file_content = make_request(url, 'GET').encode("utf-8")
+        filename = file_payload.get('filename')
     else:
         logger.warning("File path is provided.")
+        file_path = Path(file_payload)
+        filename = file_path.name
         if not file_payload.startswith('/tmp/'):
             file_payload = '/tmp/{0}'.format(file_payload)
         with open(file_payload, 'rb') as file:
             file_content = file.read()
-    return file_content
+    return filename, file_content
 
 
 def create_transcription(config, params):
@@ -514,11 +518,30 @@ def get_file(config, params):
     return client.files.retrieve(**payload).model_dump()
 
 
-def upload_file(config, params):
+def list_files(config, params):
     __init_openai(config)
-    params['file'] = get_file_input(params.get('file'))
-    params['purpose'] = params.get('purpose', '').lower()
+    params['purpose'] = FILE_PURPOSE_MAPPING.get(params.get('purpose'))
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
     client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
+    return client.files.list(**payload).model_dump()
+
+
+def upload_file(config, params):
+    __init_openai(config)
+    params['purpose'] = FILE_PURPOSE_MAPPING.get(params.get('purpose'), params.get('purpose'))
+    payload = build_payload(params)
+    payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    payload['file'] = get_file_input(params.get('file'))
+    client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.files.create(**payload).model_dump()
+
+
+def handle_comma_separated_input(params, keys=[]):
+    for key in keys:
+        input_value = params.get(key)
+        if isinstance(input_value, str):
+            params[key] = [i.strip() for i in input_value.split(',')]
+        elif isinstance(input_value, tuple):
+            params[key] = list(input_value)
+

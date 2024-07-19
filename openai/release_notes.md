@@ -4,39 +4,38 @@
   - Project ID
 - Added following new actions:
   - Create Assistant
-  - Retrieve Assistant
+  - List Assistants
+  - Get Assistant Details
+  - Update Assistant
   - Delete Assistant
-  - Modify Assistant
-  - List Assistant
   - Create Thread
-  - Retrieve Thread
+  - Get Thread Details
+  - Update Thread
   - Delete Thread
-  - Modify Thread
-  - Create Message
+  - Create Thread Message
+  - List Thread Messages
+  - Get Thread Message Details
+  - Update Thread Message
+  - Delete Thread Message
   - Create Run
-  - List Message
-  - Modify Message
-  - Delete Message
-  - Retrieve Message
+  - List Runs
+  - Get Run Details
   - Create Thread and Run
-  - List runs
-  - Retrieve Run
-  - Modify Run
-  - Submit tool output to run
-  - Cancel a run
-  - List run steps
-  - Retrieve run steps
-  - Create vector store
-  - Retrieve vector store
-  - Modify vector store
-  - Delete vector store
-  - List vector store
-  - Create vector store file
-  - Create vector store file batch
-  - Retrieve vector store file batch
-  - Cancel vector store file batch
-  - Create speech
+  - Update Run
+  - Cancel Run
+  - Submit Tool Outputs To Run
+  - List Run Steps
+  - Get Run Step Details
+  - Create Vector Store
+  - Get Vector Store Details
+  - Create Vector Store File
+  - Create Vector Store File Batch
+  - Get Vector Store File Batch
+  - Cancel Vector Store File Batch
+  - Create Speech
   - Create Transcription
   - Create Translation
+  - List Files
+  - Get File Details
   - Upload File
-  - Retrieve File
+  - Get LLM Response

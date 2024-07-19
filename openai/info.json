@@ -24,6 +24,26 @@
         "value": null
       },
       {
+        "title": "Organization ID",
+        "type": "text",
+        "name": "organization",
+        "tooltip": "Specify the organization ID to access a specific organization.",
+        "description": "Specify the organization ID to access a specific organization.",
+        "required": false,
+        "visible": true,
+        "editable": true
+      },
+      {
+        "title": "Project ID",
+        "type": "text",
+        "name": "project",
+        "tooltip": "Specify the project name to access a specific project within the organization.",
+        "description": "Specify the project name to access a specific project within the organization.",
+        "required": false,
+        "visible": true,
+        "editable": true
+      },
+      {
         "title": "Use Microsoft Azure OpenAI Endpoint",
         "type": "checkbox",
         "name": "api_type",
@@ -70,26 +90,6 @@
             }
           ]
         }
-      },
-      {
-        "title": "Organization ID",
-        "type": "text",
-        "name": "organization",
-        "tooltip": "Specify the organization ID to access a specific organization.",
-        "description": "Specify the organization ID to access a specific organization.",
-        "required": false,
-        "visible": true,
-        "editable": true
-      },
-      {
-        "title": "Project ID",
-        "type": "text",
-        "name": "project",
-        "tooltip": "Specify the project name to access a specific project within the organization.",
-        "description": "Specify the project name to access a specific project within the organization.",
-        "required": false,
-        "visible": true,
-        "editable": true
       },
       {
         "title": "Verify SSL",
@@ -1070,7 +1070,7 @@
     },
     {
       "operation": "create_thread_message",
-      "title": "Create Message",
+      "title": "Create Thread Message",
       "description": "Creates a message based on the specified input parameters.",
       "category": "miscellaneous",
       "annotation": "create_thread_message",
@@ -1178,7 +1178,7 @@
     },
     {
       "operation": "list_thread_messages",
-      "title": "List Messages in Thread",
+      "title": "List Thread Messages",
       "description": "Retrieves a list of messages for specified thread based on the specified input parameters.",
       "category": "miscellaneous",
       "annotation": "list_thread_messages",
@@ -1504,7 +1504,7 @@
           "title": "Additional Messages",
           "type": "json",
           "name": "additional_messages",
-          "required": true,
+          "required": false,
           "visible": true,
           "editable": true,
           "description": "Specify the list of additional messages to the thread before creating the run.. For example, [\n            {\n              \"role\": \"\",\n              \"content\": \"\"\n            }\n          ]",
@@ -2430,16 +2430,6 @@
       "enabled": true,
       "parameters": [
         {
-          "title": "File IDs",
-          "type": "text",
-          "name": "file_ids",
-          "required": false,
-          "visible": true,
-          "editable": true,
-          "description": "Specify the comma separated File IDs that the vector should use. Useful for tools like file_search that can access files.",
-          "tooltip": "Specify the comma separated File IDs that the vector should use. Useful for tools like file_search that can access files."
-        },
-        {
           "title": "Name",
           "type": "text",
           "name": "name",
@@ -2448,6 +2438,16 @@
           "editable": true,
           "description": "Specify the name of the vector store.",
           "tooltip": "Specify the name of the vector store."
+        },
+        {
+          "title": "File IDs",
+          "type": "text",
+          "name": "file_ids",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the comma separated File IDs that the vector should use. Useful for tools like file_search that can access files.",
+          "tooltip": "Specify the comma separated File IDs that the vector should use. Useful for tools like file_search that can access files."
         },
         {
           "title": "Expiration Policy",
@@ -2702,7 +2702,7 @@
           "editable": true,
           "options": [
             "TTS-1",
-            "TTS-1 HD"
+            "TTS-1-HD"
           ],
           "description": "Select the text to search model.",
           "tooltip": "Select the text to search model. You can choose TTS-1 or TTS-1 HD"
@@ -2908,6 +2908,46 @@
       "output_schema": {}
     },
     {
+      "operation": "list_files",
+      "title": "List Files",
+      "description": "Retrieves a list of files that belong to the user's organization.",
+      "category": "miscellaneous",
+      "annotation": "list_files",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Purpose",
+          "type": "select",
+          "name": "purpose",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the purpose associated with the file to filter the results.",
+          "tooltip": "Specify the purpose associated with the file to filter the results.",
+          "options": [
+            "Assistants",
+            "Vision",
+            "Batch",
+            "Fine-tune",
+            "User Data",
+            "Assistants Output",
+            "Batch Output",
+            "Fine-tune Results"
+          ]
+        }
+      ],
+      "output_schema": [
+        {
+          "id": "",
+          "object": "",
+          "bytes": "",
+          "created_at": "",
+          "filename": "",
+          "purpose": ""
+        }
+      ]
+    },
+    {
       "operation": "get_file",
       "title": "Get File Details",
       "description": "Retrieves information about a specific file.",
@@ -2940,7 +2980,7 @@
       "title": "Upload File",
       "description": "Uploads a file that can be used in various actions. Individual files can be up to 512 MB, and the size of all files uploaded by one organization can be up to 100 GB.",
       "category": "miscellaneous",
-      "annotation": "get_file",
+      "annotation": "upload_file",
       "enabled": true,
       "parameters": [
         {
@@ -2966,7 +3006,8 @@
             "Assistants",
             "Vision",
             "Batch",
-            "Fine-tune"
+            "Fine-tune",
+            "User Data"
           ]
         }
       ],

@@ -416,7 +416,7 @@
           "name": "List Assistants",
           "tag": "#OpenAI",
           "recordTags": [
-            "Openai",
+            "OpenAI",
             "openai"
           ],
           "isActive": false,
@@ -462,7 +462,7 @@
             {
               "uuid": "f816cb7b-83bc-4300-b087-927c6822a661",
               "@type": "WorkflowStep",
-              "name": "Get an Assistant",
+              "name": "Get Assistant Details",
               "description": null,
               "status": null,
               "arguments": {
@@ -483,10 +483,10 @@
           ],
           "triggerLimit": null,
           "description": "Retrieves an assistant based on assistant ID.",
-          "name": "Get an Assistant",
+          "name": "Get Assistant Details",
           "tag": "#OpenAI",
           "recordTags": [
-            "Openai",
+            "OpenAI",
             "openai"
           ],
           "isActive": false,
@@ -501,7 +501,7 @@
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
-              "name": "Start-> Get an Assistant",
+              "name": "Start-> Get Assistant Details",
               "sourceStep": "/api/3/workflow_steps/d1f03a3f-d5fc-4669-9130-58ee18c95d29",
               "targetStep": "/api/3/workflow_steps/f816cb7b-83bc-4300-b087-927c6822a661"
             }
@@ -532,7 +532,7 @@
             {
               "uuid": "d8adcdc9-db22-4f7b-9120-57a7c83da2a1",
               "@type": "WorkflowStep",
-              "name": "Create an Assistant",
+              "name": "Create Assistant",
               "description": null,
               "status": null,
               "arguments": {
@@ -568,11 +568,7 @@
                     "project_id": "123456789",
                     "department": "Customer Service",
                     "version": "1.0",
-                    "tags": [
-                      "customer support",
-                      "AI assistant",
-                      "version 1.0"
-                    ]
+                    "tags": "FortiSOAR"
                   }
                 },
                 "version": "3.0.0",
@@ -587,10 +583,10 @@
           ],
           "triggerLimit": null,
           "description": "Creates an assistant based on specified input parameters.",
-          "name": "Create an Assistant",
+          "name": "Create Assistant",
           "tag": "#OpenAI",
           "recordTags": [
-            "Openai",
+            "OpenAI",
             "openai"
           ],
           "isActive": false,
@@ -605,7 +601,7 @@
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
-              "name": "Start-> Create an Assistant",
+              "name": "Start-> Create Assistant",
               "sourceStep": "/api/3/workflow_steps/dbddee2d-5628-4c80-a3cd-c6747aa7ea01",
               "targetStep": "/api/3/workflow_steps/d8adcdc9-db22-4f7b-9120-57a7c83da2a1"
             }
@@ -636,7 +632,7 @@
             {
               "uuid": "4817ba0f-2ddd-4c7d-9392-8c40f509ce76",
               "@type": "WorkflowStep",
-              "name": "Update an Assistant",
+              "name": "Update Assistant",
               "description": null,
               "status": null,
               "arguments": {
@@ -673,11 +669,7 @@
                     "project_id": "123456789",
                     "department": "Customer Service",
                     "version": "1.0",
-                    "tags": [
-                      "customer support",
-                      "AI assistant",
-                      "version 1.0"
-                    ]
+                    "tags": "FortiSOAR"
                   }
                 },
                 "version": "3.0.0",
@@ -692,10 +684,10 @@
           ],
           "triggerLimit": null,
           "description": "Updates an assistant based on specified input parameters.",
-          "name": "Update an Assistant",
+          "name": "Update Assistant",
           "tag": "#OpenAI",
           "recordTags": [
-            "Openai",
+            "OpenAI",
             "openai"
           ],
           "isActive": false,
@@ -710,7 +702,7 @@
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
-              "name": "Start-> Update an Assistant",
+              "name": "Start-> Update Assistant",
               "sourceStep": "/api/3/workflow_steps/193b2073-e511-48f6-a0f0-4bcd063be8d8",
               "targetStep": "/api/3/workflow_steps/4817ba0f-2ddd-4c7d-9392-8c40f509ce76"
             }
@@ -741,7 +733,7 @@
             {
               "uuid": "99236364-c482-40f8-a39a-5905e3b28e5a",
               "@type": "WorkflowStep",
-              "name": "Delete an Assistant",
+              "name": "Delete Assistant",
               "description": null,
               "status": null,
               "arguments": {
@@ -762,10 +754,10 @@
           ],
           "triggerLimit": null,
           "description": "Deletes an assistant based on assistant ID.",
-          "name": "Delete an Assistant",
+          "name": "Delete Assistant",
           "tag": "#OpenAI",
           "recordTags": [
-            "Openai",
+            "OpenAI",
             "openai"
           ],
           "isActive": false,
@@ -780,7 +772,7 @@
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
-              "name": "Start-> Delete an Assistant",
+              "name": "Start-> Delete Assistant",
               "sourceStep": "/api/3/workflow_steps/518b331b-b8b9-411f-96cd-0ecee1a51060",
               "targetStep": "/api/3/workflow_steps/99236364-c482-40f8-a39a-5905e3b28e5a"
             }
@@ -835,7 +827,7 @@
           "name": "Get Thread",
           "tag": "#OpenAI",
           "recordTags": [
-            "Openai",
+            "OpenAI",
             "openai"
           ],
           "isActive": false,
@@ -905,7 +897,7 @@
           "name": "Delete Thread",
           "tag": "#OpenAI",
           "recordTags": [
-            "Openai",
+            "OpenAI",
             "openai"
           ],
           "isActive": false,
@@ -986,11 +978,7 @@
                     "project_id": "123456789",
                     "department": "Customer Service",
                     "version": "1.0",
-                    "tags": [
-                      "customer support",
-                      "AI assistant",
-                      "version 1.0"
-                    ]
+                    "tags": "FortiSOAR"
                   }
                 },
                 "version": "3.0.0",
@@ -1008,7 +996,7 @@
           "name": "Create Thread",
           "tag": "#OpenAI",
           "recordTags": [
-            "Openai",
+            "OpenAI",
             "openai"
           ],
           "isActive": false,
@@ -1096,7 +1084,7 @@
           "name": "Update Thread",
           "tag": "#OpenAI",
           "recordTags": [
-            "Openai",
+            "OpenAI",
             "openai"
           ],
           "isActive": false,
@@ -1142,7 +1130,7 @@
             {
               "uuid": "55a1dd1d-945d-4844-902d-f93ebb104e18",
               "@type": "WorkflowStep",
-              "name": "Create Message",
+              "name": "Create Thread Message",
               "description": null,
               "status": null,
               "arguments": {
@@ -1154,10 +1142,7 @@
                   "content": [
                     {
                       "type": "text",
-                      "text": {
-                        "value": "How does AI work? Explain it in simple terms.",
-                        "annotations": []
-                      }
+                      "text": "How does AI work? Explain it in simple terms."
                     }
                   ],
                   "attachments": "",
@@ -1169,17 +1154,13 @@
                     "project_id": "123456789",
                     "department": "Customer Service",
                     "version": "1.0",
-                    "tags": [
-                      "customer support",
-                      "AI assistant",
-                      "version 1.0"
-                    ]
+                    "tags": "FortiSOAR"
                   }
                 },
                 "version": "3.0.0",
                 "connector": "openai",
                 "operation": "create_thread_message",
-                "operationTitle": "Create Message"
+                "operationTitle": "Create Thread Message"
               },
               "left": "188",
               "top": "120",
@@ -1188,10 +1169,10 @@
           ],
           "triggerLimit": null,
           "description": "Creates a message based on the specified input parameters.",
-          "name": "Create Message",
+          "name": "Create Thread Message",
           "tag": "#OpenAI",
           "recordTags": [
-            "Openai",
+            "OpenAI",
             "openai"
           ],
           "isActive": false,
@@ -1206,7 +1187,7 @@
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
-              "name": "Start-> Create Message",
+              "name": "Start-> Create Thread Message",
               "sourceStep": "/api/3/workflow_steps/2d693224-6134-4aff-bf74-eae726f83bf5",
               "targetStep": "/api/3/workflow_steps/55a1dd1d-945d-4844-902d-f93ebb104e18"
             }
@@ -1237,7 +1218,7 @@
             {
               "uuid": "0154adc6-3976-407d-aac1-0591f1df54ec",
               "@type": "WorkflowStep",
-              "name": "Update a Thread Message",
+              "name": "Update Thread Message",
               "description": null,
               "status": null,
               "arguments": {
@@ -1254,11 +1235,7 @@
                     "project_id": "123456789",
                     "department": "Customer Service",
                     "version": "1.0",
-                    "tags": [
-                      "customer support",
-                      "AI assistant",
-                      "version 1.0"
-                    ]
+                    "tags": "FortiSOAR"
                   }
                 },
                 "version": "3.0.0",
@@ -1273,10 +1250,10 @@
           ],
           "triggerLimit": null,
           "description": "Updates a message in a thread based on the specified input parameters.",
-          "name": "Update a Thread Message",
+          "name": "Update Thread Message",
           "tag": "#OpenAI",
           "recordTags": [
-            "Openai",
+            "OpenAI",
             "openai"
           ],
           "isActive": false,
@@ -1291,7 +1268,7 @@
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
-              "name": "Start-> Update a Thread Message",
+              "name": "Start-> Update Thread Message",
               "sourceStep": "/api/3/workflow_steps/28dc513e-bb55-4e5e-a538-ec5199280e43",
               "targetStep": "/api/3/workflow_steps/0154adc6-3976-407d-aac1-0591f1df54ec"
             }
@@ -1322,7 +1299,7 @@
             {
               "uuid": "1f642547-4660-4fcd-86e7-87463cae0639",
               "@type": "WorkflowStep",
-              "name": "List Messages in a Thread",
+              "name": "List Thread Messages",
               "description": null,
               "status": null,
               "arguments": {
@@ -1339,7 +1316,7 @@
                 "version": "3.0.0",
                 "connector": "openai",
                 "operation": "list_thread_messages",
-                "operationTitle": "List Messages in Thread"
+                "operationTitle": "List Thread Messages"
               },
               "left": "188",
               "top": "120",
@@ -1348,10 +1325,10 @@
           ],
           "triggerLimit": null,
           "description": "Retrieves a list of messages for specified thread based on the specified input parameters.",
-          "name": "List Messages in a Thread",
+          "name": "List Thread Messages",
           "tag": "#OpenAI",
           "recordTags": [
-            "Openai",
+            "OpenAI",
             "openai"
           ],
           "isActive": false,
@@ -1366,7 +1343,7 @@
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
-              "name": "Start-> List Messages in a Thread",
+              "name": "Start-> List Thread Messages",
               "sourceStep": "/api/3/workflow_steps/3e2cb57b-d755-48a0-b380-8b17154d3927",
               "targetStep": "/api/3/workflow_steps/1f642547-4660-4fcd-86e7-87463cae0639"
             }
@@ -1397,7 +1374,7 @@
             {
               "uuid": "69673a09-6bc9-41f6-90e5-f9465494d8bf",
               "@type": "WorkflowStep",
-              "name": "Get a Thread Message",
+              "name": "Get Thread Message Details",
               "description": null,
               "status": null,
               "arguments": {
@@ -1419,10 +1396,10 @@
           ],
           "triggerLimit": null,
           "description": "Retrieves a specific message based on Thread ID and Message ID.",
-          "name": "Get a Thread Message",
+          "name": "Get Thread Message Details",
           "tag": "#OpenAI",
           "recordTags": [
-            "Openai",
+            "OpenAI",
             "openai"
           ],
           "isActive": false,
@@ -1437,7 +1414,7 @@
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
-              "name": "Start-> Get a Thread Message",
+              "name": "Start-> Get Thread Message Details",
               "sourceStep": "/api/3/workflow_steps/024c2693-54ae-4e5e-aa01-168c291a3344",
               "targetStep": "/api/3/workflow_steps/69673a09-6bc9-41f6-90e5-f9465494d8bf"
             }
@@ -1468,7 +1445,7 @@
             {
               "uuid": "11433946-8fe6-4596-a229-81dd4591e105",
               "@type": "WorkflowStep",
-              "name": "Delete a Thread Message",
+              "name": "Delete Thread Message",
               "description": null,
               "status": null,
               "arguments": {
@@ -1490,10 +1467,10 @@
           ],
           "triggerLimit": null,
           "description": "Deletes a message based on Thread ID and Message ID.",
-          "name": "Delete a Thread Message",
+          "name": "Delete Thread Message",
           "tag": "#OpenAI",
           "recordTags": [
-            "Openai",
+            "OpenAI",
             "openai"
           ],
           "isActive": false,
@@ -1508,7 +1485,7 @@
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
-              "name": "Start-> Delete a Thread Message",
+              "name": "Start-> Delete Thread Message",
               "sourceStep": "/api/3/workflow_steps/9d1ac833-dc30-4b4f-9ec5-1cfe9647c0d6",
               "targetStep": "/api/3/workflow_steps/11433946-8fe6-4596-a229-81dd4591e105"
             }
@@ -1567,7 +1544,7 @@
           "name": "List Runs",
           "tag": "#OpenAI",
           "recordTags": [
-            "Openai",
+            "OpenAI",
             "openai"
           ],
           "isActive": false,
@@ -1613,7 +1590,7 @@
             {
               "uuid": "a683579e-6584-4cfc-aee7-8f274759648d",
               "@type": "WorkflowStep",
-              "name": "Get a Run",
+              "name": "Get Run Details",
               "description": null,
               "status": null,
               "arguments": {
@@ -1635,10 +1612,10 @@
           ],
           "triggerLimit": null,
           "description": "Retrieves a specific run for a thread.",
-          "name": "Get a Run",
+          "name": "Get Run Details",
           "tag": "#OpenAI",
           "recordTags": [
-            "Openai",
+            "OpenAI",
             "openai"
           ],
           "isActive": false,
@@ -1653,7 +1630,7 @@
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
-              "name": "Start-> Get a Run",
+              "name": "Start-> Get Run Details",
               "sourceStep": "/api/3/workflow_steps/feb4c159-7cc8-4528-aad4-f002cf1a7fc4",
               "targetStep": "/api/3/workflow_steps/a683579e-6584-4cfc-aee7-8f274759648d"
             }
@@ -1684,7 +1661,7 @@
             {
               "uuid": "b1a469bb-d3dc-49a4-bce8-9ad180fce178",
               "@type": "WorkflowStep",
-              "name": "Create a Run",
+              "name": "Create Run",
               "description": null,
               "status": null,
               "arguments": {
@@ -1713,11 +1690,7 @@
                     "project_id": "123456789",
                     "department": "Customer Service",
                     "version": "1.0",
-                    "tags": [
-                      "customer support",
-                      "AI run",
-                      "version 1.0"
-                    ]
+                    "tags": "FortiSOAR"
                   },
                   "max_prompt_tokens": "",
                   "other_fields": ""
@@ -1734,10 +1707,10 @@
           ],
           "triggerLimit": null,
           "description": "Creates a run based on specified input parameters.",
-          "name": "Create a Run",
+          "name": "Create Run",
           "tag": "#OpenAI",
           "recordTags": [
-            "Openai",
+            "OpenAI",
             "openai"
           ],
           "isActive": false,
@@ -1752,7 +1725,7 @@
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
-              "name": "Start-> Create a Run",
+              "name": "Start-> Create Run",
               "sourceStep": "/api/3/workflow_steps/f60081b3-39cb-44c0-be69-2c83a92f7883",
               "targetStep": "/api/3/workflow_steps/b1a469bb-d3dc-49a4-bce8-9ad180fce178"
             }
@@ -1824,11 +1797,7 @@
                     "project_id": "123456789",
                     "department": "Customer Service",
                     "version": "1.0",
-                    "tags": [
-                      "customer support",
-                      "AI run",
-                      "version 1.0"
-                    ]
+                    "tags": "FortiSOAR"
                   },
                   "temperature": "",
                   "top_p": "",
@@ -1850,7 +1819,7 @@
           "name": "Create Thread and Run",
           "tag": "#OpenAI",
           "recordTags": [
-            "Openai",
+            "OpenAI",
             "openai"
           ],
           "isActive": false,
@@ -1896,7 +1865,7 @@
             {
               "uuid": "78dda212-697e-46e4-8488-58512b9dc4ae",
               "@type": "WorkflowStep",
-              "name": "Update a Run",
+              "name": "Update Run",
               "description": null,
               "status": null,
               "arguments": {
@@ -1921,10 +1890,10 @@
           ],
           "triggerLimit": null,
           "description": "Updates a run based on specified input parameters.",
-          "name": "Update a Run",
+          "name": "Update Run",
           "tag": "#OpenAI",
           "recordTags": [
-            "Openai",
+            "OpenAI",
             "openai"
           ],
           "isActive": false,
@@ -1939,7 +1908,7 @@
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
-              "name": "Start-> Update a Run",
+              "name": "Start-> Update Run",
               "sourceStep": "/api/3/workflow_steps/17e5194b-4cbb-432a-973b-9339a4d4d56a",
               "targetStep": "/api/3/workflow_steps/78dda212-697e-46e4-8488-58512b9dc4ae"
             }
@@ -1970,7 +1939,7 @@
             {
               "uuid": "7bf143a4-ec45-45d6-999b-287fe03449e4",
               "@type": "WorkflowStep",
-              "name": "Cancel a Run",
+              "name": "Cancel Run",
               "description": null,
               "status": null,
               "arguments": {
@@ -1992,10 +1961,10 @@
           ],
           "triggerLimit": null,
           "description": "Cancels a run that is in progress.",
-          "name": "Cancel a Run",
+          "name": "Cancel Run",
           "tag": "#OpenAI",
           "recordTags": [
-            "Openai",
+            "OpenAI",
             "openai"
           ],
           "isActive": false,
@@ -2010,7 +1979,7 @@
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
-              "name": "Start-> Cancel a Run",
+              "name": "Start-> Cancel Run",
               "sourceStep": "/api/3/workflow_steps/9e0a4529-a1c3-4e01-86ce-bfc4ab10d45c",
               "targetStep": "/api/3/workflow_steps/7bf143a4-ec45-45d6-999b-287fe03449e4"
             }
@@ -2072,7 +2041,7 @@
           "name": "Submit Tool Outputs To Run",
           "tag": "#OpenAI",
           "recordTags": [
-            "Openai",
+            "OpenAI",
             "openai"
           ],
           "isActive": false,
@@ -2147,7 +2116,7 @@
           "name": "List Run Steps",
           "tag": "#OpenAI",
           "recordTags": [
-            "Openai",
+            "OpenAI",
             "openai"
           ],
           "isActive": false,
@@ -2219,7 +2188,7 @@
           "name": "Get Run Step",
           "tag": "#OpenAI",
           "recordTags": [
-            "Openai",
+            "OpenAI",
             "openai"
           ],
           "isActive": false,
@@ -2295,7 +2264,7 @@
           "name": "Create Vector Store",
           "tag": "#OpenAI",
           "recordTags": [
-            "Openai",
+            "OpenAI",
             "openai"
           ],
           "isActive": false,
@@ -2365,7 +2334,7 @@
           "name": "Get Vector Store",
           "tag": "#OpenAI",
           "recordTags": [
-            "Openai",
+            "OpenAI",
             "openai"
           ],
           "isActive": false,
@@ -2436,7 +2405,7 @@
           "name": "Create Vector Store File",
           "tag": "#OpenAI",
           "recordTags": [
-            "Openai",
+            "OpenAI",
             "openai"
           ],
           "isActive": false,
@@ -2507,7 +2476,7 @@
           "name": "Create Vector Store File Batch",
           "tag": "#OpenAI",
           "recordTags": [
-            "Openai",
+            "OpenAI",
             "openai"
           ],
           "isActive": false,
@@ -2578,7 +2547,7 @@
           "name": "Get Vector Store File Batch",
           "tag": "#OpenAI",
           "recordTags": [
-            "Openai",
+            "OpenAI",
             "openai"
           ],
           "isActive": false,
@@ -2649,7 +2618,7 @@
           "name": "Cancel Vector Store File Batch",
           "tag": "#OpenAI",
           "recordTags": [
-            "Openai",
+            "OpenAI",
             "openai"
           ],
           "isActive": false,
@@ -2695,7 +2664,7 @@
             {
               "uuid": "e411a549-429d-4218-aaa6-7aeb59e7e51f",
               "@type": "WorkflowStep",
-              "name": "Create speech",
+              "name": "Create Speech",
               "description": null,
               "status": null,
               "arguments": {
@@ -2711,7 +2680,7 @@
                 "version": "3.0.0",
                 "connector": "openai",
                 "operation": "create_speech",
-                "operationTitle": "Create speech"
+                "operationTitle": "Create Speech"
               },
               "left": "188",
               "top": "120",
@@ -2720,10 +2689,10 @@
           ],
           "triggerLimit": null,
           "description": "Generates audio from the input text.",
-          "name": "Create speech",
+          "name": "Create Speech",
           "tag": "#OpenAI",
           "recordTags": [
-            "Openai",
+            "OpenAI",
             "openai"
           ],
           "isActive": false,
@@ -2738,7 +2707,7 @@
               "@type": "WorkflowRoute",
               "label": null,
               "isExecuted": false,
-              "name": "Start-> Create speech",
+              "name": "Start-> Create Speech",
               "sourceStep": "/api/3/workflow_steps/5693cc26-f56c-435f-8a11-9e7d570b1ca2",
               "targetStep": "/api/3/workflow_steps/e411a549-429d-4218-aaa6-7aeb59e7e51f"
             }
@@ -2798,7 +2767,7 @@
           "name": "Create Transcription",
           "tag": "#OpenAI",
           "recordTags": [
-            "Openai",
+            "OpenAI",
             "openai"
           ],
           "isActive": false,
@@ -2870,7 +2839,7 @@
           "name": "Create Translation",
           "tag": "#OpenAI",
           "recordTags": [
-            "Openai",
+            "OpenAI",
             "openai"
           ],
           "isActive": false,
@@ -2940,7 +2909,7 @@
           "name": "Get File",
           "tag": "#OpenAI",
           "recordTags": [
-            "Openai",
+            "OpenAI",
             "openai"
           ],
           "isActive": false,
@@ -2959,6 +2928,97 @@
               "sourceStep": "/api/3/workflow_steps/08b7688c-7fdc-4437-9cda-9d04e5315569",
               "targetStep": "/api/3/workflow_steps/cf7f40f3-d235-4362-ad18-14b1b901b38d"
             }
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "List Files",
+          "aliasName": null,
+          "tag": null,
+          "description": "Retrieves a list of files that belong to the user's organization.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1721367365,
+          "collection": "/api/3/workflow_collections/033c380b-3d36-4289-b05c-a4e27a9ba0e8",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/204f2ed9-a50e-4ef0-884a-3c0dff6b4bfd",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "List Files",
+              "description": null,
+              "arguments": {
+                "name": "OpenAI",
+                "config": "6062d104-aecf-43ed-bddb-a437cb75b33f",
+                "params": [],
+                "version": "3.0.0",
+                "connector": "openai",
+                "operation": "list_files",
+                "operationTitle": "List Files",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "165",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "5f9ac6e0-194f-4973-afde-8dabe419e52a"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "__triggerLimit": true,
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                },
+                "triggerOnSource": true,
+                "triggerOnReplicate": false
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "204f2ed9-a50e-4ef0-884a-3c0dff6b4bfd"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> List Files",
+              "targetStep": "/api/3/workflow_steps/5f9ac6e0-194f-4973-afde-8dabe419e52a",
+              "sourceStep": "/api/3/workflow_steps/204f2ed9-a50e-4ef0-884a-3c0dff6b4bfd",
+              "label": null,
+              "isExecuted": false,
+              "group": null,
+              "uuid": "581a3b91-b165-4dfb-aa1b-35df47f7b180"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "fcd8f016-4dc0-4c71-a7b7-3cf63b657d34",
+          "id": 1997,
+          "createUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "createDate": 1721366647.379959,
+          "modifyUser": "/api/3/people/3451141c-bac6-467c-8d72-85e0fab569ce",
+          "modifyDate": 1721367364.921104,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "OpenAI",
+            "openai"
           ]
         },
         {
@@ -3011,7 +3071,7 @@
           "name": "Upload File",
           "tag": "#OpenAI",
           "recordTags": [
-            "Openai",
+            "OpenAI",
             "openai"
           ],
           "isActive": false,
