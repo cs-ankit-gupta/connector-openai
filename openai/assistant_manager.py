@@ -24,7 +24,8 @@ class AssistantManager:
         return assistant_response
 
     def run_assistant(self, instructions=""):
-        client = openai.OpenAI(api_key=self.config['apiKey'], project=self.config.get('project'), organization=self.config.get('organization'))
+        client = openai.OpenAI(api_key=self.config['apiKey'], project=self.config.get('project'),
+                               organization=self.config.get('organization'))
         event_handler = EventHandler(config=self.config, params=self.params)
         with client.beta.threads.runs.create_and_stream(
                 thread_id=self.params['threadId'],
