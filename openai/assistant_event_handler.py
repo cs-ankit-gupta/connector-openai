@@ -149,7 +149,7 @@ class EventHandler(AssistantEventHandler):
                 error_message = 'Unknown error occurred.'
             return True, error_message, {}
         except Exception as error:
-            return True, f'Error: {error}', {}
+            return True, f'Error occurred while executing tool function call: {error}', {}
 
     def set_token_usage(self, usage):
         self.function_call_token_usage = dict(self.function_call_token_usage)
