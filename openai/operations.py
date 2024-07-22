@@ -4,6 +4,8 @@ MIT License
 Copyright (c) 2024 Fortinet Inc
 Copyright end
 """
+import json
+
 # from sys import api_version
 # from urllib import response
 import openai
@@ -212,6 +214,7 @@ def create_assistant(config, params):
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
     client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
+    payload['instructions'] = json.dumps(payload['instructions'])
     return client.beta.assistants.create(**payload).model_dump()
 
 
@@ -241,6 +244,7 @@ def update_assistant(config, params):
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
     client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
+    payload['instructions'] = json.dumps(payload['instructions'])
     return client.beta.assistants.update(**payload).model_dump()
 
 
