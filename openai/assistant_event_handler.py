@@ -24,7 +24,7 @@ class EventHandler(AssistantEventHandler):
         self.config = config
         self.params = params
         self.tool_outputs = []
-        self.usage = {}
+        self.token_usage = {}
         self.function_call_token_usage = None
 
     # Executes on every event
@@ -74,10 +74,10 @@ class EventHandler(AssistantEventHandler):
     def on_tool_call_done(self, tool_call: ToolCall) -> None:
         if tool_call.type == 'function':
             run_status = get_run(config=self.config,
-                                 params={'thread_id': self.params['threadId'], 'run_id': self.run_id})
+                                 params={'thread_id': self.params['thread_id'], 'run_id': self.run_id})
             while run_status['status'] in ["queued", "in_progress"]:
                 run_status = get_run(config=self.config,
-                                     params={'thread_id': self.params['threadId'], 'run_id': self.run_id})
+                                     params={'thread_id': self.params['thread_id'], 'run_id': self.run_id})
             if run_status['status'] == "requires_action":
                 logger.info(
                     f'Calling tool function, Function Name: {tool_call.function.name}, Function Argument: {tool_call.function.arguments}')
@@ -85,13 +85,13 @@ class EventHandler(AssistantEventHandler):
                     tool_call.function.name,
                     tool_call.function.arguments)
                 logger.info(f'Function Calling output: {function_output}')
-                logger.info(f'usage: {self.function_call_token_usage}')
+                logger.info(f'token_usage: {self.function_call_token_usage}')
                 if to_add_message:
                     self.tool_outputs.append({"tool_call_id": tool_call.id, "output": function_output})
                 else:
-                    cancel_run(config=self.config, params={'thread_id': self.params['threadId'], 'run_id': self.run_id})
+                    cancel_run(config=self.config, params={'thread_id': self.params['thread_id'], 'run_id': self.run_id})
                     create_thread_message(self.config,
-                                          params={'thread_id': self.params['threadId'], 'role': 'assistant',
+                                          params={'thread_id': self.params['thread_id'], 'role': 'assistant',
                                                   'content': function_output})
 
     @override
@@ -100,11 +100,11 @@ class EventHandler(AssistantEventHandler):
                                organization=self.config.get('organization'))
         run_object = client.beta.threads.runs.retrieve(
             run_id=self.run_id,
-            thread_id=self.params['threadId']
+            thread_id=self.params['thread_id']
         )
         if run_object.status == 'requires_action':
             with client.beta.threads.runs.submit_tool_outputs_stream(
-                    thread_id=self.params['threadId'],
+                    thread_id=self.params['thread_id'],
                     run_id=self.run_id,
                     tool_outputs=self.tool_outputs,
                     event_handler=EventHandler(self.config, self.params)
@@ -113,14 +113,14 @@ class EventHandler(AssistantEventHandler):
         while run_object.status not in ['completed', 'cancelled']:
             run_object = client.beta.threads.runs.retrieve(
                 run_id=self.run_id,
-                thread_id=self.params['threadId']
+                thread_id=self.params['thread_id']
             )
-        thread_messages = list_thread_messages(config=self.config, params={'thread_id': self.params['threadId']})
+        thread_messages = list_thread_messages(config=self.config, params={'thread_id': self.params['thread_id']})
         self.llm_response = thread_messages['data'][0]['content'][0]['text']['value']
         if self.function_call_token_usage is not None:
-            self.usage = self.set_token_usage(run_object.usage)
+            self.token_usage = self.set_token_usage(run_object.usage)
         else:
-            self.usage = run_object.usage
+            self.token_usage = run_object.usage
 
     @override
     def on_exception(self, exception: Exception) -> None:
@@ -142,8 +142,8 @@ class EventHandler(AssistantEventHandler):
             if response.get('status') == 'Success':
                     to_add_message = response['data'].get('to_add_message')
                     llm_response = response['data'].get('data')
-                    usage = response['data'].get('usage')
-                    return to_add_message, llm_response, usage
+                    token_usage = response['data'].get('token_usage')
+                    return to_add_message, llm_response, token_usage
             error_message = response.get('message')
             if not error_message:
                 error_message = 'Unknown error occurred.'
@@ -151,14 +151,14 @@ class EventHandler(AssistantEventHandler):
         except Exception as error:
             return True, f'Error occurred while executing tool function call: {error}', {}
 
-    def set_token_usage(self, usage):
+    def set_token_usage(self, token_usage):
         self.function_call_token_usage = dict(self.function_call_token_usage)
-        usage = dict(usage)
+        token_usage = dict(token_usage)
 
         for key in self.function_call_token_usage:
-            if key in usage:
-                usage[key] += self.function_call_token_usage[key]
+            if key in token_usage:
+                token_usage[key] += self.function_call_token_usage[key]
 
         # Convert back to list of lists
-        final_token_usage = [[key, value] for key, value in usage.items()]
+        final_token_usage = [[key, value] for key, value in token_usage.items()]
         return final_token_usage
