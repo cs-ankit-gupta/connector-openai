@@ -3006,8 +3006,8 @@
           "required": true,
           "visible": true,
           "editable": true,
-          "description": "Select the intended purpose of the uploaded file. Use \"Assistants\" for Assistants and Message files, \"Vision\" for Assistants image file inputs, \"Batch\" for Batch API, and \"Fine-tune\" for Fine-tuning.",
-          "tooltip": "Select the intended purpose of the uploaded file.",
+          "description": "Select the intended purpose of the uploaded file. You can choose from \"Assistants\", \"Vision\", \"Batch\", \"Fine-tune\", or \"User Data\". For Vision, supported file types are \"gif\", \"jpeg\", \"jpg\", \"png\", and \"webp\". For Fine-tuning, only .jsonl files are supported with specific formats for chat or completions models. For Batch, only .jsonl files up to 100 MB are supported with a specific format.",
+          "tooltip": "Select the intended purpose of the uploaded file.For Vision, supported file types are \"gif\", \"jpeg\", \"jpg\", \"png\", and \"webp\". For Fine-tuning, only .jsonl files are supported with specific formats for chat or completions models. For Batch, only .jsonl files up to 100 MB are supported with a specific format.",
           "options": [
             "Assistants",
             "Vision",
