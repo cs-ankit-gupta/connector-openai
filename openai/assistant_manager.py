@@ -18,7 +18,7 @@ class AssistantManager:
         self.params = params
 
     def get_llm_response(self):
-        payload = {'thread_id': self.params['threadId'], 'role': self.params['role'], 'content': self.params['content']}
+        payload = {'thread_id': self.params['thread_id'], 'role': self.params['role'], 'content': self.params['content']}
         create_thread_message(config=self.config, params=payload)
         assistant_response = self.run_assistant()
         return assistant_response
@@ -28,13 +28,13 @@ class AssistantManager:
                                organization=self.config.get('organization'))
         event_handler = EventHandler(config=self.config, params=self.params)
         with client.beta.threads.runs.create_and_stream(
-                thread_id=self.params['threadId'],
-                assistant_id=self.params['assistantId'],
+                thread_id=self.params['thread_id'],
+                assistant_id=self.params['assistant_id'],
                 instructions=instructions,
                 event_handler=event_handler
         ) as stream:
             stream.until_done()
-        return {"llm_response": event_handler.get_resposne(), "usage": event_handler.usage}
+        return {"llm_response": event_handler.get_resposne(), "token_usage": event_handler.token_usage}
 
 
 def get_llm_response(config, params):
