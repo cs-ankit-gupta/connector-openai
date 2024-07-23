@@ -686,16 +686,6 @@
       "enabled": true,
       "parameters": [
         {
-          "title": "Model",
-          "type": "text",
-          "name": "model",
-          "required": true,
-          "visible": true,
-          "editable": true,
-          "description": "Specify the ID of model to be used to update an assistant. You can use the \"List Available Models\" action to see all of your available models.",
-          "tooltip": "Specify the ID of model to be used to update an assistant. You can use the \"List Available Models\" action to see all of your available models."
-        },
-        {
           "title": "Assistant ID",
           "type": "text",
           "name": "assistant_id",
@@ -706,14 +696,24 @@
           "tooltip": "Specify the ID of assistant to be updated."
         },
         {
+          "title": "Model",
+          "type": "text",
+          "name": "model",
+          "required": false,
+          "visible": true,
+          "editable": true,
+          "description": "Specify the ID of model to be used to update an assistant. You can use the \"List Available Models\" action to see all of your available models.",
+          "tooltip": "Specify the ID of model to be used to update an assistant. You can use the \"List Available Models\" action to see all of your available models."
+        },
+        {
           "title": "Name",
           "type": "text",
           "name": "name",
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the name of assistant to be created",
-          "tooltip": "Specify the name of assistant to be created"
+          "description": "Specify the name of assistant to be updated.",
+          "tooltip": "Specify the name of assistant to be updated."
         },
         {
           "title": "Description",
@@ -722,8 +722,8 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the description of assistant to be created.",
-          "tooltip": "Specify the description of assistant to be created."
+          "description": "Specify the description of assistant to be updated.",
+          "tooltip": "Specify the description of assistant to be updated."
         },
         {
           "title": "Instructions",
@@ -2871,7 +2871,7 @@
           "visible": true,
           "editable": true,
           "value": "whisper-1",
-          "description": "Specify the tID of the model to use. Only whisper-1 (which is powered by our open source Whisper V2 model) is currently available.",
+          "description": "Specify the ID of the model to use. Only whisper-1 (which is powered by our open source Whisper V2 model) is currently available.",
           "tooltip": "Specify the ID of the model to use."
         },
         {
@@ -2936,16 +2936,22 @@
           ]
         }
       ],
-      "output_schema": [
-        {
-          "id": "",
-          "object": "",
-          "bytes": "",
-          "created_at": "",
-          "filename": "",
-          "purpose": ""
-        }
-      ]
+      "output_schema": {
+        "data": [
+          {
+            "id": "",
+            "bytes": "",
+            "object": "",
+            "status": "",
+            "purpose": "",
+            "filename": "",
+            "created_at": "",
+            "status_details": null
+          }
+        ],
+        "object": "",
+        "has_more": ""
+      }
     },
     {
       "operation": "get_file",
@@ -3000,8 +3006,8 @@
           "required": true,
           "visible": true,
           "editable": true,
-          "description": "Select the intended purpose of the uploaded file. Use \"Assistants\" for Assistants and Message files, \"Vision\" for Assistants image file inputs, \"Batch\" for Batch API, and \"Fine-tune\" for Fine-tuning.",
-          "tooltip": "Select the intended purpose of the uploaded file.",
+          "description": "Select the intended purpose of the uploaded file. You can choose from \"Assistants\", \"Vision\", \"Batch\", \"Fine-tune\", or \"User Data\". For Vision, supported file types are \"gif\", \"jpeg\", \"jpg\", \"png\", and \"webp\". For Fine-tuning, only .jsonl files are supported with specific formats for chat or completions models. For Batch, only .jsonl files up to 100 MB are supported with a specific format.",
+          "tooltip": "Select the intended purpose of the uploaded file.For Vision, supported file types are \"gif\", \"jpeg\", \"jpg\", \"png\", and \"webp\". For Fine-tuning, only .jsonl files are supported with specific formats for chat or completions models. For Batch, only .jsonl files up to 100 MB are supported with a specific format.",
           "options": [
             "Assistants",
             "Vision",
