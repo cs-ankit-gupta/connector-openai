@@ -17,7 +17,7 @@ class Openai(Connector):
         try:
             if operation in ['chat_conversation', 'chat_completions']:
                 params.update({'operation': operation})
-            elif operation == 'create_speech':
+            elif operation in ['create_speech', 'create_transcription', 'create_translation', 'upload_file']:
                 return supported_operations.get(operation)(config, params, *args, **kwargs)
             return supported_operations.get(operation)(config, params)
         except Exception as err:

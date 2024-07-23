@@ -5,23 +5,19 @@ Copyright (c) 2024 Fortinet Inc
 Copyright end
 """
 import json
-
-# from sys import api_version
-# from urllib import response
 import openai
 import arrow
 import re
 from bs4 import BeautifulSoup
 from jsonschema import validate
 from connectors.core.connector import get_logger, ConnectorError
-from integrations.crudhub import make_request
 from .constants import *
 import tiktoken
 import requests
 import httpx
 import os
 from pathlib import Path
-from connectors.cyops_utilities.files import save_file_in_env
+from connectors.cyops_utilities.files import save_file_in_env, download_file_from_cyops
 
 
 logger = get_logger(LOGGER_NAME)
@@ -478,26 +474,29 @@ def create_speech(config, params, *args, **kwargs):
     return {'path': return_path}
 
 
-def get_file_input(file_payload):
+def get_file_input(file_payload, env={}):
     if isinstance(file_payload, dict) and file_payload.get('@type') == "File":
         url = file_payload.get('@id')
-        file_content = make_request(url, 'GET').encode("utf-8")
-        filename = file_payload.get('filename')
+        response = download_file_from_cyops(url)
+        file_path = response.get('cyops_file_path')
+        filename = response.get('filename')
     else:
         logger.warning("File path is provided.")
         file_path = Path(file_payload)
         filename = file_path.name
-        if not file_payload.startswith('/tmp/'):
-            file_payload = '/tmp/{0}'.format(file_payload)
-        with open(file_payload, 'rb') as file:
-            file_content = file.read()
+    if not file_path.startswith('/tmp/'):
+        file_path = '/tmp/{0}'.format(file_path)
+    with open(file_path, 'rb') as file:
+        file_content = file.read()
+    save_file_in_env(env, file_path)
     return filename, file_content
 
 
-def create_transcription(config, params):
+def create_transcription(config, params, *args, **kwargs):
     __init_openai(config)
+    env = kwargs.get('env', {})
     params['voice'] = params.get('voice', '').lower()
-    params['file'] = get_file_input(params.get('file'))
+    params['file'] = get_file_input(params.get('file'), env)
     timestamp_granularities = [granularity.lower() for granularity in params.get('timestamp_granularities')]
     if 'word' in timestamp_granularities:
         params['response_format'] = 'verbose_json'
@@ -506,9 +505,10 @@ def create_transcription(config, params):
     return openai.audio.transcriptions.create(**payload).model_dump()
 
 
-def create_translation(config, params):
+def create_translation(config, params, *args, **kwargs):
     __init_openai(config)
-    params['file'] = get_file_input(params.get('file'))
+    env = kwargs.get('env', {})
+    params['file'] = get_file_input(params.get('file'), env)
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
     return openai.audio.translations.create(**payload).model_dump()
@@ -531,12 +531,13 @@ def list_files(config, params):
     return client.files.list(**payload).model_dump()
 
 
-def upload_file(config, params):
+def upload_file(config, params, *args, **kwargs):
     __init_openai(config)
+    env = kwargs.get('env', {})
     params['purpose'] = FILE_PURPOSE_MAPPING.get(params.get('purpose'), params.get('purpose'))
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
-    payload['file'] = get_file_input(params.get('file'))
+    payload['file'] = get_file_input(params.get('file'), env)
     client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.files.create(**payload).model_dump()
 
