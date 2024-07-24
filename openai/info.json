@@ -2776,7 +2776,9 @@
           "tooltip": "Specify the speed of the generated audio. Select a value from 0.25 to 4.0."
         }
       ],
-      "output_schema": {}
+      "output_schema": {
+        "path": ""
+      }
     },
     {
       "operation": "create_transcription",
