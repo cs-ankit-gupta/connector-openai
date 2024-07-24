@@ -2887,7 +2887,7 @@
         {
           "title": "Prompt",
           "type": "text",
-          "name": "temperature",
+          "name": "prompt",
           "required": false,
           "visible": true,
           "editable": true,
