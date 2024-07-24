@@ -496,11 +496,12 @@ def create_transcription(config, params, *args, **kwargs):
     __init_openai(config)
     env = kwargs.get('env', {})
     params['voice'] = params.get('voice', '').lower()
-    params['file'] = get_file_input(params.get('file'), env)
     timestamp_granularities = [granularity.lower() for granularity in params.get('timestamp_granularities')]
-    if 'word' in timestamp_granularities:
+    if timestamp_granularities:
         params['response_format'] = 'verbose_json'
     payload = build_payload(params)
+    payload['timestamp_granularities'] = timestamp_granularities
+    payload['file'] = get_file_input(params.get('file'), env)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
     return openai.audio.transcriptions.create(**payload).model_dump()
 
@@ -508,8 +509,8 @@ def create_transcription(config, params, *args, **kwargs):
 def create_translation(config, params, *args, **kwargs):
     __init_openai(config)
     env = kwargs.get('env', {})
-    params['file'] = get_file_input(params.get('file'), env)
     payload = build_payload(params)
+    payload['file'] = get_file_input(params.get('file'), env)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
     return openai.audio.translations.create(**payload).model_dump()
 

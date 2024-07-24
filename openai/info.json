@@ -2776,7 +2776,9 @@
           "tooltip": "Specify the speed of the generated audio. Select a value from 0.25 to 4.0."
         }
       ],
-      "output_schema": {}
+      "output_schema": {
+        "path": ""
+      }
     },
     {
       "operation": "create_transcription",
@@ -2853,7 +2855,35 @@
           ]
         }
       ],
-      "output_schema": {}
+      "output_schema": {
+        "task": "",
+        "text": "",
+        "words": [
+          {
+            "end": "",
+            "word": "",
+            "start": ""
+          }
+        ],
+        "duration": "",
+        "language": "",
+        "segments": [
+          {
+            "id": "",
+            "end": "",
+            "seek": "",
+            "text": "",
+            "start": "",
+            "tokens": [
+              ""
+            ],
+            "avg_logprob": "",
+            "temperature": "",
+            "no_speech_prob": "",
+            "compression_ratio": ""
+          }
+        ]
+      }
     },
     {
       "operation": "create_translation",
@@ -2887,7 +2917,7 @@
         {
           "title": "Prompt",
           "type": "text",
-          "name": "temperature",
+          "name": "prompt",
           "required": false,
           "visible": true,
           "editable": true,
@@ -2905,7 +2935,9 @@
           "tooltip": "Specify the sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. If set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit."
         }
       ],
-      "output_schema": {}
+      "output_schema": {
+        "text": ""
+      }
     },
     {
       "operation": "list_files",
@@ -2946,7 +2978,7 @@
             "purpose": "",
             "filename": "",
             "created_at": "",
-            "status_details": null
+            "status_details": ""
           }
         ],
         "object": "",
