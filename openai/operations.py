@@ -497,7 +497,7 @@ def create_transcription(config, params, *args, **kwargs):
     env = kwargs.get('env', {})
     params['voice'] = params.get('voice', '').lower()
     timestamp_granularities = [granularity.lower() for granularity in params.get('timestamp_granularities')]
-    if 'word' in timestamp_granularities:
+    if timestamp_granularities:
         params['response_format'] = 'verbose_json'
     payload = build_payload(params)
     payload['timestamp_granularities'] = timestamp_granularities
