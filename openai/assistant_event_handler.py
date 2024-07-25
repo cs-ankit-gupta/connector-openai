@@ -17,15 +17,16 @@ logger = get_logger(LOGGER_NAME)
 
 
 class EventHandler(AssistantEventHandler):
-    def __init__(self, config, params):
+    def __init__(self, config, params, last_message_id):
         super().__init__()
         self.run_id = None
-        self.llm_response = ""
+        self.llm_response = []
         self.config = config
         self.params = params
         self.tool_outputs = []
         self.token_usage = {}
         self.function_call_token_usage = None
+        self.last_message_id = last_message_id
 
     # Executes on every event
     @override
@@ -60,7 +61,7 @@ class EventHandler(AssistantEventHandler):
     # thread.message.completed
     @override
     def on_message_done(self, message: Message) -> None:
-        self.llm_response = message.content[0].text.value
+        pass
 
     @override
     def on_tool_call_created(self, tool_call):
@@ -89,7 +90,8 @@ class EventHandler(AssistantEventHandler):
                 if to_add_message:
                     self.tool_outputs.append({"tool_call_id": tool_call.id, "output": function_output})
                 else:
-                    cancel_run(config=self.config, params={'thread_id': self.params['thread_id'], 'run_id': self.run_id})
+                    cancel_run(config=self.config,
+                               params={'thread_id': self.params['thread_id'], 'run_id': self.run_id})
                     create_thread_message(self.config,
                                           params={'thread_id': self.params['thread_id'], 'role': 'assistant',
                                                   'content': function_output})
@@ -115,8 +117,7 @@ class EventHandler(AssistantEventHandler):
                 run_id=self.run_id,
                 thread_id=self.params['thread_id']
             )
-        thread_messages = list_thread_messages(config=self.config, params={'thread_id': self.params['thread_id']})
-        self.llm_response = thread_messages['data'][0]['content'][0]['text']['value']
+        self.llm_response = self.list_messages()
         if self.function_call_token_usage is not None:
             self.token_usage = self.set_token_usage(run_object.usage)
         else:
@@ -162,3 +163,12 @@ class EventHandler(AssistantEventHandler):
         # Convert back to list of lists
         final_token_usage = [[key, value] for key, value in token_usage.items()]
         return final_token_usage
+
+    def list_messages(self):
+        thread_messages = list_thread_messages(config=self.config, params={'thread_id': self.params['thread_id'],
+                                                                           'before': self.last_message_id})
+        return [
+            message['content'][0]['text']['value']
+            for message in thread_messages.get('data', [])
+            if message.get('content') and message['content'][0].get('type') == 'text'
+        ]
