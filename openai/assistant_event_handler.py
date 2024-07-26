@@ -109,7 +109,7 @@ class EventHandler(AssistantEventHandler):
                     thread_id=self.params['thread_id'],
                     run_id=self.run_id,
                     tool_outputs=self.tool_outputs,
-                    event_handler=EventHandler(self.config, self.params)
+                    event_handler=EventHandler(self.config, self.params, self.last_message_id)
             ) as stream:
                 stream.until_done()
         while run_object.status not in ['completed', 'cancelled']:
