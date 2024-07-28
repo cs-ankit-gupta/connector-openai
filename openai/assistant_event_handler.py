@@ -85,6 +85,8 @@ class EventHandler(AssistantEventHandler):
                 # call required function
                 self.call_required_function(tool_call.function.name, tool_call.function.arguments)
                 logger.info(f'Function Calling output: {self.function_calling_output}')
+                if not self.function_calling_output:
+                    self.function_calling_output = 'Function calling output is None'
                 # To add tool call function output to thread or not
                 if self.to_add_message:
                     self.tool_outputs.append({"tool_call_id": tool_call.id, "output": self.function_calling_output})
