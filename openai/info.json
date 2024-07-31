@@ -8,7 +8,7 @@
   "cs_compatible": true,
   "icon_small_name": "small.png",
   "icon_large_name": "large.png",
-  "help_online": "",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/3.0.0/openai/911/openai-v3-0-0",
   "category": "Miscellaneous",
   "configuration": {
     "fields": [
@@ -28,7 +28,7 @@
         "type": "text",
         "name": "organization",
         "tooltip": "Specify the organization ID to access a specific organization.",
-        "description": "Specify the organization ID to access a specific organization.",
+        "description": "Specify the ID of your organization, within the OpenAI API, to authenticate and control access for the OpenAI integration within your organization.",
         "required": false,
         "visible": true,
         "editable": true
@@ -38,7 +38,7 @@
         "type": "text",
         "name": "project",
         "tooltip": "Specify the project name to access a specific project within the organization.",
-        "description": "Specify the project name to access a specific project within the organization.",
+        "description": "Specify the project ID to designate a specific project or context within which OpenAI actions are performed.",
         "required": false,
         "visible": true,
         "editable": true
@@ -96,7 +96,7 @@
         "type": "checkbox",
         "name": "verify_ssl",
         "tooltip": "Select this option to verify the SSL certificate for the server.",
-        "description": "Select this option to verify the SSL certificate for the server. By default, this option is enabled.",
+        "description": "Select this option to verify the SSL certificate for the server. By default, this option is selected, i.e. set it to true.",
         "required": false,
         "visible": true,
         "editable": true,
@@ -130,7 +130,7 @@
           "visible": true,
           "editable": true,
           "value": "gpt-3.5-turbo",
-          "description": "Specify the ID of the GPT model to use for the chat completion. Currently, only gpt-3.5-turbo and gpt-3.5-turbo-0301 are supported. By default, it is set to gpt-3.5-turbo.",
+          "description": "Specify the ID of the GPT model to use for the chat completion. Currently, gpt-3.5-turbo, gpt-3.5-turbo-0301, gpt-4, and gpt-4-1106-preview are supported. By default, it is set to gpt-3.5-turbo.",
           "tooltip": "Specify the ID of the GPT model to use for the chat completion. Currently, only gpt-3.5-turbo and gpt-3.5-turbo-0301 are supported."
         },
         {
@@ -140,7 +140,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the sampling temperature between 0 and 2. Higher values, such as, 0.8 make the output more random, while lower values make the output more focused and deterministic. NOTE: It is recommended to use either this parameter or the 'Top Probability' parameter, not both. By default, this parameter is set to 1.",
+          "description": "Specify the sampling temperature between 0 and 2. Higher values, such as, 0.8 make the output more random, while lower values make the output more focused and deterministic. NOTE: It is recommended to use either this parameter or the Top Probability parameter, not both. By default, this parameter is set to 1.",
           "tooltip": "Specify the sampling temperature between 0 and 2. Higher values, such as, 0.8 make the output more random, while lower values make the output more focused and deterministic. NOTE: It is recommended to use either this parameter or the 'Top Probability' parameter, not both."
         },
         {
@@ -150,7 +150,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the top probability, an alternative to sampling with temperature, also called nucleus sampling. The model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. NOTE: It is recommended to use either this parameter or the 'Temperature' parameter, not both. By default, this parameter is set to 1.",
+          "description": "Specify the top probability, an alternative to sampling with temperature, also called nucleus sampling. The model considers the results of the tokens with top_p probability mass. So, 0.1 means only the tokens comprising the top 10% probability mass are considered. NOTE: It is recommended to use either this parameter or the Temperature parameter, not both. By default, this parameter is set to 1.",
           "tooltip": "Specify the top probability, an alternative to sampling with temperature, also called nucleus sampling. The model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. NOTE: It is recommended to use either this parameter or Temperature parameter, not both."
         },
         {
@@ -171,7 +171,7 @@
           "visible": true,
           "editable": true,
           "value": "600",
-          "description": "(Optional) Specify the maximum time (in seconds) you want to wait for the action to complete successfully. By default it is set to 600 seconds.",
+          "description": "(Optional) Specify the maximum time (in seconds) you want to wait for the action to complete successfully. By default, the timeout is set to 600 seconds.",
           "tooltip": "Specify the maximum time (in seconds) you want to wait for the action to complete successfully."
         },
         {
@@ -181,7 +181,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "(Optional) Use this to add any other inputs to the OpenAI Completions API request as a key-value pair. For example, {\n            \"seed\": 123\n          }",
+          "description": "(Optional) Specify any other inputs, as a key-value pair, to be included in the OpenAI Completions API request. For example, { \"seed\": 123 }",
           "tooltip": "Use this to add any other inputs to the OpenAI Completions API request as a key-value pair. For example, {\n            \"seed\": 123\n          }"
         }
       ],
@@ -237,7 +237,7 @@
           "visible": true,
           "editable": true,
           "value": "gpt-3.5-turbo",
-          "description": "Specify the ID of the GPT model to use for the chat completion. Currently, only gpt-3.5-turbo and gpt-3.5-turbo-0301 are supported. By default, it is set to gpt-3.5-turbo.",
+          "description": "Specify the ID of the GPT model to use for the chat completion. Currently, gpt-3.5-turbo, gpt-3.5-turbo-0301, gpt-4, and gpt-4-1106-preview are supported. By default, it is set to gpt-3.5-turbo.",
           "tooltip": "Specify the ID of the GPT model to use for the chat completion. Currently, only gpt-3.5-turbo and gpt-3.5-turbo-0301 are supported. By default, it is set to gpt-3.5-turbo."
         },
         {
@@ -247,7 +247,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the sampling temperature between 0 and 2. Higher values, such as, 0.8 make the output more random, while lower values make the output more focused and deterministic. NOTE: It is recommended to use either this parameter or the 'Top Probability' parameter, not both. By default, this parameter is set to 1.",
+          "description": "Specify the sampling temperature between 0 and 2. Higher values, such as, 0.8 make the output more random, while lower values make the output more focused and deterministic. NOTE: It is recommended to use either this parameter or the Top Probability parameter, not both. By default, this parameter is set to 1.",
           "tooltip": "Specify the sampling temperature between 0 and 2. Higher values, such as, 0.8 make the output more random, while lower values make the output more focused and deterministic. NOTE: It is recommended to use either this parameter or the 'Top Probability' parameter, not both."
         },
         {
@@ -257,7 +257,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the top probability, an alternative to sampling with temperature, also called nucleus sampling. The model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. NOTE: It is recommended to use either this parameter or the 'Temperature' parameter, not both. By default, this parameter is set to 1.",
+          "description": "Specify the top probability, an alternative to sampling with temperature, also called nucleus sampling. The model considers the results of the tokens with top_p probability mass. So, 0.1 means only the tokens comprising the top 10% probability mass are considered. NOTE: It is recommended to use either this parameter or the Temperature parameter, not both. By default, this parameter is set to 1.",
           "tooltip": "Specify the top probability, an alternative to sampling with temperature, also called nucleus sampling. The model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. NOTE: It is recommended to use either this parameter or the 'Temperature' parameter, not both."
         },
         {
@@ -278,7 +278,7 @@
           "visible": true,
           "editable": true,
           "value": "600",
-          "description": "(Optional) Specify the maximum time (in seconds) you want to wait for the action to complete successfully. By default it is set to 600 seconds.",
+          "description": "(Optional) Specify the maximum time (in seconds) you want to wait for the action to complete successfully. By default, the timeout is set to 600 seconds.",
           "tooltip": "Specify the maximum time (in seconds) you want to wait for the action to complete successfully."
         },
         {
@@ -288,7 +288,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "(Optional) Use this to add any other inputs to the OpenAI Completions API request as a key-value pair. For example, {\n            \"seed\": 123\n          },",
+          "description": "(Optional) Specify any other inputs, as a key-value pair, to be included in the OpenAI Completions API request. For example, { \"seed\": 123 }",
           "tooltip": "Use this to add any other inputs to the OpenAI Completions API request as a key-value pair. For example, {\n            \"seed\": 123\n          },"
         }
       ],
@@ -416,7 +416,7 @@
     {
       "operation": "create_assistant",
       "title": "Create Assistant",
-      "description": "Creates an assistant based on specified input parameters.",
+      "description": "Creates an assistant based on the model, name, and other input parameters that you have specified.",
       "category": "miscellaneous",
       "annotation": "create_assistant",
       "enabled": true,
@@ -428,7 +428,7 @@
           "required": true,
           "visible": true,
           "editable": true,
-          "description": "Specify the ID of model to be used to create an assistant. You can use the \"List Available Models\" action to see all of your available models.",
+          "description": "Specify the ID of model to be used to create an assistant. You can use the List Available Models action to see all the available models.",
           "tooltip": "Specify the ID of model to be used to create an assistant. You can use the \"List Available Models\" action to see all of your available models."
         },
         {
@@ -438,7 +438,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the name of assistant to be created",
+          "description": "(Optional) Specify the name of assistant to be created",
           "tooltip": "Specify the name of assistant to be created"
         },
         {
@@ -448,7 +448,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the description of assistant to be created.",
+          "description": "(Optional) Specify the description of assistant to be created.",
           "tooltip": "Specify the description of assistant to be created."
         },
         {
@@ -458,7 +458,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the system instructions that the assistant uses",
+          "description": "(Optional) Specify the system instructions that the assistant uses",
           "tooltip": "Specify the system instructions that the assistant uses"
         },
         {
@@ -468,8 +468,12 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "value": {},
-          "description": "Specify a list tools enable on assistant. There can be a maximum of 128 tools per assistant. Tools can be of types code_interpreter, file_search, or function. For example, ",
+          "value": [
+            {
+              "type": "code_interpreter"
+            }
+          ],
+          "description": "(Optional) Specify a list tools enable on assistant. There can be a maximum of 128 tools per assistant. Tools can be of types code_interpreter, file_search, or function. For example, [\n            {\n              \"type\": \"code_interpreter\"\n            }\n          ]",
           "tooltip": "Specify a list tools enable on assistant. There can be a maximum of 128 tools per assistant. Tools can be of types code_interpreter, file_search, or function"
         },
         {
@@ -493,7 +497,7 @@
               ]
             }
           },
-          "description": "(Optional) Specify the set of resources that are used by the assistant's tools. The resources are specific to the type of tools.  For example, the code_interpreter tool requires a list of file IDs, while the file_search tool requires a list of vector store IDs. For example, {\n            \"code_interpreter\": {\n              \"file_ids\": [\n                \"file_id_1\",\n                \"file_id_2\"\n              ]\n            },\n            \"file_search\": {\n              \"vector_store_ids\": [\n                \"vector_store_id_1\",\n                \"vector_store_id_2\"\n              ]\n            }\n          }",
+          "description": "(Optional) Specify the set of resources that are used by the assistant's tools. The resources are specific to the type of tools. For example, the code_interpreter tool requires a list of file IDs, while the file_search tool requires a list of vector store IDs. For example: { \"code_interpreter\": { \"file_ids\": [ \"file_id_1\", \"file_id_2\" ] }, \"file_search\": { \"vector_store_ids\": [ \"vector_store_id_1\", \"vector_store_id_2\" ] } }",
           "tooltip": "Specify the set of resources that are used by the assistant's tools. The resources are specific to the type of tools."
         },
         {
@@ -503,7 +507,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the sampling temperature between 0 and 2. Higher values, such as, 0.8 make the output more random, while lower values make the output more focused and deterministic. NOTE: It is recommended to use either this parameter or the 'Top Probability' parameter, not both. By default, this parameter is set to 1.",
+          "description": "(Optional) Specify the sampling temperature between 0 and 2. Higher values, such as, 0.8 make the output more random, while lower values make the output more focused and deterministic. NOTE: It is recommended to use either this parameter or the 'Top Probability' parameter, not both. By default, this parameter is set to 1.",
           "tooltip": "Specify the sampling temperature between 0 and 2. Higher values, such as, 0.8 make the output more random, while lower values make the output more focused and deterministic. NOTE: It is recommended to use either this parameter or the 'Top Probability' parameter, not both."
         },
         {
@@ -513,7 +517,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the top probability, an alternative to sampling with temperature, also called nucleus sampling. The model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. NOTE: It is recommended to use either this parameter or the 'Temperature' parameter, not both. By default, this parameter is set to 1.",
+          "description": "(Optional) Specify the top probability, an alternative to sampling with temperature, also called nucleus sampling. The model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. NOTE: It is recommended to use either this parameter or the 'Temperature' parameter, not both. By default, this parameter is set to 1.",
           "tooltip": "Specify the top probability, an alternative to sampling with temperature, also called nucleus sampling. The model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. NOTE: It is recommended to use either this parameter or the 'Temperature' parameter, not both."
         },
         {
@@ -525,19 +529,12 @@
           "editable": true,
           "value": {
             "creator": "Jane Doe",
-            "creation_date": "2024-05-28",
             "purpose": "Customer support",
-            "organization": "ABC Inc.",
-            "project_id": "123456789",
             "department": "Customer Service",
             "version": "1.0",
-            "tags": [
-              "customer support",
-              "AI assistant",
-              "version 1.0"
-            ]
+            "tags": "OpenAI"
           },
-          "description": "(Optional) Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. For example, {\n            \"creator\": \"Jane Doe\",\n            \"creation_date\": \"2024-05-28\",\n            \"purpose\": \"Customer support\",\n            \"organization\": \"ABC Inc.\",\n            \"project_id\": \"123456789\",\n            \"department\": \"Customer Service\",\n            \"version\": \"1.0\",\n            \"tags\": [\n              \"customer support\",\n              \"AI assistant\",\n              \"version 1.0\"\n            ]\n          }",
+          "description": "(Optional) Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. For example: { \"creator\": \"Jane Doe\", \"creation_date\": \"2024-05-28\", \"purpose\": \"Customer support\", \"organization\": \"ABC Inc.\", \"project_id\": \"123456789\", \"department\": \"Customer Service\", \"version\": \"1.0\", \"tags\": [ \"customer support\", \"AI assistant\", \"version 1.0\" ] }",
           "tooltip": "Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long."
         }
       ],
@@ -563,7 +560,7 @@
     {
       "operation": "list_assistants",
       "title": "List Assistants",
-      "description": "Retrieves a list of assistants.",
+      "description": "Retrieves a list of assistants based on the sort order, starting ID of the assistant, and other input parameters that you have specified.",
       "category": "miscellaneous",
       "annotation": "list_assistants",
       "enabled": true,
@@ -575,7 +572,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Select the order in which to retrieve the assistant list sorted by creation time. You can choose from Ascending or Descending.",
+          "description": "(Optional) Select the order in which to retrieve the assistant list sorted by creation time. You can choose from following options: Ascending Descending",
           "tooltip": "Select the order in which to retrieve the assistant list sorted by creation time.",
           "value": "Descending",
           "options": [
@@ -590,7 +587,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the assistant ID to retrieve assistants after this ID.",
+          "description": "(Optional) Specify the assistant ID to retrieve assistants after this ID.",
           "tooltip": "Specify the assistant ID to retrieve assistants after this ID."
         },
         {
@@ -600,7 +597,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the assistant ID to retrieve assistants before this ID.",
+          "description": "(Optional) Specify the assistant ID to retrieve assistants before this ID.",
           "tooltip": "Specify the assistant ID to retrieve assistants before this ID."
         },
         {
@@ -610,8 +607,8 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the maximum number of items to be retrieved. By default it retrieves 20.",
-          "tooltip": "Specify the maximum number of items to be retrieved. By default it retrieves 20.",
+          "description": "(Optional) Specify the maximum number of items to be retrieved. Default value is 20 and maximum value is 100.",
+          "tooltip": "Specify the maximum number of items to be retrieved. Default value is 20 and maximum value is 100.",
           "value": "20"
         }
       ],
@@ -642,7 +639,7 @@
     {
       "operation": "get_assistant",
       "title": "Get Assistant Details",
-      "description": "Retrieves an assistant based on assistant ID.",
+      "description": "Retrieves an assistant's details based on the assistant ID that you have specified.",
       "category": "miscellaneous",
       "annotation": "get_assistant",
       "enabled": true,
@@ -654,8 +651,8 @@
           "required": true,
           "visible": true,
           "editable": true,
-          "description": "Specify the ID of assistant to be retrieved",
-          "tooltip": "Specify the ID of assistant to be retrieved"
+          "description": "Specify the ID of assistant whose details are to be retrieved.",
+          "tooltip": "Specify the ID of assistant whose details are to be retrieved."
         }
       ],
       "output_schema": {
@@ -680,7 +677,7 @@
     {
       "operation": "update_assistant",
       "title": "Update Assistant",
-      "description": "Updates an assistant based on specified input parameters.",
+      "description": "Updates an assistant based on the model, name, and other input parameters that you have specified.",
       "category": "miscellaneous",
       "annotation": "update_assistant",
       "enabled": true,
@@ -702,7 +699,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the ID of model to be used to update an assistant. You can use the \"List Available Models\" action to see all of your available models.",
+          "description": "(Optional) Specify the ID of model to be used to update an assistant. You can use the \"List Available Models\" action to see all of your available models.",
           "tooltip": "Specify the ID of model to be used to update an assistant. You can use the \"List Available Models\" action to see all of your available models."
         },
         {
@@ -712,7 +709,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the name of assistant to be updated.",
+          "description": "(Optional) Specify the name of assistant to be updated.",
           "tooltip": "Specify the name of assistant to be updated."
         },
         {
@@ -722,7 +719,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the description of assistant to be updated.",
+          "description": "(Optional) Specify the description of assistant to be updated.",
           "tooltip": "Specify the description of assistant to be updated."
         },
         {
@@ -732,7 +729,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the system instructions that the assistant uses",
+          "description": "(Optional) Specify the system instructions that the assistant uses",
           "tooltip": "Specify the system instructions that the assistant uses"
         },
         {
@@ -742,8 +739,13 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify a list tools enable on assistant. There can be a maximum of 128 tools per assistant. Tools can be of types code_interpreter, file_search, or function, For example, {\n            \"code_interpreter\": {\n              \"file_ids\": [\n                \"file_id_1\",\n                \"file_id_2\"\n              ]\n            },\n            \"file_search\": {\n              \"vector_store_ids\": [\n                \"vector_store_id_1\",\n                \"vector_store_id_2\"\n              ]\n            }\n          }",
-          "tooltip": "Specify the system instructions that the assistant uses"
+          "value": [
+            {
+              "type": "code_interpreter"
+            }
+          ],
+          "description": "(Optional) Specify a list tools enable on assistant. There can be a maximum of 128 tools per assistant. Tools can be of types code_interpreter, file_search, or function, For example: [\n            {\n              \"type\": \"code_interpreter\"\n            }\n          ]",
+          "tooltip": "Specify a list tools enable on assistant. There can be a maximum of 128 tools per assistant. Tools can be of types code_interpreter, file_search, or function."
         },
         {
           "title": "Tool Resources",
@@ -766,7 +768,7 @@
               ]
             }
           },
-          "description": "(Optional) Specify the set of resources that are used by the assistant's tools. The resources are specific to the type of tools.  For example, the code_interpreter tool requires a list of file IDs, while the file_search tool requires a list of vector store IDs. For example, {\n            \"code_interpreter\": {\n              \"file_ids\": [\n                \"file_id_1\",\n                \"file_id_2\"\n              ]\n            },\n            \"file_search\": {\n              \"vector_store_ids\": [\n                \"vector_store_id_1\",\n                \"vector_store_id_2\"\n              ]\n            }\n          }",
+          "description": "(Optional) Specify the set of resources that are used by the assistant's tools. The resources are specific to the type of tools. For example, the code_interpreter tool requires a list of file IDs, while the file_search tool requires a list of vector store IDs. For example: { \"code_interpreter\": { \"file_ids\": [ \"file_id_1\", \"file_id_2\" ] }, \"file_search\": { \"vector_store_ids\": [ \"vector_store_id_1\", \"vector_store_id_2\" ] } }",
           "tooltip": "Specify the set of resources that are used by the assistant's tools. The resources are specific to the type of tools."
         },
         {
@@ -776,7 +778,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the sampling temperature between 0 and 2. Higher values, such as, 0.8 make the output more random, while lower values make the output more focused and deterministic. NOTE: It is recommended to use either this parameter or the 'Top Probability' parameter, not both. By default, this parameter is set to 1.",
+          "description": "(Optional) Specify the sampling temperature between 0 and 2. Higher values, such as, 0.8 make the output more random, while lower values make the output more focused and deterministic. NOTE: It is recommended to use either this parameter or the 'Top Probability' parameter, not both. By default, this parameter is set to 1.",
           "tooltip": "Specify the sampling temperature between 0 and 2. Higher values, such as, 0.8 make the output more random, while lower values make the output more focused and deterministic. NOTE: It is recommended to use either this parameter or the 'Top Probability' parameter, not both."
         },
         {
@@ -786,7 +788,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the top probability, an alternative to sampling with temperature, also called nucleus sampling. The model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. NOTE: It is recommended to use either this parameter or the 'Temperature' parameter, not both. By default, this parameter is set to 1.",
+          "description": "(Optional) Specify the top probability, an alternative to sampling with temperature, also called nucleus sampling. The model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. NOTE: It is recommended to use either this parameter or the 'Temperature' parameter, not both. By default, this parameter is set to 1.",
           "tooltip": "Specify the top probability, an alternative to sampling with temperature, also called nucleus sampling. The model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. NOTE: It is recommended to use either this parameter or the 'Temperature' parameter, not both."
         },
         {
@@ -798,19 +800,12 @@
           "editable": true,
           "value": {
             "creator": "Jane Doe",
-            "creation_date": "2024-05-28",
             "purpose": "Customer support",
-            "organization": "ABC Inc.",
-            "project_id": "123456789",
             "department": "Customer Service",
             "version": "1.0",
-            "tags": [
-              "customer support",
-              "AI assistant",
-              "version 1.0"
-            ]
+            "tags": "OpenAI"
           },
-          "description": "(Optional) Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. For example, {\n            \"creator\": \"Jane Doe\",\n            \"creation_date\": \"2024-05-28\",\n            \"purpose\": \"Customer support\",\n            \"organization\": \"ABC Inc.\",\n            \"project_id\": \"123456789\",\n            \"department\": \"Customer Service\",\n            \"version\": \"1.0\",\n            \"tags\": [\n              \"customer support\",\n              \"AI assistant\",\n              \"version 1.0\"\n            ]\n          }",
+          "description": "(Optional) Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. For example: { \"creator\": \"Jane Doe\", \"creation_date\": \"2024-05-28\", \"purpose\": \"Customer support\", \"organization\": \"ABC Inc.\", \"project_id\": \"123456789\", \"department\": \"Customer Service\", \"version\": \"1.0\", \"tags\": [ \"customer support\", \"AI assistant\", \"version 1.0\" ] }",
           "tooltip": "Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long."
         }
       ],
@@ -841,7 +836,7 @@
     {
       "operation": "delete_assistant",
       "title": "Delete Assistant",
-      "description": "Deletes an assistant based on assistant ID.",
+      "description": "Deletes an assistant based on the assistant ID that you have specified.",
       "category": "miscellaneous",
       "annotation": "delete_assistant",
       "enabled": true,
@@ -853,7 +848,7 @@
           "required": true,
           "visible": true,
           "editable": true,
-          "description": "Specify the ID of assistant to be deleted",
+          "description": "Specify the ID of assistant to be deleted.",
           "tooltip": "Specify the ID of assistant to be deleted"
         }
       ],
@@ -866,7 +861,7 @@
     {
       "operation": "create_thread",
       "title": "Create Thread",
-      "description": "Creates a thread based on the specified input parameters.",
+      "description": "Creates a thread based on the messages, tool resources in JSON, and other input parameters that you have specified.",
       "category": "miscellaneous",
       "annotation": "get_thread",
       "enabled": true,
@@ -878,7 +873,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the list of messages to start the thread. For example, [\n            {\n              \"role\": \"\",\n              \"content\": \"\"\n            }\n          ]",
+          "description": "(Optional) Specify the list of messages to start the thread. For example: [ { \"role\": \"\", \"content\": \"\" } ]",
           "tooltip": "Specify the list of messages to start the thread.",
           "value": [
             {
@@ -908,7 +903,7 @@
               ]
             }
           },
-          "description": "(Optional) Specify the set of resources are made available to the assistant's tools in this thread. The resources are specific to the type of tool. For example, the code_interpreter tool requires a list of file IDs, while the file_search tool requires a list of vector store IDs. For example, {\n            \"code_interpreter\": {\n              \"file_ids\": [\n                \"file_id_1\",\n                \"file_id_2\"\n              ]\n            },\n            \"file_search\": {\n              \"vector_store_ids\": [\n                \"vector_store_id_1\",\n                \"vector_store_id_2\"\n              ]\n            }\n          }",
+          "description": "(Optional) Specify the set of resources are made available to the assistant's tools in this thread. The resources are specific to the type of tool. For example, the code_interpreter tool requires a list of file IDs, while the file_search tool requires a list of vector store IDs. For example: { \"code_interpreter\": { \"file_ids\": [ \"file_id_1\", \"file_id_2\" ] }, \"file_search\": { \"vector_store_ids\": [ \"vector_store_id_1\", \"vector_store_id_2\" ] } }",
           "tooltip": "Specify the set of resources are made available to the assistant's tools in this thread. The resources are specific to the type of tool. For example, the code_interpreter tool requires a list of file IDs, while the file_search tool requires a list of vector store IDs."
         },
         {
@@ -920,19 +915,12 @@
           "editable": true,
           "value": {
             "creator": "Jane Doe",
-            "creation_date": "2024-05-28",
             "purpose": "Customer support",
-            "organization": "ABC Inc.",
-            "project_id": "123456789",
             "department": "Customer Service",
             "version": "1.0",
-            "tags": [
-              "customer support",
-              "AI assistant",
-              "version 1.0"
-            ]
+            "tags": "OpenAI"
           },
-          "description": "(Optional) Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. For example, {\n            \"creator\": \"Jane Doe\",\n            \"creation_date\": \"2024-05-28\",\n            \"purpose\": \"Customer support\",\n            \"organization\": \"ABC Inc.\",\n            \"project_id\": \"123456789\",\n            \"department\": \"Customer Service\",\n            \"version\": \"1.0\",\n            \"tags\": [\n              \"customer support\",\n              \"AI assistant\",\n              \"version 1.0\"\n            ]\n          }",
+          "description": "(Optional) Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. For example: { \"creator\": \"Jane Doe\", \"creation_date\": \"2024-05-28\", \"purpose\": \"Customer support\", \"organization\": \"ABC Inc.\", \"project_id\": \"123456789\", \"department\": \"Customer Service\", \"version\": \"1.0\", \"tags\": [ \"customer support\", \"AI assistant\", \"version 1.0\" ] }",
           "tooltip": "Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long."
         }
       ],
@@ -947,7 +935,7 @@
     {
       "operation": "get_thread",
       "title": "Get Thread Details",
-      "description": "Retrieves a thread based on the thread ID.",
+      "description": "Retrieves a thread's details based on the thread ID that you have specified.",
       "category": "miscellaneous",
       "annotation": "get_thread",
       "enabled": true,
@@ -959,8 +947,8 @@
           "required": true,
           "visible": true,
           "editable": true,
-          "description": "Specify the ID of thread to be retrieved",
-          "tooltip": "Specify the ID of thread to be retrieved"
+          "description": "Specify the ID of thread to be retrieved.",
+          "tooltip": "Specify the ID of thread to be retrieved."
         }
       ],
       "output_schema": {
@@ -978,7 +966,7 @@
     {
       "operation": "update_thread",
       "title": "Update Thread",
-      "description": "Updates a thread based on the specified input parameters.",
+      "description": "Updates a thread based on the messages, tool resources in JSON, and other input parameters that you have specified.",
       "category": "miscellaneous",
       "annotation": "update_thread",
       "enabled": true,
@@ -1014,7 +1002,7 @@
               ]
             }
           },
-          "description": "(Optional) Specify the set of resources are made available to the assistant's tools in this thread. The resources are specific to the type of tool. For example, the code_interpreter tool requires a list of file IDs, while the file_search tool requires a list of vector store IDs. For example, {\n            \"code_interpreter\": {\n              \"file_ids\": [\n                \"file_id_1\",\n                \"file_id_2\"\n              ]\n            },\n            \"file_search\": {\n              \"vector_store_ids\": [\n                \"vector_store_id_1\",\n                \"vector_store_id_2\"\n              ]\n            }\n          }",
+          "description": "(Optional) Specify the set of resources are made available to the assistant's tools in this thread. The resources are specific to the type of tool. For example, the code_interpreter tool requires a list of file IDs, while the file_search tool requires a list of vector store IDs. For example: { \"code_interpreter\": { \"file_ids\": [ \"file_id_1\", \"file_id_2\" ] }, \"file_search\": { \"vector_store_ids\": [ \"vector_store_id_1\", \"vector_store_id_2\" ] } }",
           "tooltip": "Specify the set of resources are made available to the assistant's tools in this thread. The resources are specific to the type of tool. For example, the code_interpreter tool requires a list of file IDs, while the file_search tool requires a list of vector store IDs."
         },
         {
@@ -1028,7 +1016,7 @@
             "modified": "true",
             "user": "abc123"
           },
-          "description": "(Optional) Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. For example, {\n    \"modified\": \"true\",\n    \"user\": \"abc123\"\n  }",
+          "description": "(Optional) Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. For example { \"modified\": \"true\", \"user\": \"abc123\" }",
           "tooltip": "Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. "
         }
       ],
@@ -1046,7 +1034,7 @@
     {
       "operation": "delete_thread",
       "title": "Delete Thread",
-      "description": "Deletes a thread based on thread ID.",
+      "description": "Deletes a thread based on the thread ID that you have specified.",
       "category": "miscellaneous",
       "annotation": "delete_thread",
       "enabled": true,
@@ -1058,7 +1046,7 @@
           "required": true,
           "visible": true,
           "editable": true,
-          "description": "Specify the ID of thread to be deleted",
+          "description": "Specify the ID of thread to be deleted.",
           "tooltip": "Specify the ID of thread to be deleted"
         }
       ],
@@ -1071,7 +1059,7 @@
     {
       "operation": "create_thread_message",
       "title": "Create Thread Message",
-      "description": "Creates a message based on the specified input parameters.",
+      "description": "Creates a message in a thread based on the thread ID, role, and other input parameters that you have specified.",
       "category": "miscellaneous",
       "annotation": "create_thread_message",
       "enabled": true,
@@ -1083,8 +1071,8 @@
           "required": true,
           "visible": true,
           "editable": true,
-          "description": "Specify the ID of the thread to create a message for.",
-          "tooltip": "Specify the ID of the thread to create a message for."
+          "description": "Specify the ID of the thread for which to create a message.",
+          "tooltip": "Specify the ID of the thread for which to create a message."
         },
         {
           "title": "Role",
@@ -1110,13 +1098,10 @@
           "value": [
             {
               "type": "text",
-              "text": {
-                "value": "How does AI work? Explain it in simple terms.",
-                "annotations": []
-              }
+              "text": "How does AI work? Explain it in simple terms."
             }
           ],
-          "description": "Specify the message content in list format. Message content can be of type text, image_url or image_file. For example, [\n    {\n      \"type\": \"text\",\n      \"text\": {\n        \"value\": \"How does AI work? Explain it in simple terms.\",\n        \"annotations\": []\n      }\n    }\n  ],\n  Note: Image types are only supported on Vision-compatible models.",
+          "description": "Specify the message content in list format. Message content can be of type text, image_url or image_file. For example: [ { \"type\": \"text\", \"text\": { \"value\": \"How does AI work? Explain it in simple terms.\", \"annotations\": [] } } ] NOTE: Image types are only supported on vision-compatible models.",
           "tooltip": "Specify the message content in list format. Message content can be of type text, image_url or image_file."
         },
         {
@@ -1126,8 +1111,17 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "value": [],
-          "description": "Specify the list of files attached to the message, and the tools they should be added to.",
+          "value": [
+            {
+              "file_id": "",
+              "tools": [
+                {
+                  "type": "code_interpreter"
+                }
+              ]
+            }
+          ],
+          "description": "(Optional) Specify the list of files attached to the message, and the tools they should be added to.",
           "tooltip": "Specify the list of files attached to the message, and the tools they should be added to."
         },
         {
@@ -1139,19 +1133,12 @@
           "editable": true,
           "value": {
             "creator": "Jane Doe",
-            "creation_date": "2024-05-28",
             "purpose": "Customer support",
-            "organization": "ABC Inc.",
-            "project_id": "123456789",
             "department": "Customer Service",
             "version": "1.0",
-            "tags": [
-              "customer support",
-              "AI assistant",
-              "version 1.0"
-            ]
+            "tags": "OpenAI"
           },
-          "description": "(Optional) Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. For example, {\n            \"creator\": \"Jane Doe\",\n            \"creation_date\": \"2024-05-28\",\n            \"purpose\": \"Customer support\",\n            \"organization\": \"ABC Inc.\",\n            \"project_id\": \"123456789\",\n            \"department\": \"Customer Service\",\n            \"version\": \"1.0\",\n            \"tags\": [\n              \"customer support\",\n              \"AI assistant\",\n              \"version 1.0\"\n            ]\n          }",
+          "description": "(Optional) Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. For example: { \"creator\": \"Jane Doe\", \"creation_date\": \"2024-05-28\", \"purpose\": \"Customer support\", \"organization\": \"ABC Inc.\", \"project_id\": \"123456789\", \"department\": \"Customer Service\", \"version\": \"1.0\", \"tags\": [ \"customer support\", \"AI assistant\", \"version 1.0\" ] }",
           "tooltip": "Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long."
         }
       ],
@@ -1179,7 +1166,7 @@
     {
       "operation": "list_thread_messages",
       "title": "List Thread Messages",
-      "description": "Retrieves a list of messages for specified thread based on the specified input parameters.",
+      "description": "Retrieves a list of messages based on the thread ID, role ID, and other input parameters that you have specified.",
       "category": "miscellaneous",
       "annotation": "list_thread_messages",
       "enabled": true,
@@ -1201,7 +1188,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the ID of the run generated for the messages to be retrieved.",
+          "description": "(Optional) Specify the ID of the run generated for the messages to be retrieved.",
           "tooltip": "Specify the ID of the run generated for the messages to be retrieved."
         },
         {
@@ -1211,7 +1198,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Select the order in which to retrieve the message list sorted by creation time. You can choose from Ascending or Descending.",
+          "description": "(Optional) Select the order in which to retrieve the message list sorted by creation time. You can choose from Ascending or Descending.",
           "tooltip": "Select the order in which to retrieve the message list sorted by creation time.",
           "value": "Descending",
           "options": [
@@ -1226,7 +1213,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the message ID to retrieve messages after this ID.",
+          "description": "(Optional) Specify the message ID to retrieve messages after this ID.",
           "tooltip": "Specify the message ID to retrieve messages after this ID."
         },
         {
@@ -1236,7 +1223,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the message ID to retrieve messages before this ID.",
+          "description": "(Optional) Specify the message ID to retrieve messages before this ID.",
           "tooltip": "Specify the message ID to retrieve messages before this ID."
         },
         {
@@ -1246,8 +1233,8 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the maximum number of items to be retrieved. By default it retrieves 20.",
-          "tooltip": "Specify the maximum number of items to be retrieved. By default it retrieves 20.",
+          "description": "(Optional) Specify the maximum number of items to be retrieved. Default value is 20 and maximum value is 100.",
+          "tooltip": "Specify the maximum number of items to be retrieved. Default value is 20 and maximum value is 100.",
           "value": "20"
         }
       ],
@@ -1283,7 +1270,7 @@
     {
       "operation": "get_thread_message",
       "title": "Get Thread Message Details",
-      "description": "Retrieves a specific message based on Thread ID and Message ID.",
+      "description": "Retrieves a message based on the thread ID and message ID that you have specified.",
       "category": "miscellaneous",
       "annotation": "get_thread_message",
       "enabled": true,
@@ -1333,7 +1320,7 @@
     {
       "operation": "update_thread_message",
       "title": "Update Thread Message",
-      "description": "Updates a message in a thread based on the specified input parameters.",
+      "description": "Updates a message in a thread based on the thread ID, message ID, and other input parameters that you have specified.",
       "category": "miscellaneous",
       "annotation": "update_thread_message",
       "enabled": true,
@@ -1345,8 +1332,8 @@
           "required": true,
           "visible": true,
           "editable": true,
-          "description": "Specify the ID of the thread to create a message for.",
-          "tooltip": "Specify the ID of the thread to create a message for."
+          "description": "Specify the ID of the thread to update a message for.",
+          "tooltip": "Specify the ID of the thread to update a message for."
         },
         {
           "title": "Message ID",
@@ -1366,20 +1353,10 @@
           "visible": true,
           "editable": true,
           "value": {
-            "creator": "Jane Doe",
-            "creation_date": "2024-05-28",
-            "purpose": "Customer support",
-            "organization": "ABC Inc.",
-            "project_id": "123456789",
-            "department": "Customer Service",
-            "version": "1.0",
-            "tags": [
-              "customer support",
-              "AI assistant",
-              "version 1.0"
-            ]
+            "modified": "true",
+            "user": "abc123"
           },
-          "description": "(Optional) Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. For example, {\n            \"creator\": \"Jane Doe\",\n            \"creation_date\": \"2024-05-28\",\n            \"purpose\": \"Customer support\",\n            \"organization\": \"ABC Inc.\",\n            \"project_id\": \"123456789\",\n            \"department\": \"Customer Service\",\n            \"version\": \"1.0\",\n            \"tags\": [\n              \"customer support\",\n              \"AI assistant\",\n              \"version 1.0\"\n            ]\n          }",
+          "description": "(Optional) Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. For example: { \"creator\": \"Jane Doe\", \"creation_date\": \"2024-05-28\", \"purpose\": \"Customer support\", \"organization\": \"ABC Inc.\", \"project_id\": \"123456789\", \"department\": \"Customer Service\", \"version\": \"1.0\", \"tags\": [ \"customer support\", \"AI assistant\", \"version 1.0\" ] }",
           "tooltip": "Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long."
         }
       ],
@@ -1410,7 +1387,7 @@
     {
       "operation": "delete_thread_message",
       "title": "Delete Thread Message",
-      "description": "Deletes a message based on Thread ID and Message ID.",
+      "description": "Deletes a message based on the thread ID and message ID that you have specified.",
       "category": "miscellaneous",
       "annotation": "delete_thread_message",
       "enabled": true,
@@ -1445,7 +1422,7 @@
     {
       "operation": "create_run",
       "title": "Create Run",
-      "description": "Creates a run based on specified input parameters.",
+      "description": "Creates a run based on thread ID, assistant ID, and other input parameters that you have specified.",
       "category": "miscellaneous",
       "annotation": "create_run",
       "enabled": true,
@@ -1477,7 +1454,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the ID of model to be used to execute this run. If a value is provided here, it will override the model associated with the assistant. If not, the model associated with the assistant will be used. You can use the \"List Available Models\" action to see all of your available models.",
+          "description": "(Optional) Specify the ID of model to be used to execute this run. If a value is provided here, it will override the model associated with the assistant. If not, the model associated with the assistant will be used. You can use the \"List Available Models\" action to see all of your available models.",
           "tooltip": "Specify the ID of model to be used to create a run. If a value is provided here, it will override the model associated with the assistant. If not, the model associated with the assistant will be used. You can use the \"List Available Models\" action to see all of your available models."
         },
         {
@@ -1487,7 +1464,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the system instructions that the assistant uses. Overrides the instructions of the assistant. This is useful for modifying the behavior on a per-run basis.",
+          "description": "(Optional) Specify the system instructions that the assistant uses. Overrides the instructions of the assistant. This is useful for modifying the behavior on a per-run basis.",
           "tooltip": "Specify the system instructions that the run uses. Overrides the instructions of the assistant. This is useful for modifying the behavior on a per-run basis."
         },
         {
@@ -1497,7 +1474,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the additional instructions that the assistant uses after the assistant instruction. This is useful for modifying the behavior on a per-run basis without overriding other instructions.",
+          "description": "(Optional) Specify the additional instructions that the assistant uses after the assistant instruction. This is useful for modifying the behavior on a per-run basis without overriding other instructions.",
           "tooltip": "Specify the additional instructions that the run uses after the assistant instruction. This is useful for modifying the behavior on a per-run basis without overriding other instructions."
         },
         {
@@ -1507,7 +1484,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the list of additional messages to the thread before creating the run.. For example, [\n            {\n              \"role\": \"\",\n              \"content\": \"\"\n            }\n          ]",
+          "description": "(Optional) Specify the list of additional messages to the thread before creating the run.. For example: [ { \"role\": \"\", \"content\": \"\" } ]",
           "tooltip": "Specify the list of additional messages to the thread before creating the run.. For example, [\n            {\n              \"role\": \"\",\n              \"content\": \"\"\n            }\n          ]",
           "value": [
             {
@@ -1523,7 +1500,12 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify a list tools assistant can use for this run. Overrides the tools of the assistant if provided. This is useful for modifying the behavior on a per-run basis.",
+          "value": [
+            {
+              "type": "code_interpreter"
+            }
+          ],
+          "description": "(Optional) Specify a list tools assistant can use for this run. Overrides the tools of the assistant if provided. This is useful for modifying the behavior on a per-run basis. For example, [\n            {\n              \"type\": \"code_interpreter\"\n            }\n          ]",
           "tooltip": "Specify a list tools assistant can use for this run. Overrides the tools of the assistant if provided. This is useful for modifying the behavior on a per-run basis."
         },
         {
@@ -1533,7 +1515,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the sampling temperature between 0 and 2. Higher values, such as, 0.8 make the output more random, while lower values make the output more focused and deterministic. NOTE: It is recommended to use either this parameter or the 'Top Probability' parameter, not both. By default, this parameter is set to 1.",
+          "description": "(Optional) Specify the sampling temperature between 0 and 2. Higher values, such as, 0.8 make the output more random, while lower values make the output more focused and deterministic. NOTE: It is recommended to use either this parameter or the 'Top Probability' parameter, not both. By default, this parameter is set to 1.",
           "tooltip": "Specify the sampling temperature between 0 and 2. Higher values, such as, 0.8 make the output more random, while lower values make the output more focused and deterministic. NOTE: It is recommended to use either this parameter or the 'Top Probability' parameter, not both."
         },
         {
@@ -1543,7 +1525,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the top probability, an alternative to sampling with temperature, also called nucleus sampling. The model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. NOTE: It is recommended to use either this parameter or the 'Temperature' parameter, not both. By default, this parameter is set to 1.",
+          "description": "(Optional) Specify the top probability, an alternative to sampling with temperature, also called nucleus sampling. The model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. NOTE: It is recommended to use either this parameter or the 'Temperature' parameter, not both. By default, this parameter is set to 1.",
           "tooltip": "Specify the top probability, an alternative to sampling with temperature, also called nucleus sampling. The model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. NOTE: It is recommended to use either this parameter or the 'Temperature' parameter, not both."
         },
         {
@@ -1555,19 +1537,12 @@
           "editable": true,
           "value": {
             "creator": "Jane Doe",
-            "creation_date": "2024-05-28",
             "purpose": "Customer support",
-            "organization": "ABC Inc.",
-            "project_id": "123456789",
             "department": "Customer Service",
             "version": "1.0",
-            "tags": [
-              "customer support",
-              "AI run",
-              "version 1.0"
-            ]
+            "tags": "OpenAI"
           },
-          "description": "(Optional) Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. For example, {\n            \"creator\": \"Jane Doe\",\n            \"creation_date\": \"2024-05-28\",\n            \"purpose\": \"Customer support\",\n            \"organization\": \"ABC Inc.\",\n            \"project_id\": \"123456789\",\n            \"department\": \"Customer Service\",\n            \"version\": \"1.0\",\n            \"tags\": [\n              \"customer support\",\n              \"AI run\",\n              \"version 1.0\"\n            ]\n          }",
+          "description": "(Optional) Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. For example: { \"creator\": \"Jane Doe\", \"creation_date\": \"2024-05-28\", \"purpose\": \"Customer support\", \"organization\": \"ABC Inc.\", \"project_id\": \"123456789\", \"department\": \"Customer Service\", \"version\": \"1.0\", \"tags\": [ \"customer support\", \"AI run\", \"version 1.0\" ] }",
           "tooltip": "Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long."
         },
         {
@@ -1577,7 +1552,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "(Optional) Specify the maximum number of prompt tokens  that may be used over the course of the run. The run will make a best effort to use only the number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of completion tokens specified, the run will end with status incomplete. See incomplete_details for more info.",
+          "description": "(Optional) Specify the maximum number of prompt tokens that may be used over the course of the run. The run will make a best effort to use only the number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of completion tokens specified, the run will end with status incomplete. See incomplete_details for more info.",
           "tooltip": "Specify the maximum number of prompt tokens  that may be used over the course of the run. The run will make a best effort to use only the number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of completion tokens specified, the run will end with status incomplete. See incomplete_details for more info."
         },
         {
@@ -1587,8 +1562,8 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "(Optional) Use this to add any other inputs to the OpenAI Completions API request as a key-value pair. For example, {\n            \"tool_choice\": auto\n          }",
-          "tooltip": "Use this to add any other inputs to the OpenAI Completions API request as a key-value pair. For example, {\n            \"tool_choice\": auto\n          }"
+          "description": "(Optional) Use this to add any other inputs to the OpenAI Completions API request as a key-value pair. For example: { \"tool_choice\": \"auto\" }",
+          "tooltip": "Use this to add any other inputs to the OpenAI Completions API request as a key-value pair. For example, {\n            \"tool_choice\": \"auto\"\n          }"
         }
       ],
       "output_schema": {
@@ -1629,7 +1604,7 @@
     {
       "operation": "list_runs",
       "title": "List Runs",
-      "description": "Retrieves a list of runs belonging to a thread.",
+      "description": "Retrieves a list of runs belonging to a thread based on thread ID, sort order, and other input parameters that you have specified.",
       "category": "miscellaneous",
       "annotation": "list_runs",
       "enabled": true,
@@ -1651,7 +1626,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Select the order in which to retrieve the run list sorted by creation time. You can choose from Ascending or Descending.",
+          "description": "(Optional) Select the order in which to retrieve the run list sorted by creation time. You can choose from Ascending or Descending.",
           "tooltip": "Select the order in which to retrieve the run list sorted by creation time.",
           "value": "Descending",
           "options": [
@@ -1666,7 +1641,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the run ID to retrieve runs after this ID.",
+          "description": "(Optional) Specify the run ID to retrieve runs after this ID.",
           "tooltip": "Specify the run ID to retrieve runs after this ID."
         },
         {
@@ -1676,7 +1651,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the run ID to retrieve runs before this ID.",
+          "description": "(Optional) Specify the run ID to retrieve runs before this ID.",
           "tooltip": "Specify the run ID to retrieve runs before this ID."
         },
         {
@@ -1686,8 +1661,8 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the maximum number of items to be retrieved. By default it retrieves 20.",
-          "tooltip": "Specify the maximum number of items to be retrieved. By default it retrieves 20.",
+          "description": "(Optional) Specify the maximum number of items to be retrieved. Default value is 20 and maximum value is 100.",
+          "tooltip": "Specify the maximum number of items to be retrieved. Default value is 20 and maximum value is 100.",
           "value": "20"
         }
       ],
@@ -1746,7 +1721,7 @@
     {
       "operation": "get_run",
       "title": "Get Run Details",
-      "description": "Retrieves a specific run for a thread.",
+      "description": "Retrieves a specific run for a thread based on the thread ID and run ID that you have specified.",
       "category": "miscellaneous",
       "annotation": "get_run",
       "enabled": true,
@@ -1758,7 +1733,7 @@
           "required": true,
           "visible": true,
           "editable": true,
-          "description": "Specify the ID of thread whose run is to be retrieved",
+          "description": "Specify the ID of thread whose run is to be retrieved.",
           "tooltip": "Specify the ID of thread whose run is to be retrieved"
         },
         {
@@ -1768,7 +1743,7 @@
           "required": true,
           "visible": true,
           "editable": true,
-          "description": "Specify the ID of run to be retrieved",
+          "description": "Specify the ID of run to be retrieved.",
           "tooltip": "Specify the ID of run to be retrieved"
         }
       ],
@@ -1814,7 +1789,7 @@
     {
       "operation": "create_thread_and_run",
       "title": "Create Thread and Run",
-      "description": "Creates a thread and run in one request.",
+      "description": "Creates a thread and run in one request based on the assistant ID, thread, and other input parameters that you have specified.",
       "category": "miscellaneous",
       "annotation": "create_thread_and_run",
       "enabled": true,
@@ -1836,7 +1811,7 @@
           "required": true,
           "visible": true,
           "editable": true,
-          "description": "Specify the thread object to create and run. For example, {\n    \"messages\": [\n      {\"role\": \"user\", \"content\": \"Explain deep learning to a 5 year old.\"}\n    ]\n  }",
+          "description": "Specify the thread object to create and run. For example: { \"messages\": [ { \"role\": \"user\", \"content\": \"Explain deep learning to a 5 year old.\" } ] }",
           "tooltip": "Specify the thread object to create and run.",
           "value": {
             "messages": [
@@ -1854,7 +1829,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the ID of model to be used to execute this run. If a value is provided here, it will override the model associated with the assistant. If not, the model associated with the assistant will be used. You can use the \"List Available Models\" action to see all of your available models.",
+          "description": "(Optional) Specify the ID of model to be used to execute this run. If a value is provided here, it will override the model associated with the assistant. If not, the model associated with the assistant will be used. You can use the \"List Available Models\" action to see all of your available models.",
           "tooltip": "Specify the ID of model to be used to create a run. If a value is provided here, it will override the model associated with the assistant. If not, the model associated with the assistant will be used. You can use the \"List Available Models\" action to see all of your available models."
         },
         {
@@ -1864,7 +1839,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the system instructions that the assistant uses. Overrides the instructions of the assistant. This is useful for modifying the behavior on a per-run basis.",
+          "description": "(Optional) Specify the system instructions that the assistant uses. Overrides the instructions of the assistant. This is useful for modifying the behavior on a per-run basis.",
           "tooltip": "Specify the system instructions that the run uses. Overrides the instructions of the assistant. This is useful for modifying the behavior on a per-run basis."
         },
         {
@@ -1874,7 +1849,12 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify a list tools assistant can use for this run. Overrides the tools of the assistant if provided. This is useful for modifying the behavior on a per-run basis.",
+          "value": [
+            {
+              "type": "code_interpreter"
+            }
+          ],
+          "description": "(Optional) Specify a list tools assistant can use for this run. Overrides the tools of the assistant if provided. This is useful for modifying the behavior on a per-run basis.",
           "tooltip": "Specify a list tools assistant can use for this run. Overrides the tools of the assistant if provided. This is useful for modifying the behavior on a per-run basis."
         },
         {
@@ -1898,7 +1878,7 @@
               ]
             }
           },
-          "description": "(Optional) Specify the set of resources that are used by the assistant's tools. The resources are specific to the type of tools.  For example, the code_interpreter tool requires a list of file IDs, while the file_search tool requires a list of vector store IDs. For example, \"value\": {\n            \"code_interpreter\": {\n              \"file_ids\": [\n                \"file_id_1\",\n                \"file_id_2\"\n              ]\n            },\n            \"file_search\": {\n              \"vector_store_ids\": [\n                \"vector_store_id_1\",\n                \"vector_store_id_2\"\n              ]\n            }\n          },",
+          "description": "(Optional) Specify the set of resources that are used by the assistant's tools. The resources are specific to the type of tools. For example, the code_interpreter tool requires a list of file IDs, while the file_search tool requires a list of vector store IDs. For example: { \"value\": { \"code_interpreter\": { \"file_ids\": [ \"file_id_1\", \"file_id_2\" ] }, \"file_search\": { \"vector_store_ids\": [ \"vector_store_id_1\", \"vector_store_id_2\" ] } } }",
           "tooltip": "Specify the set of resources that are used by the assistant's tools. The resources are specific to the type of tools."
         },
         {
@@ -1910,19 +1890,12 @@
           "editable": true,
           "value": {
             "creator": "Jane Doe",
-            "creation_date": "2024-05-28",
             "purpose": "Customer support",
-            "organization": "ABC Inc.",
-            "project_id": "123456789",
             "department": "Customer Service",
             "version": "1.0",
-            "tags": [
-              "customer support",
-              "AI run",
-              "version 1.0"
-            ]
+            "tags": "OpenAI"
           },
-          "description": "(Optional) Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. For example, {\n            \"creator\": \"Jane Doe\",\n            \"creation_date\": \"2024-05-28\",\n            \"purpose\": \"Customer support\",\n            \"organization\": \"ABC Inc.\",\n            \"project_id\": \"123456789\",\n            \"department\": \"Customer Service\",\n            \"version\": \"1.0\",\n            \"tags\": [\n              \"customer support\",\n              \"AI run\",\n              \"version 1.0\"\n            ]\n          }",
+          "description": "(Optional) Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. For example: { \"creator\": \"Jane Doe\", \"creation_date\": \"2024-05-28\", \"purpose\": \"Customer support\", \"organization\": \"ABC Inc.\", \"project_id\": \"123456789\", \"department\": \"Customer Service\", \"version\": \"1.0\", \"tags\": \"OpenAI\" }",
           "tooltip": "Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long."
         },
         {
@@ -1932,7 +1905,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the sampling temperature between 0 and 2. Higher values, such as, 0.8 make the output more random, while lower values make the output more focused and deterministic. NOTE: It is recommended to use either this parameter or the 'Top Probability' parameter, not both. By default, this parameter is set to 1.",
+          "description": "(Optional) Specify the sampling temperature between 0 and 2. Higher values, such as, 0.8 make the output more random, while lower values make the output more focused and deterministic. NOTE: It is recommended to use either this parameter or the 'Top Probability' parameter, not both. By default, this parameter is set to 1.",
           "tooltip": "Specify the sampling temperature between 0 and 2. Higher values, such as, 0.8 make the output more random, while lower values make the output more focused and deterministic. NOTE: It is recommended to use either this parameter or the 'Top Probability' parameter, not both."
         },
         {
@@ -1942,7 +1915,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the top probability, an alternative to sampling with temperature, also called nucleus sampling. The model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. NOTE: It is recommended to use either this parameter or the 'Temperature' parameter, not both. By default, this parameter is set to 1.",
+          "description": "(Optional) Specify the top probability, an alternative to sampling with temperature, also called nucleus sampling. The model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. NOTE: It is recommended to use either this parameter or the 'Temperature' parameter, not both. By default, this parameter is set to 1.",
           "tooltip": "Specify the top probability, an alternative to sampling with temperature, also called nucleus sampling. The model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered. NOTE: It is recommended to use either this parameter or the 'Temperature' parameter, not both."
         },
         {
@@ -1952,7 +1925,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "(Optional) Specify the maximum number of prompt tokens  that may be used over the course of the run. The run will make a best effort to use only the number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of completion tokens specified, the run will end with status incomplete. See incomplete_details for more info.",
+          "description": "(Optional) Specify the maximum number of prompt tokens that may be used over the course of the run. The run will make a best effort to use only the number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of completion tokens specified, the run will end with status incomplete. See incomplete_details for more info.",
           "tooltip": "Specify the maximum number of prompt tokens  that may be used over the course of the run. The run will make a best effort to use only the number of completion tokens specified, across multiple turns of the run. If the run exceeds the number of completion tokens specified, the run will end with status incomplete. See incomplete_details for more info."
         },
         {
@@ -1962,8 +1935,8 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "(Optional) Use this to add any other inputs to the OpenAI Completions API request as a key-value pair. For example, {\n            \"tool_choice\": auto\n          }",
-          "tooltip": "Use this to add any other inputs to the OpenAI Completions API request as a key-value pair. For example, {\n            \"tool_choice\": auto\n          }"
+          "description": "(Optional) Use this to add any other inputs to the OpenAI Completions API request as a key-value pair. For example: { \"tool_choice\": \"auto\" }",
+          "tooltip": "Use this to add any other inputs to the OpenAI Completions API request as a key-value pair. For example, {\n            \"tool_choice\": \"auto\"\n          }"
         }
       ],
       "output_schema": {
@@ -2002,7 +1975,7 @@
     {
       "operation": "update_run",
       "title": "Update Run",
-      "description": "Updates a run based on specified input parameters.",
+      "description": "Updates a run thread ID, run ID, and other input parameters that you have specified.",
       "category": "miscellaneous",
       "annotation": "update_run",
       "enabled": true,
@@ -2037,7 +2010,7 @@
           "value": {
             "user_id": "user_abc123"
           },
-          "description": "(Optional) Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. For example, {\n            \"user_id\": \"user_abc123\"\n          }",
+          "description": "(Optional) Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long. For example: { \"user_id\": \"user_abc123\" }",
           "tooltip": "Specify the set of 16 key-value pairs for storing additional information about the object in a structured format. Keys can be a maximum of 64 characters long and values can be a maximum of 512 characters long."
         }
       ],
@@ -2090,7 +2063,7 @@
     {
       "operation": "cancel_run",
       "title": "Cancel Run",
-      "description": "Cancels a run that is in progress.",
+      "description": "Cancels a run that is in progress based on the thread ID and run ID that you have specified.",
       "category": "miscellaneous",
       "annotation": "cancel_run",
       "enabled": true,
@@ -2151,7 +2124,7 @@
     {
       "operation": "submit_tool_outputs_to_run",
       "title": "Submit Tool Outputs To Run",
-      "description": "Submits the outputs from the tool calls once they're all completed. All outputs must be submitted in a single request.",
+      "description": "Submits the outputs from the tool calls once they're all completed based on the thread ID, run ID, and other input parameters that you have specified.",
       "category": "miscellaneous",
       "annotation": "submit_tool_outputs_to_run",
       "enabled": true,
@@ -2189,7 +2162,7 @@
               "output": "70 degrees and sunny."
             }
           ],
-          "description": "Specify the list of tools for which the outputs are being submitted. For example, [\n            {\n              \"tool_call_id\": \"call_001\",\n              \"output\": \"70 degrees and sunny.\"\n            }\n          ]",
+          "description": "Specify the list of tools for which the outputs are being submitted. For example: [ { \"tool_call_id\": \"call_001\", \"output\": \"70 degrees and sunny.\" } ]",
           "tooltip": "Specify the list of tools for which the outputs are being submitted."
         }
       ],
@@ -2248,7 +2221,7 @@
     {
       "operation": "list_run_steps",
       "title": "List Run Steps",
-      "description": "Retrieves a list of run steps belonging to a run.",
+      "description": "Retrieves a list of run steps belonging to a run based on the thread ID, run ID, and other input parameters that you have specified.",
       "category": "miscellaneous",
       "annotation": "list_run_steps",
       "enabled": true,
@@ -2280,7 +2253,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Select the order in which to retrieve the run list sorted by creation time. You can choose from Ascending or Descending.",
+          "description": "(Optional) Select the order in which to retrieve the run list sorted by creation time. You can choose from following options: Ascending Descending",
           "tooltip": "Select the order in which to retrieve the run list sorted by creation time.",
           "value": "Descending",
           "options": [
@@ -2295,7 +2268,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the step ID to retrieve run steps after this ID.",
+          "description": "(Optional) Specify the step ID to retrieve run steps after this ID.",
           "tooltip": "Specify the step ID to retrieve run steps after this ID."
         },
         {
@@ -2305,7 +2278,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the step ID to retrieve run steps before this ID.",
+          "description": "(Optional) Specify the step ID to retrieve run steps before this ID.",
           "tooltip": "Specify the step ID to retrieve run steps before this ID."
         },
         {
@@ -2315,8 +2288,8 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the maximum number of items to be retrieved. By default it retrieves 20.",
-          "tooltip": "Specify the maximum number of items to be retrieved. By default it retrieves 20.",
+          "description": "(Optional) Specify the maximum number of items to be retrieved. Default value is 20 and maximum value is 100",
+          "tooltip": "Specify the maximum number of items to be retrieved. Default value is 20 and maximum value is 100",
           "value": "20"
         }
       ],
@@ -2358,7 +2331,7 @@
     {
       "operation": "get_run_step",
       "title": "Get Run Step Details",
-      "description": "Retrieves a step of a run.",
+      "description": "Retrieves a step of a run based on the thread ID, run ID, and other input parameters that you have specified.",
       "category": "miscellaneous",
       "annotation": "get_run_step",
       "enabled": true,
@@ -2424,7 +2397,7 @@
     {
       "operation": "create_vector_store",
       "title": "Create Vector Store",
-      "description": "Creates a vector store.",
+      "description": "Creates a vector store based on the name, file ID, and other input parameters that you have specified.",
       "category": "miscellaneous",
       "annotation": "create_vector_store",
       "enabled": true,
@@ -2446,7 +2419,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the comma separated File IDs that the vector should use. Useful for tools like file_search that can access files.",
+          "description": "(Optional) Specify the comma separated File IDs that the vector should use. Useful for tools like file_search that can access files.",
           "tooltip": "Specify the comma separated File IDs that the vector should use. Useful for tools like file_search that can access files."
         },
         {
@@ -2457,10 +2430,10 @@
           "visible": true,
           "editable": true,
           "value": {
-            "anchor": "",
-            "days": ""
+            "anchor": "last_active_at",
+            "days": "1"
           },
-          "description": "Specify The expiration policy for a vector store. For example, {\n            \"anchor\": \"last_active_at\",\n            \"days\": \"1\"\n          }",
+          "description": "(Optional) Specify The expiration policy for a vector store. For example: { \"anchor\": \"last_active_at\", \"days\": \"1\" }",
           "tooltip": "Specify The expiration policy for a vector store."
         },
         {
@@ -2492,7 +2465,7 @@
     {
       "operation": "get_vector_store",
       "title": "Get Vector Store Details",
-      "description": "Retrieves a vector store details.",
+      "description": "Retrieves a vector store details based on the vector store ID that you have specified.",
       "category": "miscellaneous",
       "annotation": "get_vector_store",
       "enabled": true,
@@ -2517,7 +2490,7 @@
     {
       "operation": "create_vector_store_file",
       "title": "Create Vector Store File",
-      "description": "Creates a vector store file by attaching a File to a vector store.",
+      "description": "Creates a vector store file by attaching a File to a vector store based on the vector store ID and file IDs that you have specified.",
       "category": "miscellaneous",
       "annotation": "create_vector_store_file",
       "enabled": true,
@@ -2556,7 +2529,7 @@
     {
       "operation": "create_vector_store_file_batch",
       "title": "Create Vector Store File Batch",
-      "description": "Creates a vector store file batch.",
+      "description": "Creates a vector store file batch based on the vector store ID and file IDs that you have specified.",
       "category": "miscellaneous",
       "annotation": "create_vector_store_file_batch",
       "enabled": true,
@@ -2600,7 +2573,7 @@
     {
       "operation": "get_vector_store_file_batch",
       "title": "Get Vector Store File Batch",
-      "description": "Retrieves a vector store file batch.",
+      "description": "Retrieves a vector store file batch based on the vector store ID and batch ID that you have specified.",
       "category": "miscellaneous",
       "annotation": "get_vector_store_file_batch",
       "enabled": true,
@@ -2612,7 +2585,7 @@
           "required": true,
           "visible": true,
           "editable": true,
-          "description": "Specify the ID of the vector store that the file batch belongs to.",
+          "description": "Specify the ID of the vector store to which the file batch belongs.",
           "tooltip": "Specify the ID of the vector store that the file batch belongs to."
         },
         {
@@ -2644,7 +2617,7 @@
     {
       "operation": "cancel_vector_store_file_batch",
       "title": "Cancel Vector Store File Batch",
-      "description": "Cancel a vector store file batch. This attempts to cancel the processing of files in this batch as soon as possible.",
+      "description": "Cancel a vector store file batch based on the vector store ID and batch ID that you have specified. This attempts to cancel the processing of files in this batch as soon as possible.",
       "category": "miscellaneous",
       "annotation": "cancel_vector_store_file_batch",
       "enabled": true,
@@ -2656,7 +2629,7 @@
           "required": true,
           "visible": true,
           "editable": true,
-          "description": "Specify the ID of the vector store that the file batch belongs to.",
+          "description": "Specify the ID of the vector store to which the file batch belongs.",
           "tooltip": "Specify the ID of the vector store that the file batch belongs to."
         },
         {
@@ -2666,8 +2639,8 @@
           "required": true,
           "visible": true,
           "editable": true,
-          "description": "Specify the ID of the file batch being retrieved.",
-          "tooltip": "Specify the ID of the file batch being retrieved."
+          "description": "Specify the ID of the file batch to be canceled.",
+          "tooltip": "Specify the ID of the file batch to be canceled."
         }
       ],
       "output_schema": {
@@ -2688,7 +2661,7 @@
     {
       "operation": "create_speech",
       "title": "Create Speech",
-      "description": "Generates audio from the input text.",
+      "description": "Generates audio from the input text based on the model, input, and other input parameters that you have specified.",
       "category": "miscellaneous",
       "annotation": "create_speech",
       "enabled": true,
@@ -2704,8 +2677,8 @@
             "TTS-1",
             "TTS-1-HD"
           ],
-          "description": "Select the text to search model.",
-          "tooltip": "Select the text to search model. You can choose TTS-1 or TTS-1 HD"
+          "description": "Select the text-to-search model. You can choose TTS-1 or TTS-1-HD",
+          "tooltip": "Select the text-to-search model."
         },
         {
           "title": "Input",
@@ -2724,7 +2697,7 @@
           "required": true,
           "visible": true,
           "editable": true,
-          "description": "Select the voice to use when generating the audio. Supported voices are Alloy, Echo, Fable, Onyx, Nova, and Shimmer",
+          "description": "Select the voice to use when generating the audio. Following are the supported voices: Alloy Echo Fable Onyx Nova Shimmer",
           "tooltip": "Select the voice to use when generating the audio.",
           "options": [
             "Alloy",
@@ -2753,7 +2726,7 @@
           "visible": true,
           "editable": true,
           "value": "mp3",
-          "description": "Specify the audio format in which you want to get the generated audio. By default it is set to mp3.",
+          "description": "(Optional) Specify the audio format in which you want to get the generated audio. By default it is set to mp3.",
           "tooltip": "Specify the audio format in which you want to get the generated audio.",
           "options": [
             "mp3",
@@ -2772,7 +2745,7 @@
           "visible": true,
           "editable": true,
           "value": 1.0,
-          "description": "Specify the speed of the generated audio. Select a value from 0.25 to 4.0. By default it is set to 1.",
+          "description": "(Optional) Specify the speed of the generated audio. Select a value from 0.25 to 4.0. By default it is set to 1.",
           "tooltip": "Specify the speed of the generated audio. Select a value from 0.25 to 4.0."
         }
       ],
@@ -2783,7 +2756,7 @@
     {
       "operation": "create_transcription",
       "title": "Create Transcription",
-      "description": "Transcribes audio into the input language.",
+      "description": "Transcribes audio into the input language based on the model, file, and other input parameters that you have specified.",
       "category": "miscellaneous",
       "annotation": "create_transcription",
       "enabled": true,
@@ -2796,7 +2769,7 @@
           "visible": true,
           "editable": true,
           "value": "whisper-1",
-          "description": "Specify the tID of the model to use. Only whisper-1 (which is powered by our open source Whisper V2 model) is currently available.",
+          "description": "Specify the ID of the model to use. Only whisper-1 (which is powered by our open source Whisper V2 model) is currently available.",
           "tooltip": "Specify the ID of the model to use."
         },
         {
@@ -2806,7 +2779,7 @@
           "required": true,
           "visible": true,
           "editable": true,
-          "description": "The audio file to transcribe, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.",
+          "description": "Upload the audio file to transcribe, in one of the following formats: flac mp3 mp4 mpeg mpga m4a ogg wav webm",
           "tooltip": "The audio file to transcribe, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm."
         },
         {
@@ -2816,7 +2789,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the language of the input audio. Supplying the input language in ISO-639-1 (https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) format will improve accuracy and latency.",
+          "description": "(Optional) Specify the language of the input audio. Supplying the input language in ISO-639-1 (https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) format will improve accuracy and latency.",
           "tooltip": "Specify the language of the input audio. Supplying the input language in ISO-639-1 format will improve accuracy and latency."
         },
         {
@@ -2826,7 +2799,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the optional text to guide the model's style or continue a previous audio segment. The prompt should match the audio language.",
+          "description": "(Optional) Specify the optional text to guide the model's style or continue a previous audio segment. The prompt should match the audio language.",
           "tooltip": "Specify the optional text to guide the model's style or continue a previous audio segment. The prompt should match the audio language."
         },
         {
@@ -2836,7 +2809,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. If set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
+          "description": "(Optional) Specify the sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. If set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
           "tooltip": "Specify the sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. If set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit."
         },
         {
@@ -2847,7 +2820,7 @@
           "visible": true,
           "editable": true,
           "value": "segment",
-          "description": "Select the timestamp granularities for the transcription. Note: Generating word timestamps incurs additional latency. You can choose either or both from Word, Segment",
+          "description": "(Optional) Select the timestamp granularities for the transcription. NOTE: Generating word timestamps incurs additional latency. You can choose either or both from Word, Segment.",
           "tooltip": "Select the timestamp granularities for the transcription. Note: Generating word timestamps incurs additional latency.",
           "options": [
             "Word",
@@ -2888,7 +2861,7 @@
     {
       "operation": "create_translation",
       "title": "Create Translation",
-      "description": "Translates audio into English.",
+      "description": "Translates audio into English based on the model, file, and other input parameters that you have specified.",
       "category": "miscellaneous",
       "annotation": "create_translation",
       "enabled": true,
@@ -2911,7 +2884,7 @@
           "required": true,
           "visible": true,
           "editable": true,
-          "description": "The audio file to transcribe, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm.",
+          "description": "Upload the audio file to translate, in one of the following formats: flac mp3 mp4 mpeg mpga m4a ogg wav webm",
           "tooltip": "The audio file to transcribe, in one of these formats: flac, mp3, mp4, mpeg, mpga, m4a, ogg, wav, or webm."
         },
         {
@@ -2921,7 +2894,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the optional text to guide the model's style or continue a previous audio segment. The prompt should match the audio language.",
+          "description": "(Optional) Specify the optional text to guide the model's style or continue a previous audio segment. The prompt should match the audio language.",
           "tooltip": "Specify the optional text to guide the model's style or continue a previous audio segment. The prompt should match the audio language."
         },
         {
@@ -2931,7 +2904,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. If set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
+          "description": "(Optional) Specify the sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. If set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit.",
           "tooltip": "Specify the sampling temperature, between 0 and 1. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic. If set to 0, the model will use log probability to automatically increase the temperature until certain thresholds are hit."
         }
       ],
@@ -2942,7 +2915,7 @@
     {
       "operation": "list_files",
       "title": "List Files",
-      "description": "Retrieves a list of files that belong to the user's organization.",
+      "description": "Retrieves a list of files that belong to the user's organization based on the purpose specified.",
       "category": "miscellaneous",
       "annotation": "list_files",
       "enabled": true,
@@ -2954,7 +2927,7 @@
           "required": false,
           "visible": true,
           "editable": true,
-          "description": "Specify the purpose associated with the file to filter the results.",
+          "description": "(Optional) Specify the purpose associated with the file to filter the results. You can choose from: Assistants, Vision, Batch, Fine-tune, User Data, Assistants Output, Batch Output, Fine-tune Results",
           "tooltip": "Specify the purpose associated with the file to filter the results.",
           "options": [
             "Assistants",
@@ -2988,7 +2961,7 @@
     {
       "operation": "get_file",
       "title": "Get File Details",
-      "description": "Retrieves information about a specific file.",
+      "description": "Retrieves information about a specific file based on the file ID specified.",
       "category": "miscellaneous",
       "annotation": "get_file",
       "enabled": true,
@@ -3016,7 +2989,7 @@
     {
       "operation": "upload_file",
       "title": "Upload File",
-      "description": "Uploads a file that can be used in various actions. Individual files can be up to 512 MB, and the size of all files uploaded by one organization can be up to 100 GB.",
+      "description": "Uploads a file that can be used in various actions based on the file and purpose that you have specified. Individual files can be up to 512 MB, and the size of all files uploaded by one organization can be up to 100 GB.",
       "category": "miscellaneous",
       "annotation": "upload_file",
       "enabled": true,
@@ -3028,7 +3001,7 @@
           "required": true,
           "visible": true,
           "editable": true,
-          "description": "The file to be uploaded.",
+          "description": "Select a file to upload.",
           "tooltip": "The file to be uploaded."
         },
         {
@@ -3038,7 +3011,7 @@
           "required": true,
           "visible": true,
           "editable": true,
-          "description": "Select the intended purpose of the uploaded file. You can choose from \"Assistants\", \"Vision\", \"Batch\", \"Fine-tune\", or \"User Data\". For Vision, supported file types are \"gif\", \"jpeg\", \"jpg\", \"png\", and \"webp\". For Fine-tuning, only .jsonl files are supported with specific formats for chat or completions models. For Batch, only .jsonl files up to 100 MB are supported with a specific format.",
+          "description": "Select the intended purpose of the uploaded file. You can choose from following options: Assistants Vision: Supported file types are gif, jpeg, jpg, png, and webp. Batch: Only .jsonl files up to 100 MB are supported. Fine-tune: Only .jsonl files are supported with specific formats for chat or completion models. User Data",
           "tooltip": "Select the intended purpose of the uploaded file.For Vision, supported file types are \"gif\", \"jpeg\", \"jpg\", \"png\", and \"webp\". For Fine-tuning, only .jsonl files are supported with specific formats for chat or completions models. For Batch, only .jsonl files up to 100 MB are supported with a specific format.",
           "options": [
             "Assistants",
@@ -3062,7 +3035,7 @@
       "operation": "get_llm_response",
       "title": "Get LLM Response",
       "annotation": "get_llm_response",
-      "description": "Get LLM Response",
+      "description": "Get LLM Response based on the thread ID, role, and other input parameters that you have specified.",
       "category": "investigation",
       "is_config_required": true,
       "visible": true,
@@ -3075,8 +3048,8 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Thread ID is add user prompt.",
-          "description": "Thread ID is add user prompt.",
+          "tooltip": "Specify the thread ID in which the message is to be added for LLM response.",
+          "description": "(Optional) Specify the thread ID in which the message is to be added for LLM response.",
           "isOnChange": false,
           "onchange": {}
         },
@@ -3087,8 +3060,8 @@
           "editable": true,
           "visible": true,
           "required": false,
-          "tooltip": "Specify the role of content.",
-          "description": "Specify the role of content.",
+          "tooltip": "Specify a role of the message being added for LLM response. For example: User, Assistant, System.",
+          "description": "(Optional) Specify a role of the message being added for LLM response. For example: User, Assistant, System.",
           "isOnChange": false,
           "onchange": {}
         },
@@ -3101,7 +3074,7 @@
           "required": true,
           "value": "",
           "tooltip": "Specify the message or question for which you want to generate a response.",
-          "description": "Specify the message or question for which you want to generate a response.",
+          "description": "Specify the message or question to generate an LLM response.",
           "isOnChange": false,
           "onchange": {}
         }
