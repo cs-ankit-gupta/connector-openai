@@ -210,7 +210,8 @@ def create_assistant(config, params):
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
     client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
-    payload['instructions'] = json.dumps(payload['instructions'])
+    if payload.get('instructions'):
+        payload['instructions'] = json.dumps(payload['instructions'])
     return client.beta.assistants.create(**payload).model_dump()
 
 
@@ -219,6 +220,9 @@ def list_assistants(config, params):
     params['order'] = SORT_ORDER_MAPPING.get(params.get('order'))
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    limit = params.get('limit')
+    if limit and limit > 100:
+        params['limit'] = 100
     client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.assistants.list(**payload).model_dump()
 
@@ -240,7 +244,8 @@ def update_assistant(config, params):
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
     client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
-    payload['instructions'] = json.dumps(payload['instructions'])
+    if params.get('instructions'):
+        payload['instructions'] = json.dumps(payload['instructions'])
     return client.beta.assistants.update(**payload).model_dump()
 
 
@@ -277,6 +282,14 @@ def update_thread(config, params):
 def create_thread_message(config, params):
     __init_openai(config)
     params['role'] = params.get('role', '').lower()
+    contents = params.get('content')
+    if isinstance(contents, list):
+        for content in contents:
+            c_text, c_type = content.get('text'), content.get('type')
+            if isinstance(content, dict) and c_type == 'text' and c_text and isinstance(c_text, int):
+                content['text'] = str(c_text)
+    elif not isinstance(contents, str):
+        params['content'] = str(contents)
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
     client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
@@ -286,6 +299,9 @@ def create_thread_message(config, params):
 def list_thread_messages(config, params):
     __init_openai(config)
     params['order'] = SORT_ORDER_MAPPING.get(params.get('order'))
+    limit = params.get('limit')
+    if limit and limit > 100:
+        params['limit'] = 100
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
     client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
@@ -321,6 +337,9 @@ def list_runs(config, params):
     params['order'] = SORT_ORDER_MAPPING.get(params.get('order'))
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    limit = params.get('limit')
+    if limit and limit > 100:
+        params['limit'] = 100
     client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.threads.runs.list(**payload).model_dump()
 
@@ -340,6 +359,8 @@ def create_run(config, params):
     if other_fields:
         payload.update(other_fields)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    if payload.get('instructions'):
+        payload['instructions'] = json.dumps(payload['instructions'])
     client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.threads.runs.create(**payload).model_dump()
 
@@ -367,6 +388,8 @@ def create_thread_and_run(config, params):
     if other_fields:
         payload.update(other_fields)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    if payload.get('instructions'):
+        payload['instructions'] = json.dumps(payload['instructions'])
     client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.threads.create_and_run(**payload).model_dump()
 
@@ -384,6 +407,9 @@ def list_run_steps(config, params):
     params['order'] = SORT_ORDER_MAPPING.get(params.get('order'))
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
+    limit = params.get('limit')
+    if limit and limit > 100:
+        params['limit'] = 100
     client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.threads.runs.steps.list(**payload).model_dump()
 

@@ -412,7 +412,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Retrieves a list of assistants.",
+          "description": "Retrieves a list of assistants based on the sort order, starting ID of the assistant, and other input parameters that you have specified.",
           "name": "List Assistants",
           "tag": "#OpenAI",
           "recordTags": [
@@ -482,7 +482,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Retrieves an assistant based on assistant ID.",
+          "description": "Retrieves an assistant's details based on the assistant ID that you have specified.",
           "name": "Get Assistant Details",
           "tag": "#OpenAI",
           "recordTags": [
@@ -543,7 +543,11 @@
                   "name": "",
                   "description": "",
                   "instructions": "",
-                  "tools": "",
+                  "tools": [
+                    {
+                      "type": "code_interpreter"
+                    }
+                  ],
                   "tool_resources": {
                     "code_interpreter": {
                       "file_ids": [
@@ -562,13 +566,10 @@
                   "top_p": "",
                   "metadata": {
                     "creator": "Jane Doe",
-                    "creation_date": "2024-05-28",
                     "purpose": "Customer support",
-                    "organization": "ABC Inc.",
-                    "project_id": "123456789",
                     "department": "Customer Service",
                     "version": "1.0",
-                    "tags": "FortiSOAR"
+                    "tags": "OpenAI"
                   }
                 },
                 "version": "3.0.0",
@@ -582,7 +583,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Creates an assistant based on specified input parameters.",
+          "description": "Creates an assistant based on the model, name, and other input parameters that you have specified.",
           "name": "Create Assistant",
           "tag": "#OpenAI",
           "recordTags": [
@@ -644,7 +645,11 @@
                   "name": "",
                   "description": "",
                   "instructions": "",
-                  "tools": "",
+                  "tools": [
+                    {
+                      "type": "code_interpreter"
+                    }
+                  ],
                   "tool_resources": {
                     "code_interpreter": {
                       "file_ids": [
@@ -663,13 +668,10 @@
                   "top_p": "",
                   "metadata": {
                     "creator": "Jane Doe",
-                    "creation_date": "2024-05-28",
                     "purpose": "Customer support",
-                    "organization": "ABC Inc.",
-                    "project_id": "123456789",
                     "department": "Customer Service",
                     "version": "1.0",
-                    "tags": "FortiSOAR"
+                    "tags": "OpenAI"
                   }
                 },
                 "version": "3.0.0",
@@ -683,7 +685,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Updates an assistant based on specified input parameters.",
+          "description": "Updates an assistant based on the model, name, and other input parameters that you have specified.",
           "name": "Update Assistant",
           "tag": "#OpenAI",
           "recordTags": [
@@ -753,7 +755,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Deletes an assistant based on assistant ID.",
+          "description": "Deletes an assistant based on the assistant ID that you have specified.",
           "name": "Delete Assistant",
           "tag": "#OpenAI",
           "recordTags": [
@@ -823,7 +825,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Retrieves a thread based on the thread ID.",
+          "description": "Retrieves a thread's details based on the thread ID that you have specified.",
           "name": "Get Thread",
           "tag": "#OpenAI",
           "recordTags": [
@@ -893,7 +895,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Deletes a thread based on thread ID.",
+          "description": "Deletes a thread based on the thread ID that you have specified.",
           "name": "Delete Thread",
           "tag": "#OpenAI",
           "recordTags": [
@@ -972,13 +974,10 @@
                   },
                   "metadata": {
                     "creator": "Jane Doe",
-                    "creation_date": "2024-05-28",
                     "purpose": "Customer support",
-                    "organization": "ABC Inc.",
-                    "project_id": "123456789",
                     "department": "Customer Service",
                     "version": "1.0",
-                    "tags": "FortiSOAR"
+                    "tags": "OpenAI"
                   }
                 },
                 "version": "3.0.0",
@@ -992,7 +991,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Creates a thread based on the specified input parameters.",
+          "description": "Creates a thread based on the messages, tool resources in JSON, and other input parameters that you have specified.",
           "name": "Create Thread",
           "tag": "#OpenAI",
           "recordTags": [
@@ -1080,7 +1079,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Updates a thread based on the specified input parameters.",
+          "description": "Updates a thread based on the messages, tool resources in JSON, and other input parameters that you have specified.",
           "name": "Update Thread",
           "tag": "#OpenAI",
           "recordTags": [
@@ -1145,16 +1144,22 @@
                       "text": "How does AI work? Explain it in simple terms."
                     }
                   ],
-                  "attachments": "",
+                  "attachments": [
+                    {
+                      "file_id": "",
+                      "tools": [
+                        {
+                          "type": "code_interpreter"
+                        }
+                      ]
+                    }
+                  ],
                   "metadata": {
                     "creator": "Jane Doe",
-                    "creation_date": "2024-05-28",
                     "purpose": "Customer support",
-                    "organization": "ABC Inc.",
-                    "project_id": "123456789",
                     "department": "Customer Service",
                     "version": "1.0",
-                    "tags": "FortiSOAR"
+                    "tags": "OpenAI"
                   }
                 },
                 "version": "3.0.0",
@@ -1168,7 +1173,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Creates a message based on the specified input parameters.",
+          "description": "Creates a message in a thread based on the thread ID, role, and other input parameters that you have specified.",
           "name": "Create Thread Message",
           "tag": "#OpenAI",
           "recordTags": [
@@ -1228,14 +1233,8 @@
                   "thread_id": "",
                   "message_id": "",
                   "metadata": {
-                    "creator": "Jane Doe",
-                    "creation_date": "2024-05-28",
-                    "purpose": "Customer support",
-                    "organization": "ABC Inc.",
-                    "project_id": "123456789",
-                    "department": "Customer Service",
-                    "version": "1.0",
-                    "tags": "FortiSOAR"
+                    "modified": "true",
+                    "user": "abc123"
                   }
                 },
                 "version": "3.0.0",
@@ -1249,7 +1248,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Updates a message in a thread based on the specified input parameters.",
+          "description": "Updates a message in a thread based on the thread ID, message ID, and other input parameters that you have specified.",
           "name": "Update Thread Message",
           "tag": "#OpenAI",
           "recordTags": [
@@ -1324,7 +1323,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Retrieves a list of messages for specified thread based on the specified input parameters.",
+          "description": "Retrieves a list of messages based on the thread ID, role ID, and other input parameters that you have specified.",
           "name": "List Thread Messages",
           "tag": "#OpenAI",
           "recordTags": [
@@ -1395,7 +1394,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Retrieves a specific message based on Thread ID and Message ID.",
+          "description": "Retrieves a message based on the thread ID and message ID that you have specified.",
           "name": "Get Thread Message Details",
           "tag": "#OpenAI",
           "recordTags": [
@@ -1466,7 +1465,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Deletes a message based on Thread ID and Message ID.",
+          "description": "Deletes a message based on the thread ID and message ID that you have specified.",
           "name": "Delete Thread Message",
           "tag": "#OpenAI",
           "recordTags": [
@@ -1540,7 +1539,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Retrieves a list of runs belonging to a thread.",
+          "description": "Retrieves a list of runs belonging to a thread based on thread ID, sort order, and other input parameters that you have specified.",
           "name": "List Runs",
           "tag": "#OpenAI",
           "recordTags": [
@@ -1611,7 +1610,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Retrieves a specific run for a thread.",
+          "description": "Retrieves a specific run for a thread based on the thread ID and run ID that you have specified.",
           "name": "Get Run Details",
           "tag": "#OpenAI",
           "recordTags": [
@@ -1679,18 +1678,19 @@
                       "content": ""
                     }
                   ],
-                  "tools": "",
+                  "tools": [
+                    {
+                      "type": "code_interpreter"
+                    }
+                  ],
                   "temperature": "",
                   "top_p": "",
                   "metadata": {
                     "creator": "Jane Doe",
-                    "creation_date": "2024-05-28",
                     "purpose": "Customer support",
-                    "organization": "ABC Inc.",
-                    "project_id": "123456789",
                     "department": "Customer Service",
                     "version": "1.0",
-                    "tags": "FortiSOAR"
+                    "tags": "OpenAI"
                   },
                   "max_prompt_tokens": "",
                   "other_fields": ""
@@ -1706,7 +1706,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Creates a run based on specified input parameters.",
+          "description": "Creates a run based on thread ID, assistant ID, and other input parameters that you have specified.",
           "name": "Create Run",
           "tag": "#OpenAI",
           "recordTags": [
@@ -1774,7 +1774,11 @@
                   },
                   "model": "",
                   "instructions": "",
-                  "tools": "",
+                  "tools": [
+                    {
+                      "type": "code_interpreter"
+                    }
+                  ],
                   "tool_resources": {
                     "code_interpreter": {
                       "file_ids": [
@@ -1791,13 +1795,10 @@
                   },
                   "metadata": {
                     "creator": "Jane Doe",
-                    "creation_date": "2024-05-28",
                     "purpose": "Customer support",
-                    "organization": "ABC Inc.",
-                    "project_id": "123456789",
                     "department": "Customer Service",
                     "version": "1.0",
-                    "tags": "FortiSOAR"
+                    "tags": "OpenAI"
                   },
                   "temperature": "",
                   "top_p": "",
@@ -1815,7 +1816,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Creates a thread and run in one request.",
+          "description": "Creates a thread and run in one request based on the assistant ID, thread, and other input parameters that you have specified.",
           "name": "Create Thread and Run",
           "tag": "#OpenAI",
           "recordTags": [
@@ -1889,7 +1890,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Updates a run based on specified input parameters.",
+          "description": "Updates a run thread ID, run ID, and other input parameters that you have specified.",
           "name": "Update Run",
           "tag": "#OpenAI",
           "recordTags": [
@@ -1960,7 +1961,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Cancels a run that is in progress.",
+          "description": "Cancels a run that is in progress based on the thread ID and run ID that you have specified.",
           "name": "Cancel Run",
           "tag": "#OpenAI",
           "recordTags": [
@@ -2037,7 +2038,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Submits the outputs from the tool calls once they're all completed. All outputs must be submitted in a single request.",
+          "description": "Submits the outputs from the tool calls once they're all completed based on the thread ID, run ID, and other input parameters that you have specified.",
           "name": "Submit Tool Outputs To Run",
           "tag": "#OpenAI",
           "recordTags": [
@@ -2112,7 +2113,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Retrieves a list of run steps belonging to a run.",
+          "description": "Retrieves a list of run steps belonging to a run based on the thread ID, run ID, and other input parameters that you have specified.",
           "name": "List Run Steps",
           "tag": "#OpenAI",
           "recordTags": [
@@ -2184,7 +2185,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Retrieves a step of a run.",
+          "description": "Retrieves a step of a run based on the thread ID, run ID, and other input parameters that you have specified.",
           "name": "Get Run Step",
           "tag": "#OpenAI",
           "recordTags": [
@@ -2244,8 +2245,8 @@
                   "file_ids": "",
                   "name": "",
                   "expires_after": {
-                    "anchor": "",
-                    "days": ""
+                    "anchor": "last_active_at",
+                    "days": "1"
                   },
                   "metadata": ""
                 },
@@ -2260,7 +2261,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Creates a vector store.",
+          "description": "Creates a vector store based on the name, file ID, and other input parameters that you have specified.",
           "name": "Create Vector Store",
           "tag": "#OpenAI",
           "recordTags": [
@@ -2330,7 +2331,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Retrieves a vector store details.",
+          "description": "Retrieves a vector store details based on the vector store ID that you have specified.",
           "name": "Get Vector Store",
           "tag": "#OpenAI",
           "recordTags": [
@@ -2401,7 +2402,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Creates a vector store file by attaching a File to a vector store.",
+          "description": "Creates a vector store file by attaching a File to a vector store based on the vector store ID and file IDs that you have specified.",
           "name": "Create Vector Store File",
           "tag": "#OpenAI",
           "recordTags": [
@@ -2472,7 +2473,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Creates a vector store file batch.",
+          "description": "Creates a vector store file batch based on the vector store ID and file IDs that you have specified.",
           "name": "Create Vector Store File Batch",
           "tag": "#OpenAI",
           "recordTags": [
@@ -2543,7 +2544,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Creates a vector store file batch.",
+          "description": "Retrieves a vector store file batch based on the vector store ID and batch ID that you have specified.",
           "name": "Get Vector Store File Batch",
           "tag": "#OpenAI",
           "recordTags": [
@@ -2614,7 +2615,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Cancel a vector store file batch. This attempts to cancel the processing of files in this batch as soon as possible.",
+          "description": "Cancel a vector store file batch based on the vector store ID and batch ID that you have specified. This attempts to cancel the processing of files in this batch as soon as possible.",
           "name": "Cancel Vector Store File Batch",
           "tag": "#OpenAI",
           "recordTags": [
@@ -2688,7 +2689,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Generates audio from the input text.",
+          "description": "Generates audio from the input text based on the model, input, and other input parameters that you have specified.",
           "name": "Create Speech",
           "tag": "#OpenAI",
           "recordTags": [
@@ -2763,7 +2764,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Transcribes audio into the input language.",
+          "description": "Transcribes audio into the input language based on the model, file, and other input parameters that you have specified.",
           "name": "Create Transcription",
           "tag": "#OpenAI",
           "recordTags": [
@@ -2835,7 +2836,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Translates audio into English.",
+          "description": "Translates audio into English based on the model, file, and other input parameters that you have specified.",
           "name": "Create Translation",
           "tag": "#OpenAI",
           "recordTags": [
@@ -2905,7 +2906,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Retrieves information about a specific file.",
+          "description": "Retrieves information about a specific file based on the file ID specified.",
           "name": "Get File",
           "tag": "#OpenAI",
           "recordTags": [
@@ -2936,7 +2937,7 @@
           "name": "List Files",
           "aliasName": null,
           "tag": null,
-          "description": "Retrieves a list of files that belong to the user's organization.",
+          "description": "Retrieves a list of files that belong to the user's organization based on the purpose specified.",
           "isActive": false,
           "debug": false,
           "singleRecordExecution": false,
@@ -3067,7 +3068,7 @@
             }
           ],
           "triggerLimit": null,
-          "description": "Uploads a file that can be used in various actions. Individual files can be up to 512 MB, and the size of all files uploaded by one organization can be up to 100 GB.",
+          "description": "Uploads a file that can be used in various actions based on the file and purpose that you have specified. Individual files can be up to 512 MB, and the size of all files uploaded by one organization can be up to 100 GB.",
           "name": "Upload File",
           "tag": "#OpenAI",
           "recordTags": [
