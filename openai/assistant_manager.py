@@ -22,7 +22,7 @@ class AssistantManager:
         payload = {'thread_id': self.params['thread_id'], 'role': self.params['role'],
                    'content': self.params['content']}
         self.message_detail = create_thread_message(config=self.config, params=payload)
-        assistant_response = self.run_assistant()
+        assistant_response = self.run_assistant(instructions=self.params['instructions'])
         return assistant_response
 
     def run_assistant(self, instructions=""):

@@ -86,7 +86,7 @@ class EventHandler(AssistantEventHandler):
                 self.call_required_function(tool_call.function.name, tool_call.function.arguments)
                 logger.info(f'Function Calling output: {self.function_calling_output}')
                 if not self.function_calling_output:
-                    self.function_calling_output = 'Function calling output is None'
+                    self.function_calling_output = 'There seems to be some issue while function calling output is None.'
                 # To add tool call function output to thread or not
                 if self.to_add_message:
                     self.tool_outputs.append({"tool_call_id": tool_call.id, "output": self.function_calling_output})
@@ -121,6 +121,7 @@ class EventHandler(AssistantEventHandler):
                 run_id=self.run_id,
                 thread_id=self.params['thread_id']
             )
+            logger.info(f'Run Status: {run_object.status}')
         self.thread_messages = list_thread_messages(config=self.config,
                                                     params={'thread_id': self.params['thread_id'],
                                                             'before': self.last_message_id})
