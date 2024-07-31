@@ -223,7 +223,7 @@ def list_assistants(config, params):
     limit = params.get('limit')
     # Maximum limit supported by API is 100
     if limit and isinstance(limit, int) and limit > 100:
-        params['limit'] = 100
+        payload['limit'] = 100
     client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.assistants.list(**payload).model_dump()
 
@@ -303,7 +303,7 @@ def list_thread_messages(config, params):
     limit = params.get('limit')
     # Maximum limit supported by API is 100
     if limit and isinstance(limit, int) and limit > 100:
-        params['limit'] = 100
+        payload['limit'] = 100
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
     client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
@@ -342,7 +342,7 @@ def list_runs(config, params):
     limit = params.get('limit')
     # Maximum limit supported by API is 100
     if limit and isinstance(limit, int) and limit > 100:
-        params['limit'] = 100
+        payload['limit'] = 100
     client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.threads.runs.list(**payload).model_dump()
 
@@ -413,7 +413,7 @@ def list_run_steps(config, params):
     limit = params.get('limit')
     # Maximum limit supported by API is 100
     if limit and isinstance(limit, int) and limit > 100:
-        params['limit'] = 100
+        payload['limit'] = 100
     client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.threads.runs.steps.list(**payload).model_dump()
 
