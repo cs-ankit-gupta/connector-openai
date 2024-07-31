@@ -652,7 +652,7 @@
           "visible": true,
           "editable": true,
           "description": "Specify the ID of assistant whose details are to be retrieved.",
-          "tooltip": "Specify the ID of assistant to be retrieved"
+          "tooltip": "Specify the ID of assistant whose details are to be retrieved."
         }
       ],
       "output_schema": {
@@ -745,7 +745,7 @@
             }
           ],
           "description": "(Optional) Specify a list tools enable on assistant. There can be a maximum of 128 tools per assistant. Tools can be of types code_interpreter, file_search, or function, For example: [\n            {\n              \"type\": \"code_interpreter\"\n            }\n          ]",
-          "tooltip": "Specify the system instructions that the assistant uses"
+          "tooltip": "Specify a list tools enable on assistant. There can be a maximum of 128 tools per assistant. Tools can be of types code_interpreter, file_search, or function."
         },
         {
           "title": "Tool Resources",
@@ -1072,7 +1072,7 @@
           "visible": true,
           "editable": true,
           "description": "Specify the ID of the thread for which to create a message.",
-          "tooltip": "Specify the ID of the thread to create a message for."
+          "tooltip": "Specify the ID of the thread for which to create a message."
         },
         {
           "title": "Role",
