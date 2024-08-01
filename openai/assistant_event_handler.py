@@ -34,6 +34,7 @@ class EventHandler(AssistantEventHandler):
     @override
     def on_event(self, event: AssistantStreamEvent) -> None:
         logger.info(f'event: {event.event}')
+        self.run_id = event.data.id
         if event.event == 'thread.run.requires_action':
             self.handle_requires_action(data=event.data)
 
@@ -80,7 +81,7 @@ class EventHandler(AssistantEventHandler):
     # thread.run.step.created
     @override
     def on_run_step_created(self, run_step: RunStep) -> None:
-        self.run_id = run_step.run_id
+        pass
 
     # thread.run.step.delta
     @override
