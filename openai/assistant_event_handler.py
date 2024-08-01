@@ -115,13 +115,14 @@ class EventHandler(AssistantEventHandler):
                     event_handler=EventHandler(self.config, self.params, self.last_message_id)
             ) as stream:
                 stream.until_done()
+            logger.info(f'Successfully submitted tool output')
         # wait for the run to get completed or canceled to load the messages
         while run_object.status not in ['completed', 'cancelled']:
             run_object = client.beta.threads.runs.retrieve(
                 run_id=self.run_id,
                 thread_id=self.params['thread_id']
             )
-            logger.info(f'Run Status: {run_object.status}')
+            # logger.info(f'Run Status: {run_object.status}')
         self.thread_messages = list_thread_messages(config=self.config,
                                                     params={'thread_id': self.params['thread_id'],
                                                             'before': self.last_message_id})
@@ -151,13 +152,14 @@ class EventHandler(AssistantEventHandler):
                     self.to_add_message = response['data'].get('to_add_message')
                 if 'token_usage' in response['data']:
                     self.function_call_token_usage = response['data'].get('token_usage')
-            error_message = response.get('message')
-            if not error_message:
-                # if message is empty, add custom message
-                error_message = 'Unknown error occurred.'
-            return error_message
+                return
+            self.function_calling_output = response.get('message')
+            if not self.function_calling_output:
+                self.function_calling_output = 'Unknown error occurred.'
         except Exception as error:
-            return f'Error occurred while executing tool function call: {error}'
+            error_message = f'Error occurred while executing tool function call: {error}'
+            logger.error(error_message)
+            self.function_calling_output = error_message
 
     # Add function call token to run call token usage
     def set_token_usage(self, token_usage):
