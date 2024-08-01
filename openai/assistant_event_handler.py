@@ -34,6 +34,48 @@ class EventHandler(AssistantEventHandler):
     @override
     def on_event(self, event: AssistantStreamEvent) -> None:
         logger.info(f'event: {event.event}')
+        if event.event == 'thread.run.requires_action':
+            self.handle_requires_action(data=event.data)
+
+    def handle_requires_action(self, data):
+        for tool in data.required_action.submit_tool_outputs.tool_calls:
+            if tool.type == 'function':
+                self.tool_call_type_function(tool=tool)
+        # Submit all tool_outputs at the same time
+        self.submit_tool_outputs()
+
+    def tool_call_type_function(self, tool):
+        logger.info(
+            f'Calling tool function, Function Name: {tool.function.name}, Function Argument: {tool.function.arguments}')
+        # call required function
+        self.call_required_function(tool.function.name, tool.function.arguments)
+        logger.info(f'Function Calling output: {self.function_calling_output}')
+        if not self.function_calling_output:
+            self.function_calling_output = 'There seems to be some issue while function calling output is None.'
+        # To add tool call function output to thread or not
+        if self.to_add_message:
+            self.tool_outputs.append({"tool_call_id": tool.id, "output": self.function_calling_output})
+        else:
+            # Directly add the message to thread and cancel the run
+            cancel_run(config=self.config,
+                       params={'thread_id': self.params['thread_id'], 'run_id': self.run_id})
+            create_thread_message(self.config,
+                                  params={'thread_id': self.params['thread_id'], 'role': 'assistant',
+                                          'content': self.function_calling_output})
+
+    def submit_tool_outputs(self):
+        client = openai.OpenAI(api_key=self.config['apiKey'], project=self.config.get('project'),
+                               organization=self.config.get('organization'))
+        run_object = get_run(config=self.config, params={'run_id': self.run_id, 'thread_id': self.params['thread_id']})
+        if run_object['status'] != 'cancelled':
+            with client.beta.threads.runs.submit_tool_outputs_stream(
+                    thread_id=self.params['thread_id'],
+                    run_id=self.run_id,
+                    tool_outputs=self.tool_outputs,
+                    event_handler=EventHandler(self.config, self.params, self.last_message_id)
+            ) as stream:
+                stream.until_done()
+        logger.info(f'Successfully submitted tool output')
 
     # thread.run.step.created
     @override
@@ -75,62 +117,27 @@ class EventHandler(AssistantEventHandler):
 
     @override
     def on_tool_call_done(self, tool_call: ToolCall) -> None:
-        if tool_call.type == 'function':
-            run_status = get_run(config=self.config,
-                                 params={'thread_id': self.params['thread_id'], 'run_id': self.run_id})
-            # Check for tool call function
-            if run_status['status'] == "requires_action":
-                logger.info(
-                    f'Calling tool function, Function Name: {tool_call.function.name}, Function Argument: {tool_call.function.arguments}')
-                # call required function
-                self.call_required_function(tool_call.function.name, tool_call.function.arguments)
-                logger.info(f'Function Calling output: {self.function_calling_output}')
-                if not self.function_calling_output:
-                    self.function_calling_output = 'There seems to be some issue while function calling output is None.'
-                # To add tool call function output to thread or not
-                if self.to_add_message:
-                    self.tool_outputs.append({"tool_call_id": tool_call.id, "output": self.function_calling_output})
-                else:
-                    # Directly add the message to thread and cancel the run
-                    cancel_run(config=self.config,
-                               params={'thread_id': self.params['thread_id'], 'run_id': self.run_id})
-                    create_thread_message(self.config,
-                                          params={'thread_id': self.params['thread_id'], 'role': 'assistant',
-                                                  'content': self.function_calling_output})
+        # logger.info(f'Tool Call: {tool_call}')
+        pass
 
     @override
     def on_end(self):
-        client = openai.OpenAI(api_key=self.config['apiKey'], project=self.config.get('project'),
-                               organization=self.config.get('organization'))
-        run_object = client.beta.threads.runs.retrieve(
-            run_id=self.run_id,
-            thread_id=self.params['thread_id']
-        )
-        if run_object.status == 'requires_action':
-            # Submit the tool output
-            with client.beta.threads.runs.submit_tool_outputs_stream(
-                    thread_id=self.params['thread_id'],
-                    run_id=self.run_id,
-                    tool_outputs=self.tool_outputs,
-                    event_handler=EventHandler(self.config, self.params, self.last_message_id)
-            ) as stream:
-                stream.until_done()
-            logger.info(f'Successfully submitted tool output')
+        run_payload = {'run_id': self.run_id, 'thread_id': self.params['thread_id']}
+        run_object = get_run(config=self.config, params=run_payload)
+
         # wait for the run to get completed or canceled to load the messages
-        while run_object.status not in ['completed', 'cancelled']:
-            run_object = client.beta.threads.runs.retrieve(
-                run_id=self.run_id,
-                thread_id=self.params['thread_id']
-            )
+        while run_object['status'] not in ['completed', 'cancelled']:
+            run_object = get_run(config=self.config, params=run_payload)
             # logger.info(f'Run Status: {run_object.status}')
+
         self.thread_messages = list_thread_messages(config=self.config,
                                                     params={'thread_id': self.params['thread_id'],
                                                             'before': self.last_message_id})
         # check if more token has been used in function calling
         if self.function_call_token_usage is not None:
-            self.token_usage = self.set_token_usage(run_object.usage)
+            self.token_usage = self.set_token_usage(run_object['usage'])
         else:
-            self.token_usage = run_object.usage
+            self.token_usage = run_object['usage']
 
     @override
     def on_exception(self, exception: Exception) -> None:
