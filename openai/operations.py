@@ -202,6 +202,11 @@ def build_payload(params: dict):
                 data[k] = list(v)
             else:
                 data[k] = v
+            if k == 'metadata':
+                if v.get('version'):
+                    data[k]['version'] = str(v['version'])
+                if isinstance(v.get('modified'), bool):
+                    data[k]['modified'] = str(v['modified'])
     return data
 
 
@@ -303,7 +308,7 @@ def list_thread_messages(config, params):
     limit = params.get('limit')
     # Maximum limit supported by API is 100
     if limit and isinstance(limit, int) and limit > 100:
-        payload['limit'] = 100
+        params['limit'] = 100
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
     client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
@@ -512,8 +517,8 @@ def get_file_input(file_payload, env={}):
         filename = response.get('filename')
     else:
         logger.warning("File path is provided.")
-        file_path = Path(file_payload)
-        filename = file_path.name
+        file_path = file_payload
+        filename = Path(file_payload).name
     if not file_path.startswith('/tmp/'):
         file_path = '/tmp/{0}'.format(file_path)
     with open(file_path, 'rb') as file:
