@@ -215,8 +215,6 @@ def create_assistant(config, params):
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
     client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
-    if payload.get('instructions'):
-        payload['instructions'] = json.dumps(payload['instructions'])
     return client.beta.assistants.create(**payload).model_dump()
 
 
@@ -250,8 +248,6 @@ def update_assistant(config, params):
     payload = build_payload(params)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
     client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
-    if params.get('instructions'):
-        payload['instructions'] = json.dumps(payload['instructions'])
     return client.beta.assistants.update(**payload).model_dump()
 
 
@@ -367,8 +363,6 @@ def create_run(config, params):
     if other_fields:
         payload.update(other_fields)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
-    if payload.get('instructions'):
-        payload['instructions'] = json.dumps(payload['instructions'])
     client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.threads.runs.create(**payload).model_dump()
 
@@ -396,8 +390,6 @@ def create_thread_and_run(config, params):
     if other_fields:
         payload.update(other_fields)
     payload['timeout'] = params.get('timeout') if params.get('timeout') else 600
-    if payload.get('instructions'):
-        payload['instructions'] = json.dumps(payload['instructions'])
     client = openai.OpenAI(api_key=openai.api_key, organization=openai.organization, project=openai.project, http_client=openai.http_client)
     return client.beta.threads.create_and_run(**payload).model_dump()
 
