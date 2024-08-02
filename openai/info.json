@@ -3038,7 +3038,7 @@
       "description": "Get LLM Response based on the thread ID, role, and other input parameters that you have specified.",
       "category": "investigation",
       "is_config_required": true,
-      "visible": true,
+      "visible": false,
       "enabled": true,
       "parameters": [
         {
@@ -3054,7 +3054,7 @@
           "onchange": {}
         },
         {
-          "name": "Role",
+          "name": "role",
           "title": "Role",
           "type": "text",
           "editable": true,
