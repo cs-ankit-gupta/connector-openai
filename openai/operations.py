@@ -151,12 +151,14 @@ def check(config):
         list_models(config, {})
         return True
     except Exception as err:
-        logger.exception('{0}'.format(err))
         if hasattr(err, 'code'):
             if err.code == 'invalid_api_key':
+                logger.exception("Incorrect API key provided. You can find your API key at https://platform.openai.com/account/api-keys")
                 raise ConnectorError("Incorrect API key provided. You can find your API key at https://platform.openai.com/account/api-keys",)
             if hasattr(err, 'body') and err.body.get("message"):
+                logger.exception(err.body.get("message"))
                 raise ConnectorError(err.body.get("message"))
+        logger.exception('{0}'.format(err))
         if hasattr(err, 'error'):
             raise ConnectorError(err.error.get("message"))
         raise ConnectorError('{0}'.format(err))
