@@ -33,7 +33,7 @@ class EventHandler(AssistantEventHandler):
     # Executes on every event
     @override
     def on_event(self, event: AssistantStreamEvent) -> None:
-        logger.info(f'event: {event.event}')
+        # logger.info(f'event: {event.event}')
         self.run_id = event.data.id
         if event.event == 'thread.run.requires_action':
             self.handle_requires_action(data=event.data)
