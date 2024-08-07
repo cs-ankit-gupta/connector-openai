@@ -110,9 +110,9 @@ mkdir -p %{install_log_dir}
     fi
     find %{buildroot} -name "RECORD" -exec rm -rf {} \;
     rm -rf %{integrations_app_dir}/tmp
-    %if %{flag_reload}
+    if [ %{flag_reload} = 1 ]; then
         touch /opt/cyops/configs/integrations/workspace/connector_dev_config.ini
-    %endif
+    fi
     restorecon -R %{prefix}
 
     echo "============================================"
