@@ -2,21 +2,21 @@ Name: cyops-connector-%{connector_name}
 Prefix: /opt/%{name}
 Version: %{_version}
 Release: %{build_no}%{dist}
-License: Fortinet Inc Proprietary
-Vendor: Fortinet Inc
-Packager: support@fortinet.com
-URL: https://cybersponse.com
+License: Commercial
+Vendor: Fortinet
+Packager: devops-fortisoar@fortinet.com
+URL: https://www.fortinet.com
 Source: %{name}-%{version}.tar.gz
 BuildRoot: %{_tmppath}/%{name}-root
 
-Requires: cyops-integrations
+#SYS_CONN_REQUIRES_PLACEHOLDER
 
 Summary: FortiSOAR %{connector_display_name} Connector
 %description
 FortiSOAR %{connector_display_name} Connector
 
-#%global
 %define integrations_dir /opt/cyops-integrations
+%define integrations_app_dir %{integrations_dir}/integrations
 %define venv_name .env
 %define venv_install_dir %{integrations_dir}/%{venv_name}
 %define venv_bin %{venv_install_dir}/bin
@@ -36,6 +36,7 @@ if [ -f compatibility.txt ]; then
     cp compatibility.txt %{buildroot}%{prefix}/
 fi
 echo "compatibility_check is %{compatibility_check}"
+
 %clean
 %pre
 mkdir -p %{install_log_dir}
@@ -69,51 +70,50 @@ mkdir -p %{install_log_dir}
         # Write post install actions here
 
         # Copy connector
-        cp %{prefix}/%{connector_name}.tgz %{integrations_dir}/integrations/connectors/
+        cp %{prefix}/%{connector_name}.tgz %{integrations_app_dir}/connectors/
 
         # Extract Connector
-        cd %{integrations_dir}/integrations
+        cd %{integrations_app_dir}
         sudo -u nginx %{venv_python} manage.py connectors
 
         #Remove tgz
-        rm -rf %{integrations_dir}/integrations/connectors/%{connector_name}.tgz
+        rm -rf %{integrations_app_dir}/connectors/%{connector_name}.tgz
     elif [ $1 -gt 1 ]; then
         # Write post upgrade action here
         %define flag_reload 1
         # Extract Connector
         if [ -f %{prefix}/compatibility.txt ]; then
             compatibility=`cat %{prefix}/compatibility.txt`
-            cd %{integrations_dir}/integrations
+            cd %{integrations_app_dir}
             sudo -u nginx %{venv_python} %{prefix}/install.py --name %{connector_name} --compatibility ${compatibility}
         else
             # Copy connector
-            cp %{prefix}/%{connector_name}.tgz %{integrations_dir}/integrations/connectors/
+            cp %{prefix}/%{connector_name}.tgz %{integrations_app_dir}/connectors/
 
             # Extract Connector
-            cd %{integrations_dir}/integrations
+            cd %{integrations_app_dir}
             sudo -u nginx %{venv_python} manage.py connectors
 
             #Remove tgz
-            rm -rf %{integrations_dir}/integrations/connectors/%{connector_name}.tgz
+            rm -rf %{integrations_app_dir}/connectors/%{connector_name}.tgz
         fi
     fi
 
     # Install requirements.txt
     mod_version=`echo %{version} | sed 's/\./_/g'`
     connector_name_version=%{connector_name}_${mod_version}
-    if [ -f %{integrations_dir}/integrations/connectors/${connector_name_version}/requirements.txt ]; then
+    if [ -f %{integrations_app_dir}/connectors/${connector_name_version}/requirements.txt ]; then
         rm -rf ~/.cache/pip/
         export LC_ALL="en_US.UTF-8"
-        sudo -u nginx %{venv_pip} -b ./tmp -r %{integrations_dir}/integrations/connectors/${connector_name_version}/requirements.txt
+        export TMPDIR=./tmp
+        sudo -u nginx %{venv_pip} -r %{integrations_app_dir}/connectors/${connector_name_version}/requirements.txt
     fi
     find %{buildroot} -name "RECORD" -exec rm -rf {} \;
-    rm -rf ./tmp
+    rm -rf %{integrations_app_dir}/tmp
     %if %{flag_reload}
         touch /opt/cyops/configs/integrations/workspace/connector_dev_config.ini
     %endif
-
     restorecon -R %{prefix}
-
 
     echo "============================================"
 } >> %{install_log_dir}/%{install_log_file} 2>&1
@@ -128,7 +128,7 @@ mkdir -p %{install_log_dir}
     echo "============================================"
     if [ $1 = 0 ]; then
         # Write post remove actions here
-        cd %{integrations_dir}/integrations
+        cd %{integrations_app_dir}
         sudo -u nginx %{venv_python} manage.py deleteconnector %{connector_name} %{version}
         # Clean up
         rm -rf %{prefix}
@@ -138,10 +138,11 @@ mkdir -p %{install_log_dir}
 # postun ends here
 
 %files
-%{prefix}
 %attr(0755, root, root) %{prefix}/%{connector_name}.tgz
 %if "%{compatibility_check}" == "1"
 %attr(0755, root, root) %{prefix}/install.py
 %attr(0755, root, root) %{prefix}/compatibility.txt
+%exclude %{prefix}/*.pyc
+%exclude %{prefix}/*.pyo
 %endif
 
