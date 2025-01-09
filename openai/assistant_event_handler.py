@@ -185,5 +185,5 @@ class EventHandler(AssistantEventHandler):
                     # Create a new dict if not present
                     dict1[key] = {}
                 self.merge_dicts(dict1[key], value)
-            else:
+            elif isinstance(value, int):
                 dict1[key] = dict1.get(key, 0) + value
