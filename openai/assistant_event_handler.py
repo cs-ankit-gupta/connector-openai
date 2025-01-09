@@ -174,16 +174,10 @@ class EventHandler(AssistantEventHandler):
         self.function_call_token_usage = dict(self.function_call_token_usage)
         token_usage = dict(token_usage)
 
-        self.merge_dicts(token_usage, self.function_call_token_usage)
-        return token_usage
+        for key in self.function_call_token_usage:
+            if key in token_usage:
+                token_usage[key] += self.function_call_token_usage[key]
 
-    def merge_dicts(self, dict1, dict2):
-        for key, value in dict2.items():
-            if isinstance(value, dict):
-                # Check if value is dict, and present in dict
-                if key not in dict1:
-                    # Create a new dict if not present
-                    dict1[key] = {}
-                self.merge_dicts(dict1[key], value)
-            else:
-                dict1[key] = dict1.get(key, 0) + value
+        # Convert back to list of lists
+        final_token_usage = [[key, value] for key, value in token_usage.items()]
+        return final_token_usage
